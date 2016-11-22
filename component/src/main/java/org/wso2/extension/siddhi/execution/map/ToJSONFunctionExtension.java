@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,8 +16,9 @@
  * under the License.
  */
 
-package org.wso2.siddhi.extension.map;
+package org.wso2.extension.siddhi.execution.map;
 
+import org.json.JSONObject;
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
 import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
@@ -27,37 +28,38 @@ import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 
 import java.util.Map;
 
+
 /**
- * get(HashMap , Key , Type)
- * Returns required attribute value'.
- * Accept Type(s): (HashMap , ValidKey)
- * Return Type(s): Object
+ * toJSON(Map)
+ * Returns a string representation of the map in JSON format
+ * Accept Type(s): (Map)
+ * Return Type(s): String
  */
-public class GetFunctionExtension extends FunctionExecutor {
-    private Attribute.Type returnType = Attribute.Type.OBJECT;
+public class ToJSONFunctionExtension extends FunctionExecutor {
+    private Attribute.Type returnType = Attribute.Type.STRING;
 
     @Override
     protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
-        if (attributeExpressionExecutors.length != 2) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:get() function, " +
-                    "required 2, but found " + attributeExpressionExecutors.length);
+        if ((attributeExpressionExecutors.length) != 1) {
+            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:toJSON() function, " +
+                    "required only 1, but found " + attributeExpressionExecutors.length);
         }
     }
 
     @Override
     protected Object execute(Object[] data) {
-        Map map;
-        if (data[0] instanceof Map) {
-            map = (Map) data[0];
-        } else {
-            throw new ExecutionPlanRuntimeException("First attribute value must be of type java.util.Map");
-        }
-        return map.get(data[1]);
+        return null;
     }
 
     @Override
     protected Object execute(Object data) {
-        return null;
+        if (data instanceof Map) {
+            Map<Object, Object> map = (Map) data;
+            JSONObject jsonObject = new JSONObject(map);
+            return jsonObject.toString();
+        } else {
+            throw new ExecutionPlanRuntimeException("Data should be a string");
+        }
     }
 
     @Override

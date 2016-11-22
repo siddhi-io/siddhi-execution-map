@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,9 +16,10 @@
  * under the License.
  */
 
-package org.wso2.siddhi.extension.map;
+package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.query.api.definition.Attribute;
@@ -27,34 +28,36 @@ import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 import java.util.Map;
 
 /**
- * isMap(Object)
- * Returns boolean true if the object is a hashmap, boolean false if it is not .
- * Accept Type(s): (Object)
- * Return Type(s): boolean
+ * get(HashMap , Key , Type)
+ * Returns required attribute value'.
+ * Accept Type(s): (HashMap , ValidKey)
+ * Return Type(s): Object
  */
-public class IsMapFunctionExtension extends FunctionExecutor {
-    private Attribute.Type returnType = Attribute.Type.BOOL;
+public class GetFunctionExtension extends FunctionExecutor {
+    private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
     protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
-        if (attributeExpressionExecutors.length != 1) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:isMap() function, " +
-                    "required only one, but found " + attributeExpressionExecutors.length);
+        if (attributeExpressionExecutors.length != 2) {
+            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:get() function, " +
+                    "required 2, but found " + attributeExpressionExecutors.length);
         }
     }
 
     @Override
     protected Object execute(Object[] data) {
-        return null;
+        Map map;
+        if (data[0] instanceof Map) {
+            map = (Map) data[0];
+        } else {
+            throw new ExecutionPlanRuntimeException("First attribute value must be of type java.util.Map");
+        }
+        return map.get(data[1]);
     }
 
     @Override
-    protected Boolean execute(Object data) {
-        if (data instanceof Map) {
-            return Boolean.TRUE;
-        }
-
-        return Boolean.FALSE;
+    protected Object execute(Object data) {
+        return null;
     }
 
     @Override

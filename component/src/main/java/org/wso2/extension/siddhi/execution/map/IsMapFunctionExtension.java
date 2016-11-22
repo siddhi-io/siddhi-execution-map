@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,11 +16,9 @@
  * under the License.
  */
 
-package org.wso2.siddhi.extension.map;
+package org.wso2.extension.siddhi.execution.map;
 
-import org.json.JSONObject;
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
-import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.query.api.definition.Attribute;
@@ -28,21 +26,20 @@ import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 
 import java.util.Map;
 
-
 /**
- * toJSON(Map)
- * Returns a string representation of the map in JSON format
- * Accept Type(s): (Map)
- * Return Type(s): String
+ * isMap(Object)
+ * Returns boolean true if the object is a hashmap, boolean false if it is not .
+ * Accept Type(s): (Object)
+ * Return Type(s): boolean
  */
-public class ToJSONFunctionExtension extends FunctionExecutor {
-    private Attribute.Type returnType = Attribute.Type.STRING;
+public class IsMapFunctionExtension extends FunctionExecutor {
+    private Attribute.Type returnType = Attribute.Type.BOOL;
 
     @Override
     protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
-        if ((attributeExpressionExecutors.length) != 1) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:toJSON() function, " +
-                    "required only 1, but found " + attributeExpressionExecutors.length);
+        if (attributeExpressionExecutors.length != 1) {
+            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:isMap() function, " +
+                    "required only one, but found " + attributeExpressionExecutors.length);
         }
     }
 
@@ -52,14 +49,12 @@ public class ToJSONFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    protected Object execute(Object data) {
+    protected Boolean execute(Object data) {
         if (data instanceof Map) {
-            Map<Object, Object> map = (Map) data;
-            JSONObject jsonObject = new JSONObject(map);
-            return jsonObject.toString();
-        } else {
-            throw new ExecutionPlanRuntimeException("Data should be a string");
+            return Boolean.TRUE;
         }
+
+        return Boolean.FALSE;
     }
 
     @Override

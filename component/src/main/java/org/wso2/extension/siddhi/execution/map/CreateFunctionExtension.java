@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,47 +16,46 @@
  * under the License.
  */
 
-package org.wso2.siddhi.extension.map;
+package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
-import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.query.api.definition.Attribute;
 import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * put(HashMap , key , value)
- * Returns the updated hashmap.
- * Accept Type(s): (HashMap , ValidAttributeType , ValidAttributeType)
+ * create(key1,value1,key2,value2,.....,keyN,valueN) or create()
+ * Returns the created hashmap
+ * Accept Type(s): () , (Object,Object,....,Object,Object)
  * Return Type(s): HashMap
  */
-public class PutFunctionExtension extends FunctionExecutor {
+public class CreateFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
     protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
-        if (attributeExpressionExecutors.length != 3) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:put() function, " +
-                    "required 3 parameters, but found " + attributeExpressionExecutors.length);
+        if ((attributeExpressionExecutors.length) % 2 == 1) {
+            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:create() function, " +
+                    "required 0 or multiple of 2, but found " + attributeExpressionExecutors.length);
         }
     }
 
     @Override
     protected Object execute(Object[] data) {
-        if (data == null) {
-            throw new ExecutionPlanRuntimeException("Data can not be null.");
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        for (int i = 0; i < data.length; i += 2) {
+            map.put(data[i], data[i + 1]);
         }
-        Map<Object, Object> hashMap = (Map<Object, Object>) data[0];
-        hashMap.put(data[1], data[2]);
-        return hashMap;
+        return map;
     }
 
     @Override
     protected Object execute(Object data) {
-        return null;  //Since the map:put() function takes in 3 parameters, this method does not get called. Hence, not implemented.
+        return new HashMap<Object, Object>();
     }
 
     @Override
