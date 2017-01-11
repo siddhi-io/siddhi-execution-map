@@ -96,8 +96,15 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Private-Package>
+                            org.json.*,
+                            org.apache.axiom.*,
+                            org.apache.commons.lang3.*
+                        </Private-Package>
                         <Export-Package>
-                            org.wso2.extension.siddhi.execution.map,
+                            !org.json.*,
+                            !org.apache.axiom.*,
+                            !org.apache.commons.lang3.*,
                             org.wso2.extension.siddhi.execution.map.*
                         </Export-Package>
                         <Import-Package>
