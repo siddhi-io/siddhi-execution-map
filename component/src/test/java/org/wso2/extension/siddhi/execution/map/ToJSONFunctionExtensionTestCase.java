@@ -32,7 +32,7 @@ import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
-import org.wso2.siddhi.extension.string.ConcatFunctionExtension;
+import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
