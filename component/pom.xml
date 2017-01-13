@@ -71,8 +71,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.wso2.siddhi</groupId>
-            <artifactId>siddhi-extension-string</artifactId>
+            <groupId>org.wso2.extension.siddhi.execution.string</groupId>
+            <artifactId>siddhi-execution-string</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

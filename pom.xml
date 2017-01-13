@@ -55,6 +55,7 @@
         <jsonassert.version>1.3.0</jsonassert.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <junit.version>4.10</junit.version>
+        <siddhi-extension-string.version>3.2.0</siddhi-extension-string.version>
     </properties>
 
     <scm>
@@ -128,9 +129,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.siddhi</groupId>
-                <artifactId>siddhi-extension-string</artifactId>
-                <version>${project.version}</version>
+                <groupId>org.wso2.extension.siddhi.execution.string</groupId>
+                <artifactId>siddhi-execution-string</artifactId>
+                <version>${siddhi-extension-string.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
