@@ -19,11 +19,16 @@
 package org.wso2.extension.siddhi.execution.map;
 
 import org.apache.log4j.Logger;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.annotation.Example;
+import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.ReturnAttribute;
+import org.wso2.siddhi.annotation.util.DataType;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
@@ -33,14 +38,23 @@ import java.util.Map;
  * Accept Type(s): (HashMap , ValidAttributeType)
  * Return Type(s): HashMap
  */
+@Extension(
+        name = "remove",
+        namespace = "map",
+        description = "Remove function",
+        examples = @Example(description = "TBD", syntax = "TBD"),
+        returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT)
+)
 public class RemoveFunctionExtension extends FunctionExecutor {
     private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors,
+                        ConfigReader configReader,
+                        SiddhiAppContext siddhiAppContext) {
         if (attributeExpressionExecutors.length < 2) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:remove() function, " +
+            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:remove() function, " +
                     "required one or more keys, but found " + attributeExpressionExecutors.length);
         }
     }
@@ -75,12 +89,12 @@ public class RemoveFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    public Object[] currentState() {
+    public Map<String, Object> currentState() {
         return null;    //No need to maintain a state.
     }
 
     @Override
-    public void restoreState(Object[] state) {
+    public void restoreState(Map<String, Object> state) {
         //Since there's no need to maintain a state, nothing needs to be done here.
     }
 }

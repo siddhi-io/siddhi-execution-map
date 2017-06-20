@@ -18,17 +18,17 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
-import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -37,7 +37,7 @@ public class IsMapFunctionExtensionTestCase {
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
-    @Before
+    @BeforeMethod
     public void init() {
         count.set(0);
         eventArrived = false;
@@ -52,48 +52,50 @@ public class IsMapFunctionExtensionTestCase {
         String query = ("@info(name = 'query1') from inputStream " +
                 "select symbol,price,map:create() as tmpMap" +
                 " insert into tmpStream;" +
-                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) as map1" +
+                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, " +
+                "map:put(tmpMap,symbol,price) as map1" +
                 " insert into outputStream;" +
                 "@info(name = 'query3') from outputStream " +
                 "select map:isMap(map1) as isMap1,map:isMap(symbol) as isMap2" +
                 " insert into outputStream2;"
         );
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream2", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream2", new StreamCallback() {
             @Override
             public void receive(Event[] events) {
                 EventPrinter.print(events);
                 for (Event event : events) {
                     count.incrementAndGet();
                     if (count.get() == 1) {
-                        Assert.assertEquals(Boolean.TRUE, event.getData(0));
-                        Assert.assertEquals(Boolean.FALSE, event.getData(1));
+                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
+                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals(Boolean.TRUE, event.getData(0));
-                        Assert.assertEquals(Boolean.FALSE, event.getData(1));
+                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
+                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals(Boolean.TRUE, event.getData(0));
-                        Assert.assertEquals(Boolean.FALSE, event.getData(1));
+                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
+                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 }

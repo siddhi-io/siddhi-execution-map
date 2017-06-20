@@ -18,21 +18,21 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Before;
-import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
-import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
-import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -41,7 +41,7 @@ public class ToJSONFunctionExtensionTestCase {
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
-    @Before
+    @BeforeMethod
     public void init() {
         count.set(0);
         eventArrived = false;
@@ -55,27 +55,30 @@ public class ToJSONFunctionExtensionTestCase {
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select "
-                + "map:createFromJSON(\"{'symbol':'WSO2','price':100,'volume':100,'last5val':{'price':150,'volume':200}}\") as hashMap insert into outputStream;" +
+                + "map:createFromJSON(\"{'symbol':'WSO2','price':100,'volume':100,'last5val':" +
+                "{'price':150,'volume':200}}\") as hashMap insert into outputStream;" +
                 "from outputStream " +
                 "select map:toJSON(hashMap) as jsonString " +
                 "insert into outputStream2");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream2", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream2", new StreamCallback() {
             @Override
             public void receive(Event[] inEvents) {
                 EventPrinter.print(inEvents);
                 for (Event event : inEvents) {
                     count.incrementAndGet();
                     if (count.get() == 1) {
-                        Assert.assertEquals(event.getData(0) instanceof String, true);
+                        AssertJUnit.assertEquals(event.getData(0) instanceof String, true);
                         try {
-                            JSONAssert.assertEquals(new JSONObject("{\"volume\":100,\"symbol\":\"WSO2\",\"price\":100,\"last5val\":{\"volume\":200,\"price\":150}}"),
+                            JSONAssert.assertEquals(new JSONObject("{\"volume\":100,\"symbol\":\"WSO2\"," +
+                                            "\"price\":100,\"last5val\":{\"volume\":200,\"price\":150}}"),
                                     new JSONObject((String) event.getData(0)), false);
                         } catch (JSONException e) {
                             log.error(e);
-                            Assert.fail(e.getMessage());
+                            AssertJUnit.fail(e.getMessage());
                         }
                         eventArrived = true;
                     }
@@ -83,15 +86,15 @@ public class ToJSONFunctionExtensionTestCase {
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 
     @Test
@@ -102,49 +105,53 @@ public class ToJSONFunctionExtensionTestCase {
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select "
-                + "map:createFromJSON(str:concat('{symbol :',symbol,', price :',price,', volume :',volume,'}')) as hashMap insert into outputStream;" +
+                + "map:createFromJSON(str:concat('{symbol :',symbol,', price :',price,', volume :',volume,'}')) " +
+                "as hashMap insert into outputStream;" +
                 "from outputStream " +
                 "select map:toJSON(hashMap) as jsonString " +
                 "insert into outputStream2");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream2", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream2", new StreamCallback() {
             @Override
             public void receive(Event[] inEvents) {
                 EventPrinter.print(inEvents);
                 for (Event event : inEvents) {
                     count.incrementAndGet();
                     if (count.get() == 1) {
-                        Assert.assertEquals(event.getData(0) instanceof String, true);
+                        AssertJUnit.assertEquals(event.getData(0) instanceof String, true);
                         try {
-                            JSONAssert.assertEquals(new JSONObject("{\"volume\":100,\"symbol\":\"IBM\",\"price\":100}"),
+                            JSONAssert.assertEquals(new
+                                            JSONObject("{\"volume\":100,\"symbol\":\"IBM\",\"price\":100}"),
                                     new JSONObject((String) event.getData(0)), false);
                         } catch (JSONException e) {
                             log.error(e);
-                            Assert.fail(e.getMessage());
+                            AssertJUnit.fail(e.getMessage());
                         }
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals(event.getData(0) instanceof String, true);
+                        AssertJUnit.assertEquals(event.getData(0) instanceof String, true);
                         try {
-                            JSONAssert.assertEquals(new JSONObject("{\"volume\":200,\"symbol\":\"WSO2\",\"price\":200}"),
+                            JSONAssert.assertEquals(new
+                                            JSONObject("{\"volume\":200,\"symbol\":\"WSO2\",\"price\":200}"),
                                     new JSONObject((String) event.getData(0)), false);
                         } catch (JSONException e) {
                             log.error(e);
-                            Assert.fail(e.getMessage());
+                            AssertJUnit.fail(e.getMessage());
                         }
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals(event.getData(0) instanceof String, true);
+                        AssertJUnit.assertEquals(event.getData(0) instanceof String, true);
                         try {
-                            JSONAssert.assertEquals(new JSONObject("{\"volume\":200,\"symbol\":\"XYZ\",\"price\":300}"),
+                            JSONAssert.assertEquals(new
+                                            JSONObject("{\"volume\":200,\"symbol\":\"XYZ\",\"price\":300}"),
                                     new JSONObject((String) event.getData(0)), false);
                         } catch (JSONException e) {
                             log.error(e);
-                            Assert.fail(e.getMessage());
+                            AssertJUnit.fail(e.getMessage());
                         }
                         eventArrived = true;
                     }
@@ -152,14 +159,14 @@ public class ToJSONFunctionExtensionTestCase {
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 }
