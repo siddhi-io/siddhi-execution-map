@@ -18,12 +18,12 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
@@ -39,7 +39,7 @@ public class CreateFunctionExtensionTestCase {
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
-    @Before
+    @BeforeMethod
     public void init() {
         count.set(0);
         eventArrived = false;
@@ -55,9 +55,10 @@ public class CreateFunctionExtensionTestCase {
         String query = ("@info(name = 'query1') from inputStream select symbol,price, "
                 + "map:create(symbol,price) as hashMap insert into outputStream;");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("query1", new QueryCallback() {
+        siddhiAppRuntime.addCallback("query1", new QueryCallback() {
             @Override
             public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
@@ -65,32 +66,32 @@ public class CreateFunctionExtensionTestCase {
                     count.incrementAndGet();
                     if (count.get() == 1) {
                         HashMap map = (HashMap) event.getData(2);
-                        Assert.assertEquals(100, map.get("IBM"));
+                        AssertJUnit.assertEquals(100, map.get("IBM"));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
                         HashMap map = (HashMap) event.getData(2);
-                        Assert.assertEquals(200, map.get("WSO2"));
+                        AssertJUnit.assertEquals(200, map.get("WSO2"));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
                         HashMap map = (HashMap) event.getData(2);
-                        Assert.assertEquals(300, map.get("XYZ"));
+                        AssertJUnit.assertEquals(300, map.get("XYZ"));
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 
     @Test
@@ -103,39 +104,40 @@ public class CreateFunctionExtensionTestCase {
         String query = ("@info(name = 'query1') from inputStream select symbol,price, "
                 + "map:create() as hashMap insert into outputStream;");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("query1", new QueryCallback() {
+        siddhiAppRuntime.addCallback("query1", new QueryCallback() {
             @Override
             public void receive(long timeStamp, Event[] inEvents, Event[] removeEvents) {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 for (Event event : inEvents) {
                     count.incrementAndGet();
                     if (count.get() == 1) {
-                        Assert.assertEquals("IBM", event.getData(0));
+                        AssertJUnit.assertEquals("IBM", event.getData(0));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals("WSO2", event.getData(0));
+                        AssertJUnit.assertEquals("WSO2", event.getData(0));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals("XYZ", event.getData(0));
+                        AssertJUnit.assertEquals("XYZ", event.getData(0));
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 
     @Test
@@ -148,41 +150,42 @@ public class CreateFunctionExtensionTestCase {
                 + "select map:create(\"key1\",\"value1\",\"key2\",\"value2\",symbol,price) as hashMap "
                 + "insert into outputStream;");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
             @Override
             public void receive(Event[] inEvents) {
                 EventPrinter.print(inEvents);
                 for (Event event : inEvents) {
                     count.incrementAndGet();
                     HashMap hashMap = (HashMap) event.getData(0);
-                    Assert.assertEquals("value1", hashMap.get("key1"));
-                    Assert.assertEquals("value2", hashMap.get("key2"));
+                    AssertJUnit.assertEquals("value1", hashMap.get("key1"));
+                    AssertJUnit.assertEquals("value2", hashMap.get("key2"));
                     if (count.get() == 1) {
-                        Assert.assertEquals(100, hashMap.get("IBM"));
+                        AssertJUnit.assertEquals(100, hashMap.get("IBM"));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals(200, hashMap.get("WSO2"));
+                        AssertJUnit.assertEquals(200, hashMap.get("WSO2"));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals(300, hashMap.get("XYZ"));
+                        AssertJUnit.assertEquals(300, hashMap.get("XYZ"));
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 }

@@ -18,18 +18,18 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
-import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
-import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,7 +39,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
-    @Before
+    @BeforeMethod
     public void init() {
         count.set(0);
         eventArrived = false;
@@ -64,9 +64,10 @@ public class CreateFromXMLFunctionExtensionTestCase {
                 "</specAttributesObj>" +
                 "</sensor>\") as hashMap insert into outputStream;");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
             @Override
             public void receive(Event[] inEvents) {
                 EventPrinter.print(inEvents);
@@ -74,25 +75,25 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     count.incrementAndGet();
                     if (count.get() == 1) {
                         Map map = (Map) event.getData(0);
-                        Assert.assertEquals(map.get("commonAttr1"), 19l);
-                        Assert.assertEquals(map.get("commonAttr2"), 11.45d);
-                        Assert.assertEquals(map.get("commonAttr3"), true);
-                        Assert.assertEquals(map.get("commonAttr4"), "ELEMENT_TEXT");
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 19L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 11.45d);
+                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "ELEMENT_TEXT");
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 
     @Test
@@ -101,14 +102,17 @@ public class CreateFromXMLFunctionExtensionTestCase {
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
-        String inStreamDefinition = "\ndefine stream inputStream (longAttr long, doubleAttr double, booleanAttr bool, strAttr string);";
+        String inStreamDefinition = "\ndefine stream inputStream " +
+                "(longAttr long, doubleAttr double, booleanAttr bool, strAttr string);";
         String query = ("@info(name = 'query1') from inputStream select " +
                 "map:createFromXML(str:concat('<sensor><commonAttr1>',longAttr,'</commonAttr1><commonAttr2>'," +
-                "doubleAttr,'</commonAttr2><commonAttr3>',booleanAttr,'</commonAttr3><commonAttr4>',strAttr,'</commonAttr4></sensor>')) " +
+                "doubleAttr,'</commonAttr2><commonAttr3>',booleanAttr,'</commonAttr3><commonAttr4>',strAttr," +
+                "'</commonAttr4></sensor>')) " +
                 "as hashMap insert into outputStream;");
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
-        executionPlanRuntime.addCallback("outputStream", new StreamCallback() {
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
             @Override
             public void receive(Event[] inEvents) {
                 EventPrinter.print(inEvents);
@@ -116,38 +120,38 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     count.incrementAndGet();
                     Map map = (Map) event.getData(0);
                     if (count.get() == 1) {
-                        Assert.assertEquals(map.get("commonAttr1"), 25l);
-                        Assert.assertEquals(map.get("commonAttr2"), 100.1d);
-                        Assert.assertEquals(map.get("commonAttr3"), true);
-                        Assert.assertEquals(map.get("commonAttr4"), "Event1");
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 25L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.1d);
+                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event1");
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals(map.get("commonAttr1"), 35l);
-                        Assert.assertEquals(map.get("commonAttr2"), 100.11d);
-                        Assert.assertEquals(map.get("commonAttr3"), false);
-                        Assert.assertEquals(map.get("commonAttr4"), "Event2");
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 35L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.11d);
+                        AssertJUnit.assertEquals(map.get("commonAttr3"), false);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event2");
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals(map.get("commonAttr1"), 45l);
-                        Assert.assertEquals(map.get("commonAttr2"), 100.13456d);
-                        Assert.assertEquals(map.get("commonAttr3"), true);
-                        Assert.assertEquals(map.get("commonAttr4"), "Event3");
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 45L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.13456d);
+                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event3");
                         eventArrived = true;
                     }
                 }
             }
         });
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
         inputHandler.send(new Object[]{25, 100.1, true, "Event1"});
         inputHandler.send(new Object[]{35, 100.11, false, "Event2"});
         inputHandler.send(new Object[]{45, 100.13456, true, "Event3"});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 }

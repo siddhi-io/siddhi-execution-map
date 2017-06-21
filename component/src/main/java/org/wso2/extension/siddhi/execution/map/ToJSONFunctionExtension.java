@@ -19,12 +19,17 @@
 package org.wso2.extension.siddhi.execution.map;
 
 import org.json.JSONObject;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
-import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
+import org.wso2.siddhi.annotation.Example;
+import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.ReturnAttribute;
+import org.wso2.siddhi.annotation.util.DataType;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
+import org.wso2.siddhi.core.exception.SiddhiAppRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
@@ -35,13 +40,24 @@ import java.util.Map;
  * Accept Type(s): (Map)
  * Return Type(s): String
  */
+@Extension(
+        name = "toJSON",
+        namespace = "map",
+        description = "Returns a string representation of the map in JSON format",
+        examples = @Example(description = "TBD", syntax = "TBD"),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns a string representation of the map in JSON format",
+                type = DataType.STRING)
+)
 public class ToJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;
 
     @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors,
+                        ConfigReader configReader,
+                        SiddhiAppContext siddhiAppContext) {
         if ((attributeExpressionExecutors.length) != 1) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:toJSON() function, " +
+            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:toJSON() function, " +
                     "required only 1, but found " + attributeExpressionExecutors.length);
         }
     }
@@ -58,7 +74,7 @@ public class ToJSONFunctionExtension extends FunctionExecutor {
             JSONObject jsonObject = new JSONObject(map);
             return jsonObject.toString();
         } else {
-            throw new ExecutionPlanRuntimeException("Data should be a string");
+            throw new SiddhiAppRuntimeException("Data should be a string");
         }
     }
 
@@ -78,12 +94,12 @@ public class ToJSONFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    public Object[] currentState() {
+    public Map<String, Object> currentState() {
         return null;    //No need to maintain a state.
     }
 
     @Override
-    public void restoreState(Object[] state) {
+    public void restoreState(Map<String, Object> state) {
         //Since there's no need to maintain a state, nothing needs to be done here.
     }
 }

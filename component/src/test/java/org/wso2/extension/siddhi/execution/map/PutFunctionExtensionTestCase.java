@@ -18,12 +18,12 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
-import junit.framework.Assert;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
-import org.wso2.siddhi.core.ExecutionPlanRuntime;
+import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.stream.input.InputHandler;
@@ -38,7 +38,7 @@ public class PutFunctionExtensionTestCase {
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
-    @Before
+    @BeforeMethod
     public void init() {
         count.set(0);
         eventArrived = false;
@@ -52,14 +52,16 @@ public class PutFunctionExtensionTestCase {
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select symbol,price, "
                 + "map:create() as tmpMap insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) as newmap"
+                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price)" +
+                " as newmap"
                 + " insert into outputStream;"
 
         );
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
             @Override
             public void receive(Event[] events) {
                 EventPrinter.print(events);
@@ -67,17 +69,17 @@ public class PutFunctionExtensionTestCase {
                     count.incrementAndGet();
                     if (count.get() == 1) {
                         HashMap map = (HashMap) event.getData(3);
-                        Assert.assertEquals(100, map.get("IBM"));
+                        AssertJUnit.assertEquals(100, map.get("IBM"));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
                         HashMap map = (HashMap) event.getData(3);
-                        Assert.assertEquals(200, map.get("WSO2"));
+                        AssertJUnit.assertEquals(200, map.get("WSO2"));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
                         HashMap map = (HashMap) event.getData(3);
-                        Assert.assertEquals(300, map.get("XYZ"));
+                        AssertJUnit.assertEquals(300, map.get("XYZ"));
                         eventArrived = true;
                     }
                 }
@@ -85,15 +87,15 @@ public class PutFunctionExtensionTestCase {
         });
 
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 
     @Test
@@ -104,30 +106,32 @@ public class PutFunctionExtensionTestCase {
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select symbol,price, "
                 + "map:create() as tmpMap insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(map:put(map:create(),'CHECK ID',1000),symbol,price) as newmap"
+                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, " +
+                "map:put(map:put(map:create(),'CHECK ID',1000),symbol,price) as newmap"
                 + " insert into outputStream;"
         );
 
-        ExecutionPlanRuntime executionPlanRuntime = siddhiManager.createExecutionPlanRuntime(inStreamDefinition + query);
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
 
-        executionPlanRuntime.addCallback("outputStream", new StreamCallback() {
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
             @Override
             public void receive(Event[] events) {
                 EventPrinter.print(events);
                 for (Event event : events) {
                     count.incrementAndGet();
                     HashMap map = (HashMap) event.getData(3);
-                    Assert.assertEquals(1000, map.get("CHECK ID"));
+                    AssertJUnit.assertEquals(1000, map.get("CHECK ID"));
                     if (count.get() == 1) {
-                        Assert.assertEquals(100, map.get("IBM"));
+                        AssertJUnit.assertEquals(100, map.get("IBM"));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        Assert.assertEquals(200, map.get("WSO2"));
+                        AssertJUnit.assertEquals(200, map.get("WSO2"));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        Assert.assertEquals(300, map.get("XYZ"));
+                        AssertJUnit.assertEquals(300, map.get("XYZ"));
                         eventArrived = true;
                     }
                 }
@@ -135,14 +139,14 @@ public class PutFunctionExtensionTestCase {
         });
 
 
-        InputHandler inputHandler = executionPlanRuntime.getInputHandler("inputStream");
-        executionPlanRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100l});
-        inputHandler.send(new Object[]{"WSO2", 200, 200l});
-        inputHandler.send(new Object[]{"XYZ", 300, 200l});
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        inputHandler.send(new Object[]{"WSO2", 200, 200L});
+        inputHandler.send(new Object[]{"XYZ", 300, 200L});
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        Assert.assertEquals(3, count.get());
-        Assert.assertTrue(eventArrived);
-        executionPlanRuntime.shutdown();
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
     }
 }

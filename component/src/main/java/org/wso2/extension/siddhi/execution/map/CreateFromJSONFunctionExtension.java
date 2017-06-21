@@ -20,12 +20,17 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
-import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
+import org.wso2.siddhi.annotation.Example;
+import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.ReturnAttribute;
+import org.wso2.siddhi.annotation.util.DataType;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
+import org.wso2.siddhi.core.exception.SiddhiAppRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,13 +43,23 @@ import java.util.Map;
  * Accept Type(s): (String)
  * Return Type(s): Map
  */
+@Extension(
+        name = "createFromJSON",
+        namespace = "map",
+        description = "Create from a JSON function",
+        examples = @Example(description = "TBD", syntax = "TBD"),
+        returnAttributes = @ReturnAttribute(description = "Map will be return as an Object", type = DataType.OBJECT)
+
+)
 public class CreateFromJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors,
+                        ConfigReader configReader,
+                        SiddhiAppContext siddhiAppContext) {
         if ((attributeExpressionExecutors.length) != 1) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:create() function, " +
+            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:create() function, " +
                     "required only 1, but found " + attributeExpressionExecutors.length);
         }
     }
@@ -62,11 +77,12 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
             try {
                 jsonObject = new JSONObject(data.toString());
             } catch (JSONException e) {
-                throw new ExecutionPlanRuntimeException("Cannot create JSON from '"+data.toString()+"' in create from json function", e);
+                throw new SiddhiAppRuntimeException(
+                        "Cannot create JSON from '" + data.toString() + "' in create from json function", e);
             }
             return getMapFromJson(map, jsonObject);
         } else {
-            throw new ExecutionPlanRuntimeException("Data should be a string");
+            throw new SiddhiAppRuntimeException("Data should be a string");
         }
     }
 
@@ -79,7 +95,8 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
             try {
                 value = jsonObject.get(key);
             } catch (JSONException e) {
-                throw new ExecutionPlanRuntimeException("JSON '"+jsonObject+"'does not contain key '"+key+"' in create from json function", e);
+                throw new SiddhiAppRuntimeException(
+                        "JSON '" + jsonObject + "'does not contain key '" + key + "' in create from json function", e);
             }
             if (value instanceof JSONObject) {
                 value = getMapFromJson(new HashMap<Object, Object>(), (JSONObject) value);
@@ -105,14 +122,15 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    public Object[] currentState() {
+    public Map<String, Object> currentState() {
         return null;    //No need to maintain a state.
     }
 
     @Override
-    public void restoreState(Object[] state) {
-        //Since there's no need to maintain a state, nothing needs to be done here.
+    public void restoreState(Map<String, Object> map) {
+
     }
+
 }
 
 

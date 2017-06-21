@@ -21,19 +21,24 @@ package org.wso2.extension.siddhi.execution.map;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
-import org.wso2.siddhi.core.exception.ExecutionPlanRuntimeException;
+import org.wso2.siddhi.annotation.Example;
+import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.ReturnAttribute;
+import org.wso2.siddhi.annotation.util.DataType;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
+import org.wso2.siddhi.core.exception.SiddhiAppRuntimeException;
 import org.wso2.siddhi.core.executor.ExpressionExecutor;
 import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.util.config.ConfigReader;
 import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.exception.ExecutionPlanValidationException;
+import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
-import javax.xml.stream.XMLStreamException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.xml.stream.XMLStreamException;
 
 
 /**
@@ -42,14 +47,23 @@ import java.util.Map;
  * Accept Type(s): (String)
  * Return Type(s): Map
  */
+@Extension(
+        name = "createFromXML",
+        namespace = "map",
+        description = "Create from XML function",
+        examples = @Example(description = "TBD", syntax = "TBD"),
+        returnAttributes = @ReturnAttribute(description = "Map will return as an Object", type = DataType.OBJECT)
+)
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
     private NumberFormat numberFormat = NumberFormat.getInstance();
 
     @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors, ExecutionPlanContext executionPlanContext) {
+    protected void init(ExpressionExecutor[] attributeExpressionExecutors,
+                        ConfigReader configReader,
+                        SiddhiAppContext siddhiAppContext) {
         if ((attributeExpressionExecutors.length) != 1) {
-            throw new ExecutionPlanValidationException("Invalid no of arguments passed to map:createFromXML() function, " +
+            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:createFromXML() function, " +
                     "required only 1, but found " + attributeExpressionExecutors.length);
         }
     }
@@ -66,10 +80,10 @@ public class CreateFromXMLFunctionExtension extends FunctionExecutor {
                 OMElement parentElement = AXIOMUtil.stringToOM(data.toString());
                 return getMapFromXML(parentElement);
             } catch (XMLStreamException e) {
-                throw new ExecutionPlanRuntimeException("Input data cannot be parsed to xml: " + e.getMessage(), e);
+                throw new SiddhiAppRuntimeException("Input data cannot be parsed to xml: " + e.getMessage(), e);
             }
         } else {
-            throw new ExecutionPlanRuntimeException("Data should be a string");
+            throw new SiddhiAppRuntimeException("Data should be a string");
         }
     }
 
@@ -119,12 +133,12 @@ public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    public Object[] currentState() {
+    public Map<String, Object> currentState() {
         return null;    //No need to maintain a state.
     }
 
     @Override
-    public void restoreState(Object[] state) {
+    public void restoreState(Map<String, Object> state) {
         //Since there's no need to maintain a state, nothing needs to be done here.
     }
 }
