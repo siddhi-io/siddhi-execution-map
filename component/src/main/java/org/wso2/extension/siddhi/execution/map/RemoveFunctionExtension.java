@@ -21,6 +21,7 @@ package org.wso2.extension.siddhi.execution.map;
 import org.apache.log4j.Logger;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -41,8 +42,22 @@ import java.util.Map;
 @Extension(
         name = "remove",
         namespace = "map",
-        description = "Remove function",
-        examples = @Example(description = "TBD", syntax = "TBD"),
+        description = "Returns the updated map after removing the element with key.",
+        parameters = {
+                @Parameter(name = "map",
+                        description = "Map that needed to remove the element",
+                        type = DataType.OBJECT,
+                        optional = false
+                        ),
+                @Parameter(name = "key",
+                        description = "key of the element the needed to remove",
+                        type = DataType.OBJECT,
+                        optional = false
+                )
+        },
+        examples = @Example(
+                description = "returns the updated map students after removing the element with the key 1234",
+                syntax = "remove(students , 1234)"),
         returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT)
 )
 public class RemoveFunctionExtension extends FunctionExecutor {

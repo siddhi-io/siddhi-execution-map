@@ -21,6 +21,7 @@ package org.wso2.extension.siddhi.execution.map;
 import org.json.JSONObject;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -43,8 +44,19 @@ import java.util.Map;
 @Extension(
         name = "toJSON",
         namespace = "map",
-        description = "Returns a string representation of the map in JSON format",
-        examples = @Example(description = "TBD", syntax = "TBD"),
+        description = "Converts a map into a JSON object and returns the definition of that JSON object as a string.",
+        parameters = {
+                @Parameter(name = "map",
+                        description = "map that nedded to be converted to JSON",
+                        type = DataType.OBJECT,
+                        optional = false
+                ),
+        },
+        examples = @Example(
+                description = "If \"company\" is a map with key value pairs (\"symbol\" : wso2),(\"volume\" : 100), " +
+                        "and (\"price\",200). This will returns the string “{“symbol” : “wso2” ," +
+                        " “volume” : 100 , “price” : 200}”.",
+                syntax = "toJSON(company"),
         returnAttributes = @ReturnAttribute(
                 description = "Returns a string representation of the map in JSON format",
                 type = DataType.STRING)
