@@ -49,7 +49,7 @@ import java.util.Map;
         namespace = "map",
         description = "Returns the map created with the key values pairs given in the JSONstring.",
         parameters = {
-                @Parameter(name = "jsonstring",
+                @Parameter(name = "json.string",
                         description = "JSON as a string, which is used to create the map.",
                         type = DataType.STRING,
                         optional = false

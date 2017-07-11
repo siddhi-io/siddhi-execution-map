@@ -53,7 +53,7 @@ import javax.xml.stream.XMLStreamException;
         namespace = "map",
         description = "Returns the map created with the key values pairs given in the XMLstring.",
         parameters = {
-                @Parameter(name = "xmlstring",
+                @Parameter(name = "xml.string",
                         description = "XML as a string, which is used to create the map.",
                         type = DataType.STRING,
                 optional = false
