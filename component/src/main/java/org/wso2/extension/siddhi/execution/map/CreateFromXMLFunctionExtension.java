@@ -23,6 +23,7 @@ import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -50,9 +51,19 @@ import javax.xml.stream.XMLStreamException;
 @Extension(
         name = "createFromXML",
         namespace = "map",
-        description = "Create from XML function",
-        examples = @Example(description = "TBD", syntax = "TBD"),
-        returnAttributes = @ReturnAttribute(description = "Map will return as an Object", type = DataType.OBJECT)
+        description = "Returns the map created with the key values pairs given in the XMLstring.",
+        parameters = {
+                @Parameter(name = "xml.string",
+                        description = "XML as a string, which is used to create the map.",
+                        type = DataType.STRING,
+                optional = false
+                )
+        },
+        examples = @Example(
+                description = " returns a map with the keys \"symbol\", \"price\", \"volume\"," +
+                        " and with the values \"IBM\", 200 and 100 respectively.",
+                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)"),
+        returnAttributes = @ReturnAttribute(description = "will return a map", type = DataType.OBJECT)
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

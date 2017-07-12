@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -46,9 +47,21 @@ import java.util.Map;
 @Extension(
         name = "createFromJSON",
         namespace = "map",
-        description = "Create from a JSON function",
-        examples = @Example(description = "TBD", syntax = "TBD"),
-        returnAttributes = @ReturnAttribute(description = "Map will be return as an Object", type = DataType.OBJECT)
+        description = "Returns the map created with the key values pairs given in the JSONstring.",
+        parameters = {
+                @Parameter(name = "json.string",
+                        description = "JSON as a string, which is used to create the map.",
+                        type = DataType.STRING,
+                        optional = false
+                )
+
+        },
+
+        examples = @Example(
+                description = "returns a map with the keys \"symbol\", \"price\", \"volume\", " +
+                        "and with the values \"IBM\", 200 and 100 respectively.",
+                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)"),
+        returnAttributes = @ReturnAttribute(description = "Will return a map", type = DataType.OBJECT)
 
 )
 public class CreateFromJSONFunctionExtension extends FunctionExecutor {

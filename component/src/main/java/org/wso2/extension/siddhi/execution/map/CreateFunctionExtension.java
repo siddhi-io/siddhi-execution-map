@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -41,9 +42,30 @@ import java.util.Map;
 @Extension(
         name = "create",
         namespace = "map",
-        description = "Siddhi Function Creator",
-        examples = @Example(description = "TBD", syntax = "TBD"),
-        returnAttributes = @ReturnAttribute(description = "This will return a Object ", type = DataType.OBJECT)
+        description = "Returns the created map object.",
+        parameters = {
+                @Parameter(name = "key1",
+                        description = "key 1",
+                        type = DataType.OBJECT
+                ),
+                @Parameter(name = "value1",
+                        description = "Value 1",
+                        type = DataType.OBJECT
+                ),
+                @Parameter(name = "key2",
+                        description = "Key 2",
+                        type = DataType.OBJECT
+                ),
+                @Parameter(name = "value2",
+                        description = "Value 2",
+                        type = DataType.OBJECT
+                ),
+        },
+
+        examples = @Example(
+                description = "returns a map with keys 1, 2, 3 and corresponding values \"one\", \"two\", \"three\"",
+                syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)"),
+        returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT)
 )
 public class CreateFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

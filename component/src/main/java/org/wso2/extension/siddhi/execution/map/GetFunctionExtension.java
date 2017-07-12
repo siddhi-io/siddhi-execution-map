@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -41,9 +42,25 @@ import java.util.Map;
 @Extension(
         name = "get",
         namespace = "map",
-        description = "Get function",
-        examples = @Example(description = "TBD", syntax = "TBD"),
-        returnAttributes = @ReturnAttribute(description = "Return type is Object", type = DataType.OBJECT)
+        description = "Returns the value object from the map that is related to the given key.",
+        parameters = {
+                @Parameter(name = "map",
+                        description = "Map where the value should return",
+                        type = DataType.OBJECT,
+                        optional = false
+                ),
+                @Parameter(
+                        name = "key",
+                        description = "Key of the value which needed to return",
+                        type = DataType.OBJECT,
+                        optional = false
+                )
+        },
+        examples = @Example(description = "returns the value that is related to the key 1 from the map named company.",
+                syntax = "get(company,1)"),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns the value object from the map that is related to the given key",
+                type = DataType.OBJECT)
 )
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

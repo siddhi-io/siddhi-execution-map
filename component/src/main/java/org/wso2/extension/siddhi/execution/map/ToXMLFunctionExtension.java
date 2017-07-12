@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -43,8 +44,26 @@ import java.util.Map;
 @Extension(
         name = "toXML",
         namespace = "map",
-        description = "eturns the string representation of the map in XML format",
-        examples = @Example(description = "TBD", syntax = "TBD"),
+        description = "Returns the map as an XML string.",
+        parameters = {
+                @Parameter(name = "map",
+                        description = "map that needed to convert to XML",
+                        type = DataType.OBJECT,
+                        optional = false
+                ),
+                @Parameter(name = "rootelementname",
+                        description = "root element of the map",
+                        type = DataType.OBJECT,
+                        optional = true,
+                        defaultValue = "null"
+                )
+
+        },
+        examples = @Example(
+                description = "If \"company\" is a map with key value pairs (“symbol” : wso2)," +
+                        " (“volume” : 100), and (“price” : 200). this will  returns the string" +
+                        " “<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>",
+                syntax = "toXML(company, \"abcCompany\")"),
         returnAttributes = @ReturnAttribute(
                 description = "returns the string representation of the map in XML format",
                 type = DataType.STRING)

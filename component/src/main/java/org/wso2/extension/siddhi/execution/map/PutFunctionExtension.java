@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -41,9 +42,28 @@ import java.util.Map;
 @Extension(
         name = "put",
         namespace = "map",
-        description = "Put function",
-        examples = @Example(description = "TBD", syntax = "TBD"),
-        returnAttributes = @ReturnAttribute(description = "HashMap will be return as an Object", type = DataType.OBJECT)
+        description = "Returns the updated map after adding the given key-value pair",
+        parameters = {
+                @Parameter(name = "map",
+                        description = "Map that value should add",
+                        type = DataType.OBJECT,
+                        optional = false
+                        ),
+                @Parameter(name = "key",
+                        description = "Key of the value",
+                        type = DataType.OBJECT,
+                        optional = false
+                ),
+                @Parameter(name = "value",
+                        description = "New value",
+                        type = DataType.OBJECT,
+                        optional = false
+                )
+        },
+        examples = @Example(
+                description = " returns the updated map named students after adding the object \"sam\" " +
+                        "with key 1234.", syntax = "put(students , 1234 , ”sam”)"),
+        returnAttributes = @ReturnAttribute(description = "A hashMap will be return", type = DataType.OBJECT)
 )
 public class PutFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

@@ -20,6 +20,7 @@ package org.wso2.extension.siddhi.execution.map;
 
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.ReturnAttribute;
 import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
@@ -40,8 +41,18 @@ import java.util.Map;
 @Extension(
         name = "isMap",
         namespace = "map",
-        description = "Returns boolean true if the object is a hashmap, boolean false if it is not",
-        examples = @Example(description = "TBD", syntax = "TBD"),
+        description = "Returns true if the object is a map or false otherwise.t",
+        parameters = {
+                @Parameter(name = "object",
+                        description = "Object that needed to check whether it is a map",
+                        type = {DataType.OBJECT},
+                        optional = false
+                )
+        },
+        examples = @Example(
+                description = "returns true if the students object is a map. It returns false if " +
+                        "the students object is not a map.",
+                syntax = "isMap(students)"),
         returnAttributes = @ReturnAttribute(description = "Returns a boolean value", type = DataType.BOOL)
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
