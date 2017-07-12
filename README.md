@@ -20,7 +20,7 @@ Contact us
 ------------------
 Siddhi developers can be contacted via the mailing lists:\
     * Carbon Developers List : dev@wso2.org\
-     * Carbon Architecture List : architecture@wso2.org
+    * Carbon Architecture List : architecture@wso2.org
     
 We welcome your feedback and contribution.
 ------------------
