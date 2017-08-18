@@ -14,8 +14,8 @@ limitations under the License.
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Siddhi-gpl-execution-geo-Test-Suite">
-    <test name="Siddhi-gpl-execution-geo-tests" preserve-order="true" parallel="false">
+<suite name="Siddhi-execution-map-Test-Suite">
+    <test name="Siddhi-execution-map-tests" preserve-order="true" parallel="false">
         <classes>
             <class name="org.wso2.extension.siddhi.execution.map.CreateFromJSONFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.CreateFromXMLFunctionExtensionTestCase"/>

@@ -1,6 +1,12 @@
 Siddhi Execution Extension - Map
 ----------------------
 
+---
+|  Branch | Build Status |
+| :------ |:------------ | 
+| master  | [![Build Status](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/) |
+---
+
 This extension provides the capability to send a map object inside Siddhi stream definitions and use it inside queries. The following are the functions of the map extension.
    * Create function
    * Get function
