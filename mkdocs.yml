@@ -1,4 +1,4 @@
-site_name: Siddhi Execution Extension - Map
+site_name: Siddhi-Extension-Map
 extra_css:
 - stylesheets/extra.css
 extra_javascript:
@@ -9,6 +9,9 @@ extra:
   palette:
     primary: teal
     accent: teal
+google_analytics:
+- UA-103065-28
+- auto
 pages:
 - Welcome to Siddhi Execution Extension - Map: index.md
 - License: license.md
