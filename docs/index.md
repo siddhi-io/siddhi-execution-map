@@ -35,6 +35,7 @@ directory.
 ```
 
 ## Jenkins Build Status
+
 ---
 |  Branch | Build Status |
 | :------ |:------------ | 
@@ -55,11 +56,9 @@ directory.
 
 ## How to Contribute
  
-  * Please report issues at <a target="_blank" href="https://github
-  .com/wso2-extensions/siddhi-execution-map/issues">GitHub Issue Tracker</a>.
+  * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-execution-map/issues">GitHub Issue Tracker</a>.
   
-  * Send your contributions as pull requests to <a target="_blank" href="https://github
-  .com/wso2-extensions/siddhi-execution-map/tree/master">master branch</a>. 
+  * Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-execution-map/tree/master">master branch</a>. 
  
 ## Contact us 
 
