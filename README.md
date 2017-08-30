@@ -29,7 +29,7 @@ directory.
 ```
      <dependency>
         <groupId>org.wso2.extension.siddhi.execution.map</groupId>
-        <artifactId>siddhi-execution-map-parent</artifactId>
+        <artifactId>siddhi-execution-map</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```
