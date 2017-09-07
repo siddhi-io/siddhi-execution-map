@@ -37,9 +37,11 @@ directory.
 ## Jenkins Build Status
 
 ---
+
 |  Branch | Build Status |
 | :------ |:------------ | 
 | master  | [![Build Status](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/) |
+
 ---
 
 ## Features
