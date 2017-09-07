@@ -29,7 +29,7 @@ directory.
 ```
      <dependency>
         <groupId>org.wso2.extension.siddhi.execution.map</groupId>
-        <artifactId>siddhi-execution-map-parent</artifactId>
+        <artifactId>siddhi-execution-map</artifactId>
         <version>x.x.x</version>
      </dependency>
 ```
@@ -37,9 +37,11 @@ directory.
 ## Jenkins Build Status
 
 ---
+
 |  Branch | Build Status |
 | :------ |:------------ | 
 | master  | [![Build Status](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/) |
+
 ---
 
 ## Features
