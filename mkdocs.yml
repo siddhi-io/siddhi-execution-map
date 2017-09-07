@@ -14,6 +14,7 @@ google_analytics:
 - auto
 pages:
 - Welcome to Siddhi Execution Extension - Map: index.md
+- API Docs:
+  - 4.0.2-SNAPSHOT: api/4.0.2-SNAPSHOT.md
 - License: license.md
-- API Docs: []
 theme: material
