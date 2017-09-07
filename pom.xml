@@ -46,7 +46,7 @@
     </profiles>
 
     <properties>
-        <siddhi.version>4.0.0-M61</siddhi.version>
+        <siddhi.version>4.0.0-M62</siddhi.version>
         <log4j.version>1.2.17.wso2v1</log4j.version>
         <org.json.wso2.version>2.0.0.wso2v1</org.json.wso2.version>
         <axiom-api.version>1.2.11-wso2v9</axiom-api.version>
@@ -211,14 +211,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.19.1</version>
                     <configuration>
-                        <includes>
-                            <include>**/*TestCase.java</include>
-                        </includes>
-                        <reportFormat>brief</reportFormat>
-                        <useFile>false</useFile>
-                        <forkMode>once</forkMode>
+                        <skipTests>false</skipTests>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
                         <argLine>${surefireArgLine} -ea -Xmx512m</argLine>
                     </configuration>
                 </plugin>
