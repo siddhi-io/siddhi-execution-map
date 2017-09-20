@@ -4,23 +4,25 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <lastmod>2017-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
+        
     <url>
-     <loc></loc>
-     <lastmod></lastmod>
+     <loc>/api/4.0.3-SNAPSHOT/</loc>
+     <lastmod>2017-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
     
     <url>
      <loc>/license/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <lastmod>2017-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
