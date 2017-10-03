@@ -89,16 +89,6 @@ public class RemoveFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    public void start() {
-        //Nothing to start
-    }
-
-    @Override
-    public void stop() {
-        //Nothing to stop
-    }
-
-    @Override
     public Attribute.Type getReturnType() {
         return returnType;
     }
