@@ -30,6 +30,7 @@ import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
+import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -340,6 +341,74 @@ public class ToXMLFunctionExtensionTestCase {
         SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
         AssertJUnit.assertEquals(3, count.get());
         AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test(expectedExceptions = SiddhiAppCreationException.class)
+    public void testToXMLFunctionExtension5() throws InterruptedException {
+        log.info("ToXMLFunctionExtension TestCase with test attributeExpressionExecutors length");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromXML(\"<sensor>" +
+                "<commonAttr1>19</commonAttr1>" +
+                "<commonAttr2>11.45</commonAttr2>" +
+                "<commonAttr3>true</commonAttr3>" +
+                "<commonAttr4>ELEMENT_TEXT</commonAttr4>" +
+                "<specAttributesObj>" +
+                "<specAttr1>111</specAttr1>" +
+                "<specAttr2>222</specAttr2>" +
+                "</specAttributesObj>" +
+                "</sensor>\") as hashMap insert into outputStream;" +
+                "from outputStream " +
+                "select map:toXML(hashMap, 'wso2' ,'ibm') as xmlString " +
+                "insert into outputStream2;");
+
+        siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
+    }
+
+    @Test
+    public void testToXMLFunctionExtension6() throws InterruptedException {
+        log.info("ToXMLFunctionExtension TestCase with test data should be Map string format  ");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') from inputStream select " +
+                "symbol,price,volume as hashMap insert into outputStream;" +
+                "from outputStream " +
+                "select map:toXML(hashMap) as xmlString " +
+                "insert into outputStream2;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test
+    public void testCreateFromXMLFunctionExtension5() throws InterruptedException {
+        log.info("CreateFromXMLFunctionExtension TestCase with test Object[] data should be string format");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
+
+        String inStreamDefinition = "\ndefine stream inputStream (longAttr long, doubleAttr double, booleanAttr bool,"
+                + " strAttr string);";
+        String query = ("@info(name = 'query1') from inputStream select " +
+                "longAttr, doubleAttr, booleanAttr, strAttr as hashMap insert into outputStream;" +
+                "from outputStream " +
+                "select map:toXML(hashMap, 'sensor') as xmlString " +
+                "insert into outputStream2");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100, 100L});
         siddhiAppRuntime.shutdown();
     }
 }

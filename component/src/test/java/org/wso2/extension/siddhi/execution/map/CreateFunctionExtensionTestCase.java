@@ -26,6 +26,7 @@ import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
+import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
@@ -187,5 +188,17 @@ public class CreateFunctionExtensionTestCase {
         AssertJUnit.assertEquals(3, count.get());
         AssertJUnit.assertTrue(eventArrived);
         siddhiAppRuntime.shutdown();
+    }
+
+    @Test(expectedExceptions = SiddhiAppCreationException.class)
+    public void testCreateFromXMLFunctionExtension3() throws InterruptedException {
+        log.info("CreateFromXMLFunctionExtension TestCase 3 with test attributeExpressionExecutors length");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') from inputStream select symbol,price, "
+                + "map:create(symbol,price,volume) as hashMap insert into outputStream;");
+
+        siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
 }

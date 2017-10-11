@@ -26,6 +26,7 @@ import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
+import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -97,5 +98,24 @@ public class IsMapFunctionExtensionTestCase {
         AssertJUnit.assertEquals(3, count.get());
         AssertJUnit.assertTrue(eventArrived);
         siddhiAppRuntime.shutdown();
+    }
+
+    @Test(expectedExceptions = SiddhiAppCreationException.class)
+    public void testIsMapFunctionExtension1() throws InterruptedException {
+        log.info("RemoveFunctionExtension TestCase with test attributeExpressionExecutors length");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') from inputStream " +
+                "select symbol,price,map:create() as tmpMap" +
+                " insert into tmpStream;" +
+                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) " +
+                "as map1 insert into outputStream;" +
+                "@info(name = 'query3') from outputStream " +
+                "select map:isMap(map1) as isMap1,map:isMap(symbol,price) as isMap2" +
+                " insert into outputStream2;"
+        );
+
+        siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
 }
