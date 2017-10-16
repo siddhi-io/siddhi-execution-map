@@ -11,7 +11,7 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT">4.0.4-SNAPSHOT</a>.
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.5">4.0.5</a>.
 
 ## How to use 
 
@@ -46,15 +46,6 @@ directory.
 
 ## Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#tojson-function">toJSON</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Converts a map into a JSON object and returns the definition of that JSON object as a string.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#createfromxml-function">createFromXML</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the map created with the key values pairs given in the XMLstring.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#createfromjson-function">createFromJSON</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the map created with the key values pairs given in the JSONstring.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#remove-function">remove</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the updated map after removing the element with key.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#create-function">create</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the created map object.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#put-function">put</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the updated map after adding the given key-value pair</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#toxml-function">toXML</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the map as an XML string.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#ismap-function">isMap</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns true if the object is a map or false otherwise.t</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-execution-map/api/4.0.4-SNAPSHOT/#get-function">get</a> *(<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#functions">Function</a>)*<br><div style="padding-left: 1em;"><p>Returns the value object from the map that is related to the given key.</p></div>
 
 ## How to Contribute
  
