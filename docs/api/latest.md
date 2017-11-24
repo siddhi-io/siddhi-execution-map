@@ -1,4 +1,4 @@
-# API Docs - v4.0.6
+# API Docs - v4.0.7-SNAPSHOT
 
 ## Map
 
@@ -58,7 +58,7 @@
 <span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
-create(1 , ?one? ,  2 , ?two? , 3 , ?three?)
+create(1 , ”one” ,  2 , ”two” , 3 , ”three”)
 ```
 <p style="word-wrap: break-word">returns a map with keys 1, 2, 3 and corresponding values "one", "two", "three"</p>
 
@@ -94,7 +94,7 @@ create(1 , ?one? ,  2 , ?two? , 3 , ?three?)
 <span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
-createFromJSON(?{?symbol' : 'IBM' , 'price' : 200, 'volume' : 100}?)
+createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)
 ```
 <p style="word-wrap: break-word">returns a map with the keys "symbol", "price", "volume", and with the values "IBM", 200 and 100 respectively.</p>
 
@@ -130,7 +130,7 @@ createFromJSON(?{?symbol' : 'IBM' , 'price' : 200, 'volume' : 100}?)
 <span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
-createFromJSON(?{?symbol' : 'IBM' , 'price' : 200, 'volume' : 100}?)
+createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)
 ```
 <p style="word-wrap: break-word"> returns a map with the keys "symbol", "price", "volume", and with the values "IBM", 200 and 100 respectively.</p>
 
@@ -262,7 +262,7 @@ isMap(students)
 <span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span>
 ```
-put(students , 1234 , ?sam?)
+put(students , 1234 , ”sam”)
 ```
 <p style="word-wrap: break-word"> returns the updated map named students after adding the object "sam" with key 1234.</p>
 
@@ -344,7 +344,7 @@ remove(students , 1234)
 ```
 toJSON(company
 ```
-<p style="word-wrap: break-word">If "company" is a map with key value pairs ("symbol" : wso2),("volume" : 100), and ("price",200). This will returns the string ?{?symbol? : ?wso2? , ?volume? : 100 , ?price? : 200}?.</p>
+<p style="word-wrap: break-word">If "company" is a map with key value pairs ("symbol" : wso2),("volume" : 100), and ("price",200). This will returns the string “{“symbol” : “wso2” , “volume” : 100 , “price” : 200}”.</p>
 
 ### toXML *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#function">(Function)</a>*
 
@@ -388,5 +388,5 @@ toJSON(company
 ```
 toXML(company, "abcCompany")
 ```
-<p style="word-wrap: break-word">If "company" is a map with key value pairs (?symbol? : wso2), (?volume? : 100), and (?price? : 200). this will  returns the string ?&lt;abcCompany&gt;&lt;symbol&gt;wso2&lt;/symbol&gt;&lt;volume&gt;&lt;100&gt;&lt;/volume&gt;&lt;price&gt;200&lt;/price&gt;&lt;/abcCompany&gt;</p>
+<p style="word-wrap: break-word">If "company" is a map with key value pairs (“symbol” : wso2), (“volume” : 100), and (“price” : 200). this will  returns the string “&lt;abcCompany&gt;&lt;symbol&gt;wso2&lt;/symbol&gt;&lt;volume&gt;&lt;100&gt;&lt;/volume&gt;&lt;price&gt;200&lt;/price&gt;&lt;/abcCompany&gt;</p>
 
