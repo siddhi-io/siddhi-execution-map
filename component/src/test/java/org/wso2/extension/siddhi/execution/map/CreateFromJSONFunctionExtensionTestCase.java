@@ -23,11 +23,13 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.map.test.util.UnitTestAppender;
 import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
+import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -36,7 +38,7 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CreateFromJSONFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(CreateFromJSONFunctionExtensionTestCase.class);
+    private static Logger log = Logger.getLogger(CreateFromJSONFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -151,6 +153,9 @@ public class CreateFromJSONFunctionExtensionTestCase {
     @Test
     public void testCreateFromJSONFunctionExtension4() throws InterruptedException {
         log.info("CreateFromJSONFunctionExtension TestCase with test string data format");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
@@ -164,12 +169,16 @@ public class CreateFromJSONFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
+        AssertJUnit.assertTrue(appender.getMessages().contains("Cannot create JSON from"));
         siddhiAppRuntime.shutdown();
     }
 
     @Test
     public void testCreateFromJSONFunctionExtension5() throws InterruptedException {
         log.info("CreateFromJSONFunctionExtension TestCase with test data should be a string");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
@@ -183,7 +192,7 @@ public class CreateFromJSONFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
+        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
         siddhiAppRuntime.shutdown();
     }
 }
-

@@ -23,11 +23,13 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.map.test.util.UnitTestAppender;
 import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
+import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -36,7 +38,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CreateFromXMLFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(CreateFromXMLFunctionExtensionTestCase.class);
+    private static Logger log = Logger.getLogger(CreateFromXMLFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -179,6 +181,9 @@ public class CreateFromXMLFunctionExtensionTestCase {
     @Test
     public void testCreateFromXMLFunctionExtension4() throws InterruptedException {
         log.info("CreateFromXMLFunctionExtension TestCase with test string data has xml format");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
@@ -196,12 +201,16 @@ public class CreateFromXMLFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{25, 100.1, true, "Event1"});
+        AssertJUnit.assertTrue(appender.getMessages().contains("Unexpected character"));
         siddhiAppRuntime.shutdown();
     }
 
     @Test
     public void testCreateFromXMLFunctionExtension5() throws InterruptedException {
         log.info("CreateFromXMLFunctionExtension TestCase with test data is to be a string");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
@@ -215,6 +224,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
+        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
         siddhiAppRuntime.shutdown();
     }
 }

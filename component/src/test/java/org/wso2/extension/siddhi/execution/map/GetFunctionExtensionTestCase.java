@@ -23,10 +23,12 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.map.test.util.UnitTestAppender;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
+import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -34,7 +36,7 @@ import org.wso2.siddhi.core.util.EventPrinter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GetFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(GetFunctionExtensionTestCase.class);
+    private static Logger log = Logger.getLogger(GetFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -173,6 +175,9 @@ public class GetFunctionExtensionTestCase {
     @Test
     public void testGetFunctionExtension4() throws InterruptedException {
         log.info("GetFunctionExtension TestCase with test first attribute value must be of type java.util.Map");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price double, volume long);";
 
@@ -192,6 +197,7 @@ public class GetFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
+        AssertJUnit.assertTrue(appender.getMessages().contains("First attribute value must be of type java.util.Map"));
         siddhiAppRuntime.shutdown();
     }
 }
