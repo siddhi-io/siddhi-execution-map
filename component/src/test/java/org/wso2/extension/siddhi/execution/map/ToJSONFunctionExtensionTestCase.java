@@ -26,11 +26,13 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
+import org.wso2.extension.siddhi.execution.map.test.util.UnitTestAppender;
 import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
+import org.wso2.siddhi.core.executor.function.FunctionExecutor;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -38,7 +40,7 @@ import org.wso2.siddhi.core.util.EventPrinter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ToJSONFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(ToJSONFunctionExtensionTestCase.class);
+    private static Logger log = Logger.getLogger(ToJSONFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -190,6 +192,9 @@ public class ToJSONFunctionExtensionTestCase {
     @Test
     public void testToJSONFunctionExtension4() throws InterruptedException {
         log.info("ToJSONFunctionExtension TestCase with data should be a Map string format");
+        log = Logger.getLogger(FunctionExecutor.class);
+        UnitTestAppender appender = new UnitTestAppender();
+        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
@@ -205,6 +210,7 @@ public class ToJSONFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
+        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
         siddhiAppRuntime.shutdown();
     }
 }
