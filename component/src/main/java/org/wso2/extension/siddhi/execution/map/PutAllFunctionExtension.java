@@ -41,23 +41,23 @@ import java.util.Map;
 @Extension(
         name = "putAll",
         namespace = "map",
-        description = "Returns the updated map1 after copying all of the mappings from the specified map2. "
-                + "If you have duplicate keys, map2 will overwrite the values in map1.",
+        description = "Returns the updated toMap after copying all of the mappings from the specified fromMap. "
+                + "If you have duplicate keys, fromMap will overwrite the values in toMap.",
         parameters = {
-                @Parameter(name = "map1",
+                @Parameter(name = "toMap",
                         description = "Map to which mappings needs to be copied in to.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
-                @Parameter(name = "map2",
+                @Parameter(name = "fromMap",
                         description = "Map from which mappings are copied from.",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
         examples = @Example(
-                description = "Returns the updated map named map1 after adding each mapping from map2.",
-                syntax = "putAll(map1 , map2)"),
+                description = "Returns the updated map named toMap after adding each mapping from fromMap.",
+                syntax = "putAll(toMap , fromMap)"),
         returnAttributes = @ReturnAttribute(description = "A hashMap will be returned", type = DataType.OBJECT)
 )
 public class PutAllFunctionExtension extends FunctionExecutor {
