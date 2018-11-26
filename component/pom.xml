@@ -130,6 +130,9 @@
                             org.wso2.extension.siddhi.execution.map.*
                         </Export-Package>
                         <Import-Package>
+                            org.wso2.siddhi.query.*;version="${siddhi.import.version.range}",
+                            org.wso2.siddhi.core.*;version="${siddhi.import.version.range}",
+                            org.wso2.siddhi.annotation.*;version="${siddhi.import.version.range}",
                             *;resolution:=optional
                         </Import-Package>
                         <Include-Resource>
