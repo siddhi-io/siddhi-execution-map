@@ -23,7 +23,7 @@ limitations under the License.
             <class name="org.wso2.extension.siddhi.execution.map.GetFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.IsMapFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.PutFunctionExtensionTestCase"/>
-
+            <class name="org.wso2.extension.siddhi.execution.map.PutAllFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.RemoveFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.ToJSONFunctionExtensionTestCase"/>
             <class name="org.wso2.extension.siddhi.execution.map.ToXMLFunctionExtensionTestCase"/>
