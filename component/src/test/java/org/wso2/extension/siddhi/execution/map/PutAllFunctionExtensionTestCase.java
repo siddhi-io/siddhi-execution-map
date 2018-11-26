@@ -82,7 +82,7 @@ public class PutAllFunctionExtensionTestCase {
     }
 
     @Test
-    public void testPutFunctionExtension2() throws InterruptedException {
+    public void testPutAllFunctionExtension2() throws InterruptedException {
         log.info("PutAllFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
 

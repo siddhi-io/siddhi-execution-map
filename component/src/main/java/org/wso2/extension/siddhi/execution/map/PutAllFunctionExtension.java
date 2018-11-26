@@ -28,12 +28,12 @@ import java.util.Map;
                 + "If you have duplicate keys, map2 will overwrite the values in map1.",
         parameters = {
                 @Parameter(name = "map1",
-                        description = "Map to be merged",
+                        description = "Map to which mappings needs to be copied in to.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
                 @Parameter(name = "map2",
-                        description = "Map to be merged",
+                        description = "Map from which mappings are copied from.",
                         type = DataType.OBJECT,
                         optional = false
                 )
