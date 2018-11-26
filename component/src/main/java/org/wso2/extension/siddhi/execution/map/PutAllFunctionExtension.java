@@ -41,22 +41,22 @@ import java.util.Map;
 @Extension(
         name = "putAll",
         namespace = "map",
-        description = "Returns the updated toMap after copying all of the mappings from the specified fromMap. "
-                + "If you have duplicate keys, fromMap will overwrite the values in toMap.",
+        description = "Returns the updated to.map after copying all of the mappings from the specified from.map. "
+                + "If you have duplicate keys, from.map will overwrite the values in to.map.",
         parameters = {
-                @Parameter(name = "toMap",
+                @Parameter(name = "to.map",
                         description = "Map to which mappings needs to be copied in to.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
-                @Parameter(name = "fromMap",
+                @Parameter(name = "from.map",
                         description = "Map from which mappings are copied from.",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
         examples = @Example(
-                description = "Returns the updated map named toMap after adding each mapping from fromMap.",
+                description = "Returns the updated map named to.map after adding each mapping from from.map.",
                 syntax = "putAll(toMap , fromMap)"),
         returnAttributes = @ReturnAttribute(description = "A hashMap will be returned", type = DataType.OBJECT)
 )
