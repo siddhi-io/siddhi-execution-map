@@ -73,7 +73,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v4015" tabindex="1" class="md-skip">
+      <a href="#api-docs-v4016" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -196,6 +196,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.0.16/" title="4.0.16" class="md-nav__link">
+      4.0.16
+    </a>
+  </li>
+
         
           
           
@@ -412,6 +424,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#putall-function" title="putAll (Function)" class="md-nav__link">
+    putAll (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remove-function" title="remove (Function)" class="md-nav__link">
     remove (Function)
   </a>
@@ -536,6 +555,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#putall-function" title="putAll (Function)" class="md-nav__link">
+    putAll (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remove-function" title="remove (Function)" class="md-nav__link">
     remove (Function)
   </a>
@@ -578,7 +604,7 @@
               
                 
                 
-                <h1 id="api-docs-v4015">API Docs - v4.0.15</h1>
+                <h1 id="api-docs-v4016">API Docs - v4.0.16</h1>
 <h2 id="map">Map</h2>
 <h3 id="create-function">create <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#function">(Function)</a></em></h3>
 <p style="word-wrap: break-word">Returns the created map object.</p>
@@ -825,6 +851,47 @@
 </code></pre>
 
 <p style="word-wrap: break-word"> returns the updated map named students after adding the object "sam" with key 1234.</p>
+
+<h3 id="putall-function">putAll <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#function">(Function)</a></em></h3>
+<p style="word-wrap: break-word">Returns the updated to.map after copying all of the mappings from the specified from.map. If you have duplicate keys, from.map will overwrite the values in to.map.</p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:putAll(&lt;OBJECT&gt; to.map, &lt;OBJECT&gt; from.map)
+</code></pre>
+
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">to.map</td>
+        <td style="vertical-align: top; word-wrap: break-word">Map to which mappings needs to be copied in to.</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">from.map</td>
+        <td style="vertical-align: top; word-wrap: break-word">Map from which mappings are copied from.</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<pre><code>putAll(toMap , fromMap)
+</code></pre>
+
+<p style="word-wrap: break-word">Returns the updated map named to.map after adding each mapping from from.map.</p>
 
 <h3 id="remove-function">remove <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#function">(Function)</a></em></h3>
 <p style="word-wrap: break-word">Returns the updated map after removing the element with key.</p>
