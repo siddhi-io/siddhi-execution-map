@@ -47,7 +47,8 @@ import java.util.Map;
 @Extension(
         name = "createFromJSON",
         namespace = "map",
-        description = "Returns the map created with the key values pairs given in the JSONstring.",
+        description = "This returns the map created by pairing the keys with its corresponding values " +
+                "given in the JSON string.",
         parameters = {
                 @Parameter(name = "json.string",
                         description = "JSON as a string, which is used to create the map.",
@@ -58,9 +59,10 @@ import java.util.Map;
         },
 
         examples = @Example(
-                description = "returns a map with the keys \"symbol\", \"price\", \"volume\", " +
-                        "and with the values \"IBM\", 200 and 100 respectively.",
-                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)"),
+                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
+                description = "This returns a map with the keys \"symbol\", \"price\", \"volume\", " +
+                        "and its values, \"IBM\", 200 and 100 respectively.")
+
         returnAttributes = @ReturnAttribute(description = "Will return a map", type = DataType.OBJECT)
 
 )
