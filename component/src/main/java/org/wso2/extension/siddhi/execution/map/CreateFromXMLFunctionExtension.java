@@ -63,8 +63,7 @@ import javax.xml.stream.XMLStreamException;
         examples = @Example(
                 syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
                 description = " returns a map with the keys \"symbol\", \"price\", \"volume\"," +
-                        " and with the values \"IBM\", 200 and 100 respectively.")
-
+                        " and with the values \"IBM\", 200 and 100 respectively."),
         returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT)
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {

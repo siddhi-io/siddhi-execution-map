@@ -61,7 +61,7 @@ import java.util.Map;
         examples = @Example(
                 syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
                 description = "This returns a map with the keys \"symbol\", \"price\", \"volume\", " +
-                        "and its values, \"IBM\", 200 and 100 respectively.")
+                        "and its values, \"IBM\", 200 and 100 respectively."),
 
         returnAttributes = @ReturnAttribute(description = "Will return a map", type = DataType.OBJECT)
 
