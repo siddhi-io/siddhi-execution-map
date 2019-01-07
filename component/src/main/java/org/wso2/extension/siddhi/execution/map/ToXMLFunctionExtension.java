@@ -44,29 +44,30 @@ import java.util.Map;
 @Extension(
         name = "toXML",
         namespace = "map",
-        description = "Returns the map as an XML string.",
+        description = "This returns the map as an XML string.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "map that needed to convert to XML",
+                        description = "The map that needs to be converted to XML.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
                 @Parameter(name = "rootelementname",
-                        description = "root element of the map",
+                        description = "The root element of the map.",
                         type = DataType.OBJECT,
                         optional = true,
                         defaultValue = "null"
                 )
 
         },
-        examples = @Example(
-                description = "If \"company\" is a map with key value pairs (“symbol” : wso2)," +
-                        " (“volume” : 100), and (“price” : 200). this will  returns the string" +
-                        " “<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>",
-                syntax = "toXML(company, \"abcCompany\")"),
         returnAttributes = @ReturnAttribute(
-                description = "returns the string representation of the map in XML format",
-                type = DataType.STRING)
+                description = "This returns the string representation of the map in XML format.",
+                type = DataType.STRING),
+        examples = @Example(
+                syntax = "toXML(company, \"abcCompany\")",
+                description = "If \"company\" is a map with key-value pairs, (“symbol” : wso2)," +
+                        " (“volume” : 100), and (“price” : 200), this function returns the string, " +
+                        " “<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>.")
+
 )
 public class ToXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;

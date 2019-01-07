@@ -42,23 +42,26 @@ import java.util.Map;
 @Extension(
         name = "remove",
         namespace = "map",
-        description = "Returns the updated map after removing the element with key.",
+        description = "This returns the updated map after removing the element with the key specified.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "Map that needed to remove the element",
+                        description = "The map that needs to be updated by removing the element.",
                         type = DataType.OBJECT,
                         optional = false
                         ),
                 @Parameter(name = "key",
-                        description = "key of the element the needed to remove",
+                        description = "The key of the element that needs to removed from the map.",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
+        returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT),
         examples = @Example(
-                description = "returns the updated map students after removing the element with the key 1234",
-                syntax = "remove(students , 1234)"),
-        returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT)
+                syntax = "remove(students , 1234)",
+                description = "This function returns the updated map, students after removing the element with the" +
+                        " key 1234"
+                )
+
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
     private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);
