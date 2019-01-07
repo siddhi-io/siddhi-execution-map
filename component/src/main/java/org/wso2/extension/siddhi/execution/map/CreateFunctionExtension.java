@@ -42,7 +42,7 @@ import java.util.Map;
 @Extension(
         name = "create",
         namespace = "map",
-        description = "Returns the created map object.",
+        description = "This creates a map between the keys and their corresponding values.",
         parameters = {
                 @Parameter(name = "key1",
                         description = "key 1",
@@ -63,8 +63,10 @@ import java.util.Map;
         },
 
         examples = @Example(
-                description = "returns a map with keys 1, 2, 3 and corresponding values \"one\", \"two\", \"three\"",
-                syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)"),
+                syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)",
+                description = "This returns a map with keys 1, 2, 3 mapped with their corresponding values," +
+                        " \"one\", \"two\", \"three\""),
+
         returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT)
 )
 public class CreateFunctionExtension extends FunctionExecutor {
