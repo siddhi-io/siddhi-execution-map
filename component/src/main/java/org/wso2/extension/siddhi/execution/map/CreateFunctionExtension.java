@@ -61,13 +61,14 @@ import java.util.Map;
                         type = DataType.OBJECT
                 ),
         },
+        returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT),
 
         examples = @Example(
                 syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)",
                 description = "This returns a map with keys 1, 2, 3 mapped with their corresponding values," +
-                        " \"one\", \"two\", \"three\""),
+                        " \"one\", \"two\", \"three\"")
 
-        returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT)
+
 )
 public class CreateFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

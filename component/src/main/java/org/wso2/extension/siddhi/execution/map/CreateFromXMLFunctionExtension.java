@@ -60,11 +60,12 @@ import javax.xml.stream.XMLStreamException;
                 optional = false
                 )
         },
+        returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT),
         examples = @Example(
                 syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
                 description = " returns a map with the keys \"symbol\", \"price\", \"volume\"," +
-                        " and with the values \"IBM\", 200 and 100 respectively."),
-        returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT)
+                        " and with the values \"IBM\", 200 and 100 respectively.")
+
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
