@@ -51,19 +51,21 @@ import javax.xml.stream.XMLStreamException;
 @Extension(
         name = "createFromXML",
         namespace = "map",
-        description = "Returns the map created with the key values pairs given in the XMLstring.",
+        description = "This returns the map created by pairing the keys with their corresponding values," +
+                "given as an XML string.",
         parameters = {
                 @Parameter(name = "xml.string",
-                        description = "XML as a string, which is used to create the map.",
+                        description = "The XML string, which is used to create the map.",
                         type = DataType.STRING,
                 optional = false
                 )
         },
         examples = @Example(
+                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
                 description = " returns a map with the keys \"symbol\", \"price\", \"volume\"," +
-                        " and with the values \"IBM\", 200 and 100 respectively.",
-                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)"),
-        returnAttributes = @ReturnAttribute(description = "will return a map", type = DataType.OBJECT)
+                        " and with the values \"IBM\", 200 and 100 respectively.")
+
+        returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT)
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
