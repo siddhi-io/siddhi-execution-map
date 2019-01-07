@@ -41,19 +41,22 @@ import java.util.Map;
 @Extension(
         name = "isMap",
         namespace = "map",
-        description = "Returns true if the object is a map or false otherwise.t",
+        description = "This returns 'true' if the object is a map and 'false' if otherwise.",
         parameters = {
                 @Parameter(name = "object",
-                        description = "Object that needed to check whether it is a map",
+                        description = "The object that the function checks to determine whether it's a map or not.",
                         type = {DataType.OBJECT},
                         optional = false
                 )
         },
+        returnAttributes = @ReturnAttribute(description = "This returns a boolean value based on whether " +
+                "the object specified is a map or not.", type = DataType.BOOL),
         examples = @Example(
-                description = "returns true if the students object is a map. It returns false if " +
-                        "the students object is not a map.",
-                syntax = "isMap(students)"),
-        returnAttributes = @ReturnAttribute(description = "Returns a boolean value", type = DataType.BOOL)
+                syntax = "isMap(students)",
+                description = "This function returns 'true' if the object, students is a map. It returns 'false' if " +
+                        "it is not a map.")
+
+
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.BOOL;
