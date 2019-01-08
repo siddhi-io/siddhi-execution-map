@@ -65,8 +65,8 @@ import java.util.Map;
 
         examples = @Example(
                 syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)",
-                description = "This returns a map with keys 1, 2, 3 mapped with their corresponding values," +
-                        " \"one\", \"two\", \"three\"")
+                description = "This returns a map with keys 1, 2, 3 mapped with their corresponding values, " +
+                        "\"one\", \"two\", \"three\".")
 
 
 )
