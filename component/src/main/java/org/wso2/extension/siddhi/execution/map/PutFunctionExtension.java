@@ -42,28 +42,29 @@ import java.util.Map;
 @Extension(
         name = "put",
         namespace = "map",
-        description = "Returns the updated map after adding the given key-value pair",
+        description = "This returns the updated map after adding the given key-value pair.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "Map that value should add",
+                        description = "The map to which the value should be added.",
                         type = DataType.OBJECT,
                         optional = false
                         ),
                 @Parameter(name = "key",
-                        description = "Key of the value",
+                        description = "The key of the value added.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
                 @Parameter(name = "value",
-                        description = "New value",
+                        description = "The new value.",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
+        returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
         examples = @Example(
-                description = " returns the updated map named students after adding the object \"sam\" " +
-                        "with key 1234.", syntax = "put(students , 1234 , ”sam”)"),
-        returnAttributes = @ReturnAttribute(description = "A hashMap will be return", type = DataType.OBJECT)
+                syntax = "put(students , 1234 , ”sam”)",
+                description = "This function returns the updated map named students after adding the object \"sam\" " +
+                        "with key 1234.")
 )
 public class PutFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

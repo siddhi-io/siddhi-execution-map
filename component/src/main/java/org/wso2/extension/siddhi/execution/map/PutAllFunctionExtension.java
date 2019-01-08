@@ -41,24 +41,25 @@ import java.util.Map;
 @Extension(
         name = "putAll",
         namespace = "map",
-        description = "Returns the updated to.map after copying all of the mappings from the specified from.map. "
-                + "If you have duplicate keys, from.map will overwrite the values in to.map.",
+        description = "This returns the updated 'to.map' map after copying all of the mappings from the " +
+                "specified 'from.map.' map."
+                + " If there are duplicate keys, 'from.map' overwrites the values into the 'to.map.' map.",
         parameters = {
                 @Parameter(name = "to.map",
-                        description = "Map to which mappings needs to be copied in to.",
+                        description = "The map into which the mappings need to copied.",
                         type = DataType.OBJECT,
                         optional = false
                 ),
                 @Parameter(name = "from.map",
-                        description = "Map from which mappings are copied from.",
+                        description = "The map from which the mappings are copied.",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
+        returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
         examples = @Example(
-                description = "Returns the updated map named to.map after adding each mapping from from.map.",
-                syntax = "putAll(toMap , fromMap)"),
-        returnAttributes = @ReturnAttribute(description = "A hashMap will be returned", type = DataType.OBJECT)
+                syntax = "putAll(toMap , fromMap)",
+                description = "This returns the updated map named 'toMap' after adding each mapping from 'fromMap.'")
 )
 public class PutAllFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

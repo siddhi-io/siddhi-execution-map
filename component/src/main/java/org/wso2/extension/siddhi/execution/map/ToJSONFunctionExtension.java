@@ -44,22 +44,23 @@ import java.util.Map;
 @Extension(
         name = "toJSON",
         namespace = "map",
-        description = "Converts a map into a JSON object and returns the definition of that JSON object as a string.",
+        description = "This converts a map into a JSON object and returns the definition of that " +
+                "JSON object as a string.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "map that nedded to be converted to JSON",
+                        description = "The map that needs to be converted to JSON",
                         type = DataType.OBJECT,
                         optional = false
                 ),
         },
-        examples = @Example(
-                description = "If \"company\" is a map with key value pairs (\"symbol\" : wso2),(\"volume\" : 100), " +
-                        "and (\"price\",200). This will returns the string “{“symbol” : “wso2” ," +
-                        " “volume” : 100 , “price” : 200}”.",
-                syntax = "toJSON(company"),
         returnAttributes = @ReturnAttribute(
-                description = "Returns a string representation of the map in JSON format",
-                type = DataType.STRING)
+                description = "This returns a string representation of the map in JSON format.",
+                type = DataType.STRING),
+        examples = @Example(
+                syntax = "toJSON(company)",
+                description = "If \"company\" is a map with key-value pairs, (\"symbol\" : wso2),(\"volume\" : 100), " +
+                        "and (\"price\",200), it returns the string “{“symbol” : “wso2”," +
+                        " “volume” : 100 , “price” : 200}”.")
 )
 public class ToJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;

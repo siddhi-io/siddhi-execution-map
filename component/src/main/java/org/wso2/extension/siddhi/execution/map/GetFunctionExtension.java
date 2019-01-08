@@ -42,25 +42,28 @@ import java.util.Map;
 @Extension(
         name = "get",
         namespace = "map",
-        description = "Returns the value object from the map that is related to the given key.",
+        description = "This returns the value object, that corresponds to the given key, from the map. ",
         parameters = {
                 @Parameter(name = "map",
-                        description = "Map where the value should return",
+                        description = "The map from where the value should be obtained",
                         type = DataType.OBJECT,
                         optional = false
                 ),
                 @Parameter(
                         name = "key",
-                        description = "Key of the value which needed to return",
+                        description = "The key of the value which needs to be returned",
                         type = DataType.OBJECT,
                         optional = false
                 )
         },
-        examples = @Example(description = "returns the value that is related to the key 1 from the map named company.",
-                syntax = "get(company,1)"),
         returnAttributes = @ReturnAttribute(
-                description = "Returns the value object from the map that is related to the given key",
-                type = DataType.OBJECT)
+                description = "This returns the value object from the map that corresponds to the given key.",
+                type = DataType.OBJECT),
+
+        examples = @Example(
+                syntax = "get(company,1)",
+                description = "This function returns the value that is associated with the key, i.e., 1, from a " +
+                        "map named company.")
 )
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
