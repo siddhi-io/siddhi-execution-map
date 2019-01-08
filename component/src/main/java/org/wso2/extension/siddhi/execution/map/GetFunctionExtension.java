@@ -65,7 +65,6 @@ import java.util.Map;
                 description = "This function returns the value that is associated with the key, i.e., 1, from a " +
                         "map named company.")
 )
-
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
