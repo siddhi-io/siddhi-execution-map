@@ -53,8 +53,8 @@ import java.util.Map;
                 "the object specified is a map or not.", type = DataType.BOOL),
         examples = @Example(
                 syntax = "isMap(students)",
-                description = "This function returns 'true' if the object, students is a map. It returns 'false' if " +
-                        "it is not a map.")
+                description = "This function returns 'true' if the object, students is a map. It returns " +
+                        "'false' if it is not a map.")
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.BOOL;

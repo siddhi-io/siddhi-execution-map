@@ -58,8 +58,8 @@ import java.util.Map;
         returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT),
         examples = @Example(
                 syntax = "remove(students , 1234)",
-                description = "This function returns the updated map, students after removing the element with the" +
-                        " key 1234."
+                description = "This function returns the updated map, students after removing the element with the " +
+                        "key 1234."
                 )
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
