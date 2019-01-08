@@ -59,9 +59,8 @@ import java.util.Map;
         examples = @Example(
                 syntax = "remove(students , 1234)",
                 description = "This function returns the updated map, students after removing the element with the" +
-                        " key 1234"
+                        " key 1234."
                 )
-
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
     private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);

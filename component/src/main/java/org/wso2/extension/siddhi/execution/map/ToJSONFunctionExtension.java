@@ -59,10 +59,8 @@ import java.util.Map;
         examples = @Example(
                 syntax = "toJSON(company)",
                 description = "If \"company\" is a map with key-value pairs, (\"symbol\" : wso2),(\"volume\" : 100), " +
-                        "and (\"price\",200), it returns the string “{“symbol” : “wso2” ," +
+                        "and (\"price\",200), it returns the string “{“symbol” : “wso2”," +
                         " “volume” : 100 , “price” : 200}”.")
-
-
 )
 public class ToJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;

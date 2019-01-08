@@ -57,17 +57,15 @@ import java.util.Map;
                         optional = true,
                         defaultValue = "null"
                 )
-
         },
         returnAttributes = @ReturnAttribute(
                 description = "This returns the string representation of the map in XML format.",
                 type = DataType.STRING),
         examples = @Example(
                 syntax = "toXML(company, \"abcCompany\")",
-                description = "If \"company\" is a map with key-value pairs, (“symbol” : wso2)," +
-                        " (“volume” : 100), and (“price” : 200), this function returns the string, " +
-                        " “<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>.")
-
+                description = "If \"company\" is a map with key-value pairs, (“symbol” : wso2), " +
+                        "(“volume” : 100), and (“price” : 200), this function returns the string, " +
+                        "“<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>.")
 )
 public class ToXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;

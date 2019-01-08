@@ -55,7 +55,6 @@ import java.util.Map;
                         type = DataType.STRING,
                         optional = false
                 )
-
         },
         returnAttributes = @ReturnAttribute(description = "Will return a map", type = DataType.OBJECT),
 
@@ -63,7 +62,6 @@ import java.util.Map;
                 syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
                 description = "This returns a map with the keys \"symbol\", \"price\", \"volume\", " +
                         "and its values, \"IBM\", 200 and 100 respectively.")
-
 )
 public class CreateFromJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
