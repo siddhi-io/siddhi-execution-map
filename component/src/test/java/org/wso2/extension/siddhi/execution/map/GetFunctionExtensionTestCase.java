@@ -28,7 +28,7 @@ import org.wso2.siddhi.core.SiddhiAppRuntime;
 import org.wso2.siddhi.core.SiddhiManager;
 import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.executor.function.FunctionExecutor;
+import org.wso2.siddhi.core.stream.StreamJunction;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.stream.output.StreamCallback;
 import org.wso2.siddhi.core.util.EventPrinter;
@@ -175,7 +175,7 @@ public class GetFunctionExtensionTestCase {
     @Test
     public void testGetFunctionExtension4() throws InterruptedException {
         log.info("GetFunctionExtension TestCase with test first attribute value must be of type java.util.Map");
-        log = Logger.getLogger(FunctionExecutor.class);
+        log = Logger.getLogger(StreamJunction.class);
         UnitTestAppender appender = new UnitTestAppender();
         log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
