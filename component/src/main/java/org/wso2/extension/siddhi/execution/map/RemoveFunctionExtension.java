@@ -18,18 +18,20 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
+import io.siddhi.annotation.Example;
+import io.siddhi.annotation.Extension;
+import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ReturnAttribute;
+import io.siddhi.annotation.util.DataType;
+import io.siddhi.core.config.SiddhiQueryContext;
+import io.siddhi.core.executor.ExpressionExecutor;
+import io.siddhi.core.executor.function.FunctionExecutor;
+import io.siddhi.core.util.config.ConfigReader;
+import io.siddhi.core.util.snapshot.state.State;
+import io.siddhi.core.util.snapshot.state.StateFactory;
+import io.siddhi.query.api.definition.Attribute;
+import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.apache.log4j.Logger;
-import org.wso2.siddhi.annotation.Example;
-import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.annotation.Parameter;
-import org.wso2.siddhi.annotation.ReturnAttribute;
-import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.SiddhiAppContext;
-import org.wso2.siddhi.core.executor.ExpressionExecutor;
-import org.wso2.siddhi.core.executor.function.FunctionExecutor;
-import org.wso2.siddhi.core.util.config.ConfigReader;
-import org.wso2.siddhi.query.api.definition.Attribute;
-import org.wso2.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
@@ -48,7 +50,7 @@ import java.util.Map;
                         description = "The map that needs to be updated by removing the element.",
                         type = DataType.OBJECT,
                         optional = false
-                        ),
+                ),
                 @Parameter(name = "key",
                         description = "The key of the element that needs to removed from the map.",
                         type = DataType.OBJECT,
@@ -60,24 +62,25 @@ import java.util.Map;
                 syntax = "remove(students , 1234)",
                 description = "This function returns the updated map, students after removing the element with the " +
                         "key 1234."
-                )
+        )
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
     private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
-    protected void init(ExpressionExecutor[] attributeExpressionExecutors,
-                        ConfigReader configReader,
-                        SiddhiAppContext siddhiAppContext) {
+    protected StateFactory init(ExpressionExecutor[] expressionExecutors,
+                                ConfigReader configReader,
+                                SiddhiQueryContext siddhiQueryContext) {
         if (attributeExpressionExecutors.length < 2) {
             throw new SiddhiAppValidationException("Invalid no of arguments passed to map:remove() function, " +
                     "required one or more keys, but found " + attributeExpressionExecutors.length);
         }
+        return null;
     }
 
     @Override
-    protected Object execute(Object[] data) {
+    protected Object execute(Object[] data, State state) {
         Map<Object, Object> map = (Map<Object, Object>) data[0];
         for (int i = 1; i < data.length; i++) {
             map.remove(data[i]);
@@ -86,7 +89,7 @@ public class RemoveFunctionExtension extends FunctionExecutor {
     }
 
     @Override
-    protected Object execute(Object data) {
+    protected Object execute(Object data, State state) {
         return null;
     }
 
@@ -94,16 +97,4 @@ public class RemoveFunctionExtension extends FunctionExecutor {
     public Attribute.Type getReturnType() {
         return returnType;
     }
-
-    @Override
-    public Map<String, Object> currentState() {
-        return null;    //No need to maintain a state.
-    }
-
-    @Override
-    public void restoreState(Map<String, Object> state) {
-        //Since there's no need to maintain a state, nothing needs to be done here.
-    }
 }
-
-
