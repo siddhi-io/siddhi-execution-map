@@ -72,7 +72,7 @@ public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private NumberFormat numberFormat = NumberFormat.getInstance();
 
     @Override
-    protected StateFactory init(ExpressionExecutor[] expressionExecutors,
+    protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
         if ((attributeExpressionExecutors.length) != 1) {

@@ -74,7 +74,7 @@ public class ToXMLFunctionExtension extends FunctionExecutor {
     private String rootElement = null;
 
     @Override
-    protected StateFactory init(ExpressionExecutor[] expressionExecutors,
+    protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
         if ((attributeExpressionExecutors.length) > 2) {

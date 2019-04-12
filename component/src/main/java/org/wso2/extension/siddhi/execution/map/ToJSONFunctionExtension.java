@@ -68,7 +68,7 @@ public class ToJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;
 
     @Override
-    protected StateFactory init(ExpressionExecutor[] expressionExecutors,
+    protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
         if ((attributeExpressionExecutors.length) != 1) {
