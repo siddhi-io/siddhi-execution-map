@@ -18,6 +18,14 @@
 
 package org.wso2.extension.siddhi.execution.map;
 
+import io.siddhi.core.SiddhiAppRuntime;
+import io.siddhi.core.SiddhiManager;
+import io.siddhi.core.event.Event;
+import io.siddhi.core.exception.SiddhiAppCreationException;
+import io.siddhi.core.stream.StreamJunction;
+import io.siddhi.core.stream.input.InputHandler;
+import io.siddhi.core.stream.output.StreamCallback;
+import io.siddhi.core.util.EventPrinter;
 import org.apache.axiom.om.impl.exception.XMLComparisonException;
 import org.apache.axiom.om.impl.llom.util.XMLComparator;
 import org.apache.axiom.om.util.AXIOMUtil;
@@ -28,14 +36,6 @@ import org.testng.annotations.Test;
 import org.wso2.extension.siddhi.execution.map.test.util.SiddhiTestHelper;
 import org.wso2.extension.siddhi.execution.map.test.util.UnitTestAppender;
 import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
-import org.wso2.siddhi.core.SiddhiAppRuntime;
-import org.wso2.siddhi.core.SiddhiManager;
-import org.wso2.siddhi.core.event.Event;
-import org.wso2.siddhi.core.exception.SiddhiAppCreationException;
-import org.wso2.siddhi.core.stream.StreamJunction;
-import org.wso2.siddhi.core.stream.input.InputHandler;
-import org.wso2.siddhi.core.stream.output.StreamCallback;
-import org.wso2.siddhi.core.util.EventPrinter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
