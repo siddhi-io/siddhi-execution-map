@@ -28,6 +28,7 @@ import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
 import io.siddhi.extension.execution.map.test.util.SiddhiTestHelper;
 import io.siddhi.extension.execution.map.test.util.UnitTestAppender;
+import io.siddhi.extension.execution.string.ConcatFunctionExtension;
 import org.apache.axiom.om.impl.exception.XMLComparisonException;
 import org.apache.axiom.om.impl.llom.util.XMLComparator;
 import org.apache.axiom.om.util.AXIOMUtil;
@@ -35,7 +36,6 @@ import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;

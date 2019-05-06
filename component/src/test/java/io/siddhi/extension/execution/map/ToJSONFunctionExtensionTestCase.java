@@ -28,6 +28,7 @@ import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
 import io.siddhi.extension.execution.map.test.util.SiddhiTestHelper;
 import io.siddhi.extension.execution.map.test.util.UnitTestAppender;
+import io.siddhi.extension.execution.string.ConcatFunctionExtension;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +36,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.wso2.extension.siddhi.execution.string.ConcatFunctionExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
