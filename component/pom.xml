@@ -19,7 +19,7 @@
 
 
     <parent>
-        <groupId>org.wso2.extension.siddhi.execution.map</groupId>
+        <groupId>io.siddhi.extension.execution.map</groupId>
         <artifactId>siddhi-execution-map-parent</artifactId>
         <version>5.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -70,7 +70,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.wso2.extension.siddhi.execution.string</groupId>
+            <groupId>io.siddhi.extension.execution.string</groupId>
             <artifactId>siddhi-execution-string</artifactId>
             <scope>test</scope>
         </dependency>
@@ -127,7 +127,7 @@
                             !org.json.*,
                             !org.apache.axiom.*,
                             !org.apache.commons.lang3.*,
-                            org.wso2.extension.siddhi.execution.map.*
+                            io.siddhi.extension.execution.map.*
                         </Export-Package>
                         <Import-Package>
                             io.siddhi.query.*;version="${siddhi.import.version.range}",

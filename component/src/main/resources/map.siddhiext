@@ -16,12 +16,12 @@
 # under the License.
 #
 
-create=org.wso2.extension.siddhi.execution.map.CreateFunctionExtension
-createFromJSON=org.wso2.extension.siddhi.execution.map.CreateFromJSONFunctionExtension
-createFromXML=org.wso2.extension.siddhi.execution.map.CreateFromXMLFunctionExtension
-remove=org.wso2.extension.siddhi.execution.map.RemoveFunctionExtension
-put=org.wso2.extension.siddhi.execution.map.PutFunctionExtension
-get=org.wso2.extension.siddhi.execution.map.GetFunctionExtension
-isMap=org.wso2.extension.siddhi.execution.map.IsMapFunctionExtension
-toJSON=org.wso2.extension.siddhi.execution.map.ToJSONFunctionExtension
-toXML=org.wso2.extension.siddhi.execution.map.ToXMLFunctionExtension
+create=io.siddhi.extension.execution.map.CreateFunctionExtension
+createFromJSON=io.siddhi.extension.execution.map.CreateFromJSONFunctionExtension
+createFromXML=io.siddhi.extension.execution.map.CreateFromXMLFunctionExtension
+remove=io.siddhi.extension.execution.map.RemoveFunctionExtension
+put=io.siddhi.extension.execution.map.PutFunctionExtension
+get=io.siddhi.extension.execution.map.GetFunctionExtension
+isMap=io.siddhi.extension.execution.map.IsMapFunctionExtension
+toJSON=io.siddhi.extension.execution.map.ToJSONFunctionExtension
+toXML=io.siddhi.extension.execution.map.ToXMLFunctionExtension

@@ -17,16 +17,16 @@ limitations under the License.
 <suite name="Siddhi-execution-map-Test-Suite">
     <test name="Siddhi-execution-map-tests" preserve-order="true" parallel="false">
         <classes>
-            <class name="org.wso2.extension.siddhi.execution.map.CreateFromJSONFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.CreateFromXMLFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.CreateFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.GetFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.IsMapFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.PutFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.PutAllFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.RemoveFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.ToJSONFunctionExtensionTestCase"/>
-            <class name="org.wso2.extension.siddhi.execution.map.ToXMLFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CreateFromJSONFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CreateFromXMLFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CreateFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.GetFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.IsMapFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.PutFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.PutAllFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.RemoveFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ToJSONFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ToXMLFunctionExtensionTestCase"/>
         </classes>
     </test>
 </suite>
