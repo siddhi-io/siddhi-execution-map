@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -49,18 +50,26 @@ import java.util.Map;
                 @Parameter(name = "map",
                         description = "The map to which the value should be added.",
                         type = DataType.OBJECT,
+                        dynamic = true,
                         optional = false
                 ),
                 @Parameter(name = "key",
                         description = "The key of the value added.",
-                        type = DataType.OBJECT,
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true,
                         optional = false
                 ),
                 @Parameter(name = "value",
                         description = "The new value.",
-                        type = DataType.OBJECT,
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true,
                         optional = false
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"map", "key", "value"})
         },
         returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
         examples = @Example(

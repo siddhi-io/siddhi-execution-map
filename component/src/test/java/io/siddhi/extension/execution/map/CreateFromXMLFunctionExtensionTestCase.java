@@ -205,7 +205,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testCreateFromXMLFunctionExtension5() throws InterruptedException {
         log.info("CreateFromXMLFunctionExtension TestCase with test data is to be a string");
         log = Logger.getLogger(StreamJunction.class);

@@ -46,7 +46,7 @@ public class IsMapFunctionExtensionTestCase {
 
     @Test
     public void testIsMapFunctionExtension() throws InterruptedException {
-        log.info("RemoveFunctionExtension TestCase");
+        log.info("IsMapFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
@@ -102,7 +102,7 @@ public class IsMapFunctionExtensionTestCase {
 
     @Test(expectedExceptions = SiddhiAppCreationException.class)
     public void testIsMapFunctionExtension1() throws InterruptedException {
-        log.info("RemoveFunctionExtension TestCase with test attributeExpressionExecutors length");
+        log.info("IsMapFunctionExtension TestCase with test attributeExpressionExecutors length");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";

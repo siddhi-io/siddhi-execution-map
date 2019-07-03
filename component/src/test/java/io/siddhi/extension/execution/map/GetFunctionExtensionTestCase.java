@@ -172,7 +172,7 @@ public class GetFunctionExtensionTestCase {
         siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testGetFunctionExtension4() throws InterruptedException {
         log.info("GetFunctionExtension TestCase with test first attribute value must be of type java.util.Map");
         log = Logger.getLogger(StreamJunction.class);

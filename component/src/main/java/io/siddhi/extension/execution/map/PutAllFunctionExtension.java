@@ -20,6 +20,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -50,13 +51,18 @@ import java.util.Map;
                 @Parameter(name = "to.map",
                         description = "The map into which the mappings need to copied.",
                         type = DataType.OBJECT,
+                        dynamic = true,
                         optional = false
                 ),
                 @Parameter(name = "from.map",
                         description = "The map from which the mappings are copied.",
                         type = DataType.OBJECT,
+                        dynamic = true,
                         optional = false
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"to.map", "from.map"})
         },
         returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
         examples = @Example(

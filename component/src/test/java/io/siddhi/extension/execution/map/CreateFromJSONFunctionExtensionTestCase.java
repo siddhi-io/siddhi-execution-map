@@ -173,7 +173,7 @@ public class CreateFromJSONFunctionExtensionTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testCreateFromJSONFunctionExtension5() throws InterruptedException {
         log.info("CreateFromJSONFunctionExtension TestCase with test data should be a string");
         log = Logger.getLogger(StreamJunction.class);
@@ -189,10 +189,5 @@ public class CreateFromJSONFunctionExtensionTestCase {
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
                 inStreamDefinition + query);
 
-        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
-        siddhiAppRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100L});
-        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
-        siddhiAppRuntime.shutdown();
     }
 }

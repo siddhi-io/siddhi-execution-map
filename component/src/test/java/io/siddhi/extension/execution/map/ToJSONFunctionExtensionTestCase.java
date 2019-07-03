@@ -189,7 +189,7 @@ public class ToJSONFunctionExtensionTestCase {
         siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testToJSONFunctionExtension4() throws InterruptedException {
         log.info("ToJSONFunctionExtension TestCase with data should be a Map string format");
         log = Logger.getLogger(StreamJunction.class);

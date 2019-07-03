@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -55,8 +56,12 @@ import java.util.Map;
                 @Parameter(name = "json.string",
                         description = "JSON as a string, which is used to create the map.",
                         type = DataType.STRING,
+                        dynamic = true,
                         optional = false
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"json.string"})
         },
         returnAttributes = @ReturnAttribute(description = "Will return a map", type = DataType.OBJECT),
 
