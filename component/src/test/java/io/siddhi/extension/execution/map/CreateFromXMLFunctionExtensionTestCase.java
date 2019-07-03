@@ -34,6 +34,7 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -78,10 +79,10 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     count.incrementAndGet();
                     if (count.get() == 1) {
                         Map map = (Map) event.getData(0);
-                        AssertJUnit.assertEquals(map.get("commonAttr1"), 19L);
-                        AssertJUnit.assertEquals(map.get("commonAttr2"), 11.45d);
-                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
-                        AssertJUnit.assertEquals(map.get("commonAttr4"), "ELEMENT_TEXT");
+                        AssertJUnit.assertEquals(19L, map.get("commonAttr1"));
+                        AssertJUnit.assertEquals(11.45d, map.get("commonAttr2"));
+                        AssertJUnit.assertEquals(true, map.get("commonAttr3"));
+                        AssertJUnit.assertEquals("ELEMENT_TEXT", map.get("commonAttr4"));
                         eventArrived = true;
                     }
                 }
@@ -123,24 +124,24 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     count.incrementAndGet();
                     Map map = (Map) event.getData(0);
                     if (count.get() == 1) {
-                        AssertJUnit.assertEquals(map.get("commonAttr1"), 25L);
-                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.1d);
-                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
-                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event1");
+                        AssertJUnit.assertEquals(25L, map.get("commonAttr1"));
+                        AssertJUnit.assertEquals(100.1d, map.get("commonAttr2"));
+                        AssertJUnit.assertEquals(true, map.get("commonAttr3"));
+                        AssertJUnit.assertEquals("Event1", map.get("commonAttr4"));
                         eventArrived = true;
                     }
                     if (count.get() == 2) {
-                        AssertJUnit.assertEquals(map.get("commonAttr1"), 35L);
-                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.11d);
-                        AssertJUnit.assertEquals(map.get("commonAttr3"), false);
-                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event2");
+                        AssertJUnit.assertEquals(35L, map.get("commonAttr1"));
+                        AssertJUnit.assertEquals(100.11d, map.get("commonAttr2"));
+                        AssertJUnit.assertEquals(false, map.get("commonAttr3"));
+                        AssertJUnit.assertEquals("Event2", map.get("commonAttr4"));
                         eventArrived = true;
                     }
                     if (count.get() == 3) {
-                        AssertJUnit.assertEquals(map.get("commonAttr1"), 45L);
-                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.13456d);
-                        AssertJUnit.assertEquals(map.get("commonAttr3"), true);
-                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event3");
+                        AssertJUnit.assertEquals(45L, map.get("commonAttr1"));
+                        AssertJUnit.assertEquals(100.13456d, map.get("commonAttr2"));
+                        AssertJUnit.assertEquals(true, map.get("commonAttr3"));
+                        AssertJUnit.assertEquals("Event3", map.get("commonAttr4"));
                         eventArrived = true;
                     }
                 }
@@ -225,6 +226,71 @@ public class CreateFromXMLFunctionExtensionTestCase {
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
         AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test
+    public void testCreateFromXMLFunctionExtension6() throws InterruptedException {
+        log.info("CreateFromXMLFunctionExtension TestCase 6");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
+
+        String inStreamDefinition = "\ndefine stream inputStream " +
+                "(longAttr long, doubleAttr double, booleanAttr bool, strAttr string);";
+        String query = ("@info(name = 'query1') from inputStream select " +
+                "map:createFromXML(str:concat('<parent><commonAttr1>',longAttr,'</commonAttr1>" +
+                "<commonAttr2>'," +
+                "doubleAttr,'</commonAttr2><sensor><commonAttr3>',booleanAttr,'</commonAttr3></sensor><commonAttr4>'," +
+                "strAttr,'</commonAttr4></parent>')) as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                EventPrinter.print(inEvents);
+                for (Event event : inEvents) {
+                    count.incrementAndGet();
+                    Map map = (Map) event.getData(0);
+                    if (count.get() == 1) {
+                        Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
+                        innerMap.put("commonAttr3",true);
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 25L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.1d);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event1");
+                        AssertJUnit.assertEquals(map.get("sensor"), innerMap);
+                        eventArrived = true;
+                    }
+                    if (count.get() == 2) {
+                        Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
+                        innerMap.put("commonAttr3",false);
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 35L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.11d);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event2");
+                        AssertJUnit.assertEquals(map.get("sensor"), innerMap);
+                        eventArrived = true;
+                    }
+                    if (count.get() == 3) {
+                        Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
+                        innerMap.put("commonAttr3",true);
+                        AssertJUnit.assertEquals(map.get("commonAttr1"), 45L);
+                        AssertJUnit.assertEquals(map.get("commonAttr2"), 100.13456d);
+                        AssertJUnit.assertEquals(map.get("commonAttr4"), "Event3");
+                        AssertJUnit.assertEquals(map.get("sensor"), innerMap);
+                        eventArrived = true;
+                    }
+                }
+            }
+        });
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{25, 100.1, true, "Event1"});
+        inputHandler.send(new Object[]{35, 100.11, false, "Event2"});
+        inputHandler.send(new Object[]{45, 100.13456, true, "Event3"});
+        SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
+        AssertJUnit.assertEquals(3, count.get());
+        AssertJUnit.assertTrue(eventArrived);
         siddhiAppRuntime.shutdown();
     }
 }
