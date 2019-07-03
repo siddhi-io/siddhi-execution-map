@@ -254,7 +254,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     Map map = (Map) event.getData(0);
                     if (count.get() == 1) {
                         Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
-                        innerMap.put("commonAttr3",true);
+                        innerMap.put("commonAttr3", true);
                         AssertJUnit.assertEquals(map.get("commonAttr1"), 25L);
                         AssertJUnit.assertEquals(map.get("commonAttr2"), 100.1d);
                         AssertJUnit.assertEquals(map.get("commonAttr4"), "Event1");
@@ -263,7 +263,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     }
                     if (count.get() == 2) {
                         Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
-                        innerMap.put("commonAttr3",false);
+                        innerMap.put("commonAttr3", false);
                         AssertJUnit.assertEquals(map.get("commonAttr1"), 35L);
                         AssertJUnit.assertEquals(map.get("commonAttr2"), 100.11d);
                         AssertJUnit.assertEquals(map.get("commonAttr4"), "Event2");
@@ -272,7 +272,7 @@ public class CreateFromXMLFunctionExtensionTestCase {
                     }
                     if (count.get() == 3) {
                         Map<String, Boolean> innerMap = new HashMap<String, Boolean>();
-                        innerMap.put("commonAttr3",true);
+                        innerMap.put("commonAttr3", true);
                         AssertJUnit.assertEquals(map.get("commonAttr1"), 45L);
                         AssertJUnit.assertEquals(map.get("commonAttr2"), 100.13456d);
                         AssertJUnit.assertEquals(map.get("commonAttr4"), "Event3");
