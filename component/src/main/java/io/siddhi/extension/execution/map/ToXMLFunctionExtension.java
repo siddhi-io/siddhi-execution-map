@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -51,14 +52,20 @@ import java.util.Map;
                 @Parameter(name = "map",
                         description = "The map that needs to be converted to XML.",
                         type = DataType.OBJECT,
+                        dynamic = true,
                         optional = false
                 ),
-                @Parameter(name = "rootelementname",
+                @Parameter(name = "root.element.name",
                         description = "The root element of the map.",
-                        type = DataType.OBJECT,
+                        type = {DataType.OBJECT, DataType.STRING},
+                        dynamic = true,
                         optional = true,
                         defaultValue = "null"
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"map"}),
+                @ParameterOverload(parameterNames = {"map", "root.element.name"})
         },
         returnAttributes = @ReturnAttribute(
                 description = "This returns the string representation of the map in XML format.",
@@ -99,7 +106,7 @@ public class ToXMLFunctionExtension extends FunctionExecutor {
             Map<Object, Object> map = (Map<Object, Object>) data[0];
             return getXmlFromMapWithRootElement(map);
         } else {
-            throw new SiddhiAppRuntimeException("Data should be a string");
+            throw new SiddhiAppRuntimeException("Data should be a Map");
         }
     }
 
@@ -109,7 +116,7 @@ public class ToXMLFunctionExtension extends FunctionExecutor {
             Map<Object, Object> map = (Map<Object, Object>) data;
             return getXmlFromMap(map);
         } else {
-            throw new SiddhiAppRuntimeException("Data should be a string");
+            throw new SiddhiAppRuntimeException("Data should be a Map");
         }
     }
 
@@ -118,23 +125,21 @@ public class ToXMLFunctionExtension extends FunctionExecutor {
     }
 
     private Object getXmlFromMapWithRootElement(Map<Object, Object> map) {
-        StringBuilder xmlValue = new StringBuilder();
-        xmlValue.append("<" + rootElement + ">");
-        xmlValue.append(addingElements(map));
-        xmlValue.append("</" + rootElement + ">");
-        return xmlValue.toString();
+        return ("<" + rootElement + ">") +
+                addingElements(map) +
+                "</" + rootElement + ">";
     }
 
     private String addingElements(Map<Object, Object> map) {
         StringBuilder xmlValue = new StringBuilder();
         for (Map.Entry<Object, Object> mapEntry : map.entrySet()) {
-            xmlValue.append("<" + mapEntry.getKey().toString() + ">");
+            xmlValue.append("<").append(mapEntry.getKey().toString()).append(">");
             if (mapEntry.getValue() instanceof Map) {
                 xmlValue.append(getXmlFromMap((Map<Object, Object>) mapEntry.getValue()));
             } else {
                 xmlValue.append(mapEntry.getValue().toString());
             }
-            xmlValue.append("</" + mapEntry.getKey().toString() + ">");
+            xmlValue.append("</").append(mapEntry.getKey().toString()).append(">");
         }
         return xmlValue.toString();
     }

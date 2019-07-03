@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -58,13 +59,21 @@ import javax.xml.stream.XMLStreamException;
                 @Parameter(name = "xml.string",
                         description = "The XML string, which is used to create the map.",
                         type = DataType.STRING,
+                        dynamic = true,
                         optional = false
                 )
         },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"xml.string"})
+        },
         returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT),
         examples = @Example(
-                syntax = "createFromJSON(“{‘symbol' : 'IBM' , 'price' : 200, 'volume' : 100}”)",
-                description = " returns a map with the keys \"symbol\", \"price\", \"volume\", " +
+                syntax = "createFromXML(“<stock>" +
+                        "                   <symbol>IBM</symbol>" +
+                        "                   <price>200</price>" +
+                        "                   <volume>100</volume>" +
+                        "               </stock>”)",
+                description = "This returns a map with the keys \"symbol\", \"price\", \"volume\", " +
                         "and with the values \"IBM\", 200 and 100 respectively.")
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {

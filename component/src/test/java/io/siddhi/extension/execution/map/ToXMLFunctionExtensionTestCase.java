@@ -55,7 +55,6 @@ public class ToXMLFunctionExtensionTestCase {
     public void testToXMLFunctionExtension() throws InterruptedException {
         log.info("ToXMLFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
-        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select "
@@ -199,7 +198,6 @@ public class ToXMLFunctionExtensionTestCase {
     public void testToXMLFunctionExtension3() throws InterruptedException {
         log.info("ToXMLFunctionExtension TestCase 3");
         SiddhiManager siddhiManager = new SiddhiManager();
-        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select "
@@ -350,7 +348,6 @@ public class ToXMLFunctionExtensionTestCase {
     public void testToXMLFunctionExtension5() throws InterruptedException {
         log.info("ToXMLFunctionExtension TestCase with test attributeExpressionExecutors length");
         SiddhiManager siddhiManager = new SiddhiManager();
-        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select "
@@ -371,14 +368,13 @@ public class ToXMLFunctionExtensionTestCase {
         siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testToXMLFunctionExtension6() throws InterruptedException {
         log.info("ToXMLFunctionExtension TestCase with test data should be Map string format  ");
         log = Logger.getLogger(StreamJunction.class);
         UnitTestAppender appender = new UnitTestAppender();
         log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
-        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
         String query = ("@info(name = 'query1') from inputStream select " +
@@ -389,21 +385,15 @@ public class ToXMLFunctionExtensionTestCase {
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
                 inStreamDefinition + query);
-        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
-        siddhiAppRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100L});
-        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
-        siddhiAppRuntime.shutdown();
     }
 
-    @Test
+    @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testCreateFromXMLFunctionExtension5() throws InterruptedException {
         log.info("CreateFromXMLFunctionExtension TestCase with test Object[] data should be string format");
         log = Logger.getLogger(StreamJunction.class);
         UnitTestAppender appender = new UnitTestAppender();
         log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
-        siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 
         String inStreamDefinition = "\ndefine stream inputStream (longAttr long, doubleAttr double, booleanAttr bool,"
                 + " strAttr string);";
@@ -415,10 +405,5 @@ public class ToXMLFunctionExtensionTestCase {
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
                 inStreamDefinition + query);
-        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
-        siddhiAppRuntime.start();
-        inputHandler.send(new Object[]{"IBM", 100, 100L});
-        AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
-        siddhiAppRuntime.shutdown();
     }
 }

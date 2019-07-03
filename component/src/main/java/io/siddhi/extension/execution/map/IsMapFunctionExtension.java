@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -47,9 +48,14 @@ import java.util.Map;
         parameters = {
                 @Parameter(name = "object",
                         description = "The object that the function checks to determine whether it's a map or not.",
-                        type = {DataType.OBJECT},
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true,
                         optional = false
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"object"})
         },
         returnAttributes = @ReturnAttribute(description = "This returns a boolean value based on whether " +
                 "the object specified is a map or not.", type = DataType.BOOL),

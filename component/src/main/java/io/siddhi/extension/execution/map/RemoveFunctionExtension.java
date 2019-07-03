@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -49,13 +50,19 @@ import java.util.Map;
                 @Parameter(name = "map",
                         description = "The map that needs to be updated by removing the element.",
                         type = DataType.OBJECT,
+                        dynamic = true,
                         optional = false
                 ),
                 @Parameter(name = "key",
                         description = "The key of the element that needs to removed from the map.",
-                        type = DataType.OBJECT,
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true,
                         optional = false
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"map", "key"})
         },
         returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT),
         examples = @Example(

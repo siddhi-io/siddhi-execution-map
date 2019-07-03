@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -48,20 +49,20 @@ import java.util.Map;
         parameters = {
                 @Parameter(name = "key1",
                         description = "key 1",
-                        type = DataType.OBJECT
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                        DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true
                 ),
                 @Parameter(name = "value1",
                         description = "Value 1",
-                        type = DataType.OBJECT
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true
                 ),
-                @Parameter(name = "key2",
-                        description = "Key 2",
-                        type = DataType.OBJECT
-                ),
-                @Parameter(name = "value2",
-                        description = "Value 2",
-                        type = DataType.OBJECT
-                ),
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"key1", "value1"}),
+                @ParameterOverload(parameterNames = {"key1", "value1", "..."}),
         },
         returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT),
         examples = @Example(
