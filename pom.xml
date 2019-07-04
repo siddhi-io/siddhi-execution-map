@@ -63,9 +63,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/wso2-extensions/siddhi-execution-map.git</connection>
-        <url>https://github.com/wso2-extensions/siddhi-execution-map.git</url>
-        <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-execution-map.git
+        <connection>scm:git:https://github.com/siddhi-io/siddhi-execution-map.git</connection>
+        <url>https://github.com/siddhi-io/siddhi-execution-map.git</url>
+        <developerConnection>scm:git:https://github.com/siddhi-io/siddhi-execution-map.git
         </developerConnection>
         <tag>HEAD</tag>
     </scm>

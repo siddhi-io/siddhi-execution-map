@@ -47,7 +47,7 @@ import java.util.Map;
 @Extension(
         name = "toXML",
         namespace = "map",
-        description = "This returns the map as an XML string.",
+        description = "Function returns the map as an XML string.",
         parameters = {
                 @Parameter(name = "map",
                         description = "The map that needs to be converted to XML.",
@@ -60,7 +60,7 @@ import java.util.Map;
                         type = {DataType.OBJECT, DataType.STRING},
                         dynamic = true,
                         optional = true,
-                        defaultValue = "null"
+                        defaultValue = "The XML root element will be ignored"
                 )
         },
         parameterOverloads = {
@@ -70,11 +70,20 @@ import java.util.Map;
         returnAttributes = @ReturnAttribute(
                 description = "This returns the string representation of the map in XML format.",
                 type = DataType.STRING),
-        examples = @Example(
-                syntax = "toXML(company, \"abcCompany\")",
-                description = "If \"company\" is a map with key-value pairs, (“symbol” : wso2), " +
-                        "(“volume” : 100), and (“price” : 200), this function returns the string, " +
-                        "“<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price></abcCompany>.")
+        examples = {
+                @Example(
+                        syntax = "toXML(company, 'abcCompany')",
+                        description = "If `company` is a map with key-value pairs, ('symbol' : 'wso2'), " +
+                                "('volume' : 100), and ('price' : 200), this function returns XML as a string, " +
+                                "`<abcCompany><symbol>wso2</symbol><volume><100></volume><price>200</price>" +
+                                "</abcCompany>`."),
+                @Example(
+                        syntax = "toXML(company)",
+                        description = "If `company` is a map with key-value pairs, ('symbol' : 'wso2'), " +
+                                "('volume' : 100), and ('price' : 200), this function returns XML without root" +
+                                " element as a string, " +
+                                "`<symbol>wso2</symbol><volume><100></volume><price>200</price>`.")
+        }
 )
 public class ToXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;

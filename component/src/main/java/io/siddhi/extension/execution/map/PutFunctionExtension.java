@@ -45,37 +45,36 @@ import java.util.Map;
 @Extension(
         name = "put",
         namespace = "map",
-        description = "This returns the updated map after adding the given key-value pair.",
+        description = "Function returns the updated map after adding the given key-value pair. " +
+                "If the key already exist in the map the key is updated with the new value.",
         parameters = {
                 @Parameter(name = "map",
                         description = "The map to which the value should be added.",
                         type = DataType.OBJECT,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 ),
                 @Parameter(name = "key",
-                        description = "The key of the value added.",
+                        description = "The key to be added.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 ),
                 @Parameter(name = "value",
-                        description = "The new value.",
+                        description = "The value to be added.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "key", "value"})
         },
-        returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns the updated map with key and value.", type = DataType.OBJECT),
         examples = @Example(
-                syntax = "put(students , 1234 , ”sam”)",
-                description = "This function returns the updated map named students after adding the object \"sam\" " +
-                        "with key 1234.")
+                syntax = "map:put(students , 1234 , 'sam')",
+                description = "Function returns the updated map named students after adding the value " +
+                        "`sam` with the key `1234`.")
 )
 public class PutFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

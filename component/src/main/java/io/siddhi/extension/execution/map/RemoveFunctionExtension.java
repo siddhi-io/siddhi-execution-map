@@ -45,30 +45,30 @@ import java.util.Map;
 @Extension(
         name = "remove",
         namespace = "map",
-        description = "This returns the updated map after removing the element with the key specified.",
+        description = "Function returns the updated map after removing the element with the specified key.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "The map that needs to be updated by removing the element.",
+                        description = "The map that needs to be updated.",
                         type = DataType.OBJECT,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 ),
                 @Parameter(name = "key",
-                        description = "The key of the element that needs to removed from the map.",
+                        description = "The key of the element that needs to removed.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "key"})
         },
-        returnAttributes = @ReturnAttribute(description = "return Object will be a HashMap", type = DataType.OBJECT),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns the updated map after removing the key-value.",
+                type = DataType.OBJECT),
         examples = @Example(
-                syntax = "remove(students , 1234)",
-                description = "This function returns the updated map, students after removing the element with the " +
-                        "key 1234."
+                syntax = "map:remove(students, 1234)",
+                description = "This returns the updated map, students after removing the key-value pair" +
+                        " corresponding to the key `1234`."
         )
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
