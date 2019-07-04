@@ -174,7 +174,7 @@ map:get(companyMap, 2)
 <p style="word-wrap: break-word">If the companyMap does not have any value for key <code>2</code> then the function returns <code>null</code>.</p>
 
 ### isMap *<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*
-<p style="word-wrap: break-word">Function check if the object is type of a map.</p>
+<p style="word-wrap: break-word">Function checks if the object is type of a map.</p>
 <span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span>
 
 ```
