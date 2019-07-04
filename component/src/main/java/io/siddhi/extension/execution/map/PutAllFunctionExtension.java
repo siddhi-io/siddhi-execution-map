@@ -44,30 +44,32 @@ import java.util.Map;
 @Extension(
         name = "putAll",
         namespace = "map",
-        description = "This returns the updated 'to.map' map after copying all of the mappings from the " +
-                "specified 'from.map.' map."
-                + " If there are duplicate keys, 'from.map' overwrites the values into the 'to.map.' map.",
+        description = "Function returns the updated map after adding all the key-value pairs from another map."
+                + " If there are duplicate keys, the key will be assigned new values from the map that's being copied.",
         parameters = {
                 @Parameter(name = "to.map",
-                        description = "The map into which the mappings need to copied.",
+                        description = "The map into which the key-values need to copied.",
                         type = DataType.OBJECT,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 ),
                 @Parameter(name = "from.map",
-                        description = "The map from which the mappings are copied.",
+                        description = "The map from which the key-values are copied.",
                         type = DataType.OBJECT,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"to.map", "from.map"})
         },
-        returnAttributes = @ReturnAttribute(description = "A hashMap is returned.", type = DataType.OBJECT),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns the updated map after adding all the key-value pairs.",
+                type = DataType.OBJECT),
         examples = @Example(
-                syntax = "putAll(toMap , fromMap)",
-                description = "This returns the updated map named 'toMap' after adding each mapping from 'fromMap.'")
+                syntax = "map:putAll(toMap, fromMap)",
+                description = "If `toMap` contains key-value pairs ('symbol': 'wso2'), ('volume' : 100), " +
+                        "and if `fromMap` contains key-value pairs ('symbol': 'IBM'), ('price' : 12), " +
+                        "then the function returns updated `toMap` with key-value pairs ('symbol': 'IBM'), " +
+                        "('price' : 12), ('volume' : 100).")
 )
 public class PutAllFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

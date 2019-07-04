@@ -44,25 +44,25 @@ import java.util.Map;
 @Extension(
         name = "isMap",
         namespace = "map",
-        description = "This returns 'true' if the object is a map and 'false' if otherwise.",
+        description = "Function check if the object is type of a map.",
         parameters = {
-                @Parameter(name = "object",
-                        description = "The object that the function checks to determine whether it's a map or not.",
+                @Parameter(name = "arg",
+                        description = "The argument the need to be determined whether it's a map or not.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(parameterNames = {"object"})
+                @ParameterOverload(parameterNames = {"arg"})
         },
-        returnAttributes = @ReturnAttribute(description = "This returns a boolean value based on whether " +
-                "the object specified is a map or not.", type = DataType.BOOL),
+        returnAttributes = @ReturnAttribute(
+                description = "Returns `true` if the arg is a map (`java.util.Map`) and `false` if otherwise.",
+                type = DataType.BOOL),
         examples = @Example(
-                syntax = "isMap(students)",
-                description = "This function returns 'true' if the object, students is a map. It returns " +
-                        "'false' if it is not a map.")
+                syntax = "map:isMap(students)",
+                description = "Returns 'true' if the students is and an instance of `java.util.Map` else it returns " +
+                        "`false`.")
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.BOOL;

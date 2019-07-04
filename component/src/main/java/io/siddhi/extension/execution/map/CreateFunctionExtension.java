@@ -45,10 +45,10 @@ import java.util.Map;
 @Extension(
         name = "create",
         namespace = "map",
-        description = "This creates a map between the keys and their corresponding values.",
+        description = "Function creates a map pairing the keys and their corresponding values.",
         parameters = {
                 @Parameter(name = "key1",
-                        description = "key 1",
+                        description = "Key 1",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                         DataType.FLOAT, DataType.BOOL, DataType.STRING},
                         dynamic = true
@@ -64,11 +64,12 @@ import java.util.Map;
                 @ParameterOverload(parameterNames = {"key1", "value1"}),
                 @ParameterOverload(parameterNames = {"key1", "value1", "..."}),
         },
-        returnAttributes = @ReturnAttribute(description = "Returns the created map object. ", type = DataType.OBJECT),
+        returnAttributes = @ReturnAttribute(description = "Returns the created map object," +
+                " by pairing adjacent key value pairs.", type = DataType.OBJECT),
         examples = @Example(
-                syntax = "create(1 , ”one” ,  2 , ”two” , 3 , ”three”)",
-                description = "This returns a map with keys 1, 2, 3 mapped with their corresponding values, " +
-                        "\"one\", \"two\", \"three\".")
+                syntax = "map:create(1, 'one', 2, 'two', 3, 'three')",
+                description = "This returns a map with keys `1`, `2`, `3` mapped with their corresponding values, " +
+                        "`one`, `two`, `three`.")
 )
 public class CreateFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

@@ -45,33 +45,37 @@ import java.util.Map;
 @Extension(
         name = "get",
         namespace = "map",
-        description = "This returns the value object, that corresponds to the given key, from the map. ",
+        description = "Function returns the value corresponding to the given key from the map.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "The map from where the value should be obtained",
+                        description = "The map from where the value should be obtained.",
                         type = DataType.OBJECT,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 ),
                 @Parameter(
                         name = "key",
-                        description = "The key of the value which needs to be returned",
+                        description = "The key to fetch the value.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "key"})
         },
         returnAttributes = @ReturnAttribute(
-                description = "This returns the value object from the map that corresponds to the given key.",
+                description = "Returns the value from the map that corresponds to the given key.",
                 type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "get(company,1)",
-                description = "This function returns the value that is associated with the key, i.e., 1, from a " +
-                        "map named company.")
+        examples = {
+                @Example(
+                        syntax = "map:get(companyMap, 1)",
+                        description = "If the companyMap has key `1` and value `ABC` in it's set of key " +
+                                "value pairs. The function returns `ABC`."),
+                @Example(
+                        syntax = "map:get(companyMap, 2)",
+                        description = "If the companyMap does not have any value for key `2` then the function " +
+                                "returns `null`.")
+        }
 )
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

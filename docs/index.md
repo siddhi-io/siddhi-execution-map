@@ -1,80 +1,63 @@
-Siddhi Execution Extension - Map
+Siddhi Execution Map
 ======================================
 
-The **siddhi-execution-map extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> that provides the capability to send a map object inside Siddhi stream definitions and use it inside queries. The following are the functions of the map extension..
+  [![Jenkins Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-execution-map/)
+  [![GitHub (pre-)Release](https://img.shields.io/github/release/siddhi-io/siddhi-execution-map/all.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
+  [![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
+  [![GitHub Open Issues](https://img.shields.io/github/issues-raw/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/issues)
+  [![GitHub Last Commit](https://img.shields.io/github/last-commit/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/commits/master)
+  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Find some useful links below:
+The **siddhi-execution-map extension** is a <a target="_blank" href="https://siddhi.io/">Siddhi</a> extension that provides capability to generate and manipulate map (key-value) data objects.
 
-* <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map">Source code</a>
-* <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/releases">Releases</a>
-* <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/issues">Issue tracker</a>
+For information on <a target="_blank" href="https://siddhi.io/">Siddhi</a> and it's features refer <a target="_blank" href="https://siddhi.io/redirect/docs.html">Siddhi Documentation</a>. 
+
+## Download
+
+* Versions 5.x and above with group id `io.siddhi.extension.*` from <a target="_blank" href="https://mvnrepository.com/artifact/io.siddhi.extension.execution.map/siddhi-execution-map/">here</a>.
+* Versions 4.x and lower with group id `org.wso2.extension.siddhi.*` from <a target="_blank" href="https://mvnrepository.com/artifact/org.wso2.extension.siddhi.execution.map/siddhi-execution-map">here</a>.
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2">5.0.2</a>.
-
-## How to use 
-
-**Using the extension in <a target="_blank" href="https://github.com/wso2/product-sp">WSO2 Stream Processor</a>**
-
-* You can use this extension in the latest <a target="_blank" href="https://github.com/wso2/product-sp/releases">WSO2 Stream Processor</a> that is a part of <a target="_blank" href="http://wso2.com/analytics?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">WSO2 Analytics</a> offering, with editor, debugger and simulation support. 
-
-* This extension is shipped by default with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/releases">jar</a> that can be found in the `<STREAM_PROCESSOR_HOME>/lib` 
-directory.
-
-**Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a>**
-
-* This extension can be added as a maven dependency along with other Siddhi dependencies to your project.
-
-```
-     <dependency>
-        <groupId>io.siddhi.extension.execution.map</groupId>
-        <artifactId>siddhi-execution-map</artifactId>
-        <version>x.x.x</version>
-     </dependency>
-```
-
-## Jenkins Build Status
-
----
-
-|  Branch | Build Status |
-| :------ |:------------ | 
-| master  | [![Build Status](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/view/All%20Builds/job/siddhi/job/siddhi-execution-map/) |
-
----
+Latest API Docs is <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3">5.0.3</a>.
 
 ## Features
 
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#create-function">create</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This creates a map between the keys and their corresponding values.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#createfromjson-function">createFromJSON</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the map created by pairing the keys with its corresponding values given in the JSON string.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#createfromxml-function">createFromXML</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the map created by pairing the keys with their corresponding values,given as an XML string.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#get-function">get</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the value object, that corresponds to the given key, from the map. </p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#ismap-function">isMap</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns 'true' if the object is a map and 'false' if otherwise.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#put-function">put</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the updated map after adding the given key-value pair.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#putall-function">putAll</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the updated 'to.map' map after copying all of the mappings from the specified 'from.map.' map. If there are duplicate keys, 'from.map' overwrites the values into the 'to.map.' map.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#remove-function">remove</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the updated map after removing the element with the key specified.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#tojson-function">toJSON</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This converts a map into a JSON object and returns the definition of that JSON object as a string.</p></div>
-* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.2/#toxml-function">toXML</a> *<a target="_blank" href="https://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a>*<br><div style="padding-left: 1em;"><p>This returns the map as an XML string.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#groupconcat-aggregate-function">groupConcat</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#aggregate-function">Aggregate Function</a>)*<br> <div style="padding-left: 1em;"><p>This function aggregates the received events by concatenating the keys in those events using a separator, e.g.,a comma (,) or a hyphen (-), and returns the concatenated key map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#charat-function">charAt</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This function returns the 'char' value that is present at the given index position. of the input map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#coalesce-function">coalesce</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p> This returns the first input parameter value of the given argument, that is not null.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#concat-function">concat</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This function returns a map value that is obtained as a result of concatenating two or more input map values.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#contains-function">contains</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This function returns <code>true</code> if the<code>input.map</code> contains the specified sequence of char values in the <code>search.map</code>. </p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#equalsignorecase-function">equalsIgnoreCase</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This returns a boolean value by comparing two maps lexicographically without considering the letter case.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#filltemplate-function">fillTemplate</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This extension replaces the templated positions that are marked with an index value in a specified template with the maps provided.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#hex-function">hex</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>This function returns a hexadecimal map by converting each byte of each character in the input map to two hexadecimal digits.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#length-function">length</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns the length of the input map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#lower-function">lower</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Converts the capital letters in the input map to the equivalent simple letters.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#regexp-function">regexp</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns a boolean value based on the matchability of the input map and the given regular expression.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#repeat-function">repeat</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Repeats the input map for a specified number of times.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#replaceall-function">replaceAll</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Finds all the submaps of the input map that matches with the given expression, and replaces them with the given replacement map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#replacefirst-function">replaceFirst</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Finds the first submap of the input map that matches with the given regular expression, and replaces itwith the given replacement map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#reverse-function">reverse</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns the input map in the reverse order character-wise and map-wise.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#split-function">split</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Splits the  <code>input.map</code> into submaps using the value parsed in the <code>split.map</code> and returns the submap at the position specified in the <code>group.number</code>.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#strcmp-function">strcmp</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Compares two maps lexicographically and returns an integer value. If both maps are equal, 0 is returned. If  the first map is lexicographically greater than the second map, a positive value is returned. If the first map is lexicographically greater than the second map, a negative value is returned.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#substr-function">substr</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns a submap of the input map by considering a subset or all of the following factors: starting index, length, regular expression, and regex group number.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#trim-function">trim</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns a copy of the input map without the leading and trailing whitespace (if any).</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#unhex-function">unhex</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Returns a map by converting the hexadecimal characters in the input map.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#upper-function">upper</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">Function</a>)*<br> <div style="padding-left: 1em;"><p>Converts the simple letters in the input map to the equivalent capital/block letters.</p></div>
+* <a target="_blank" href="https://siddhi-io.github.io/siddhi-execution-map/api/5.0.3/#tokenize-stream-processor">tokenize</a> *(<a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#stream-processor">Stream Processor</a>)*<br> <div style="padding-left: 1em;"><p>This function splits the input map into tokens using a given regular expression and returns the split tokens.</p></div>
 
-## How to Contribute
- 
-  * Please report issues at <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/issues">GitHub Issue Tracker</a>.
-  
-  * Send your contributions as pull requests to <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/tree/master">master branch</a>. 
- 
-## Contact us 
+## Dependencies 
 
- * Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>. 
- 
- * Siddhi developers can be contacted via the mailing lists:
- 
-    Developers List   : [dev@wso2.org](mailto:dev@wso2.org)
-    
-    Architecture List : [architecture@wso2.org](mailto:architecture@wso2.org)
- 
-## Support 
+There are no other dependencies needed for this extension. 
 
-* We are committed to ensuring support for this extension in production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology. 
+## Installation
 
-* For more details and to take advantage of this unique opportunity contact us via <a target="_blank" href="http://wso2.com/support?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">http://wso2.com/support/</a>. 
+For installing this extension on various siddhi execution environments refer Siddhi documentation section on <a target="_blank" href="https://siddhi.io/redirect/add-extensions.html">adding extensions</a>.
+
+## Support and Contribution
+
+* We encourage users to ask questions and get support via <a target="_blank" href="https://stackoverflow.com/questions/tagged/siddhi">StackOverflow</a>, make sure to add the `siddhi` tag to the issue for better response.
+
+* If you find any issues related to the extension please report them on <a target="_blank" href="https://github.com/siddhi-io/siddhi-execution-map/issues">the issue tracker</a>.
+
+* For production support and other contribution related information refer <a target="_blank" href="https://siddhi.io/community/">Siddhi Community</a> documentation.

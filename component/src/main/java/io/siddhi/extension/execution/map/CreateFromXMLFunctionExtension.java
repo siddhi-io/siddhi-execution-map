@@ -53,14 +53,13 @@ import javax.xml.stream.XMLStreamException;
 @Extension(
         name = "createFromXML",
         namespace = "map",
-        description = "This returns the map created by pairing the keys with their corresponding values," +
+        description = "Function returns the map created by pairing the keys with their corresponding values," +
                 "given as an XML string.",
         parameters = {
                 @Parameter(name = "xml.string",
                         description = "The XML string, which is used to create the map.",
                         type = DataType.STRING,
-                        dynamic = true,
-                        optional = false
+                        dynamic = true
                 )
         },
         parameterOverloads = {
@@ -68,13 +67,13 @@ import javax.xml.stream.XMLStreamException;
         },
         returnAttributes = @ReturnAttribute(description = "This returns a map.", type = DataType.OBJECT),
         examples = @Example(
-                syntax = "createFromXML(“<stock>" +
-                        "                   <symbol>IBM</symbol>" +
-                        "                   <price>200</price>" +
-                        "                   <volume>100</volume>" +
-                        "               </stock>”)",
-                description = "This returns a map with the keys \"symbol\", \"price\", \"volume\", " +
-                        "and with the values \"IBM\", 200 and 100 respectively.")
+                syntax = "map:createFromXML(\"<stock>\n" +
+                         "                      <symbol>IBM</symbol>\n" +
+                         "                      <price>200</price>\n" +
+                         "                      <volume>100</volume>\n" +
+                         "                   </stock>\")\n",
+                description = "This returns a map with the keys `symbol`, `price`, `volume`, " +
+                        "and with their values `IBM`, `200` and `100` respectively.")
 )
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
