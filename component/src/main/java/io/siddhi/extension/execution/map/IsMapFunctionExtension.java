@@ -44,7 +44,7 @@ import java.util.Map;
 @Extension(
         name = "isMap",
         namespace = "map",
-        description = "Function check if the object is type of a map.",
+        description = "Function checks if the object is type of a map.",
         parameters = {
                 @Parameter(name = "arg",
                         description = "The argument the need to be determined whether it's a map or not.",
