@@ -1,13 +1,13 @@
 site_name: Siddhi Execution Map
 site_description: Siddhi Execution Map Extension
 site_author: WSO2
-site_url: https://wso2-extensions.github.io/siddhi-execution-map/
+site_url: https://siddhi-io.github.io/siddhi-execution-map/
 extra_css:
 - stylesheets/extra.css
 extra_javascript:
 - javascripts/extra.js
 repo_name: Siddhi-Execution-Map
-repo_url: https://github.com/wso2-extensions/siddhi-execution-map
+repo_url: https://github.com/siddhi-io/siddhi-execution-map
 copyright: Copyright &copy; 2011 - 2018 WSO2
 theme:
   name: material
