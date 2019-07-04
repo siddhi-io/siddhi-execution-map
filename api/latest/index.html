@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -13,10 +13,6 @@
         <meta name="description" content="Siddhi Execution Map Extension">
       
       
-        <link rel="canonical" href="https://wso2-extensions.github.io/siddhi-execution-map/api/latest/">
-      
-      
-        <meta name="author" content="WSO2">
       
       
         <meta name="lang:clipboard.copy" content="Copy to clipboard">
@@ -38,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
     
     
       
@@ -46,9 +42,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
       
       
         
@@ -57,18 +53,47 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-103065-28", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -81,24 +106,7 @@
       <defs>
         
         
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
         
       </defs>
     </svg>
@@ -106,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v501" tabindex="1" class="md-skip">
+      <a href="#api-docs-v502" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -115,9 +123,9 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://wso2-extensions.github.io/siddhi-execution-map/" title="Siddhi Execution Map" class="md-header-nav__button md-logo">
+        <a href="../.." title="Siddhi Execution Map" class="md-header-nav__button md-logo">
           
-            <img src="../../images/siddhi-logo-w.svg" width="24" height="24">
+            <img src="../../images/siddhi-logo.svg" width="24" height="24">
           
         </a>
       </div>
@@ -127,22 +135,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Siddhi Execution Map
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              Siddhi Execution Map
+            </span>
+            <span class="md-header-nav__topic">
+              
                 latest
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -165,7 +172,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -176,20 +182,18 @@
 
   
 
-
-  <a href="https://github.com/wso2-extensions/siddhi-execution-map/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      Siddhi-Execution-Map
+<a href="https://github.com/siddhi-io/siddhi-execution-map/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    Siddhi Execution Map
+  </div>
+</a>
           </div>
         </div>
       
@@ -211,11 +215,11 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <span class="md-nav__button md-logo">
+    <a href="../.." title="Siddhi Execution Map" class="md-nav__button md-logo">
       
-        <img src="../../images/siddhi-logo-w.svg" width="48" height="48">
+        <img src="../../images/siddhi-logo.svg" width="48" height="48">
       
-    </span>
+    </a>
     Siddhi Execution Map
   </label>
   
@@ -225,20 +229,18 @@
 
   
 
-
-  <a href="https://github.com/wso2-extensions/siddhi-execution-map/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      Siddhi-Execution-Map
+<a href="https://github.com/siddhi-io/siddhi-execution-map/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    Siddhi Execution Map
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -249,8 +251,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Welcome" class="md-nav__link">
-      Welcome
+    <a href="../.." title="Information" class="md-nav__link">
+      Information
     </a>
   </li>
 
@@ -275,6 +277,144 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        latest
+      </label>
+    
+    <a href="./" title="latest" class="md-nav__link md-nav__link--active">
+      latest
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#map" title="Map" class="md-nav__link">
+    Map
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-function" title="create (Function)" class="md-nav__link">
+    create (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createfromjson-function" title="createFromJSON (Function)" class="md-nav__link">
+    createFromJSON (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createfromxml-function" title="createFromXML (Function)" class="md-nav__link">
+    createFromXML (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-function" title="get (Function)" class="md-nav__link">
+    get (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ismap-function" title="isMap (Function)" class="md-nav__link">
+    isMap (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-function" title="put (Function)" class="md-nav__link">
+    put (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#putall-function" title="putAll (Function)" class="md-nav__link">
+    putAll (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-function" title="remove (Function)" class="md-nav__link">
+    remove (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tojson-function" title="toJSON (Function)" class="md-nav__link">
+    toJSON (Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toxml-function" title="toXML (Function)" class="md-nav__link">
+    toXML (Function)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.0.2/" title="5.0.2" class="md-nav__link">
+      5.0.2
+    </a>
+  </li>
+
         
           
           
@@ -492,132 +632,6 @@
   </li>
 
         
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        latest
-      </label>
-    
-    <a href="./" title="latest" class="md-nav__link md-nav__link--active">
-      latest
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#map" title="Map" class="md-nav__link">
-    Map
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-function" title="create (Function)" class="md-nav__link">
-    create (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#createfromjson-function" title="createFromJSON (Function)" class="md-nav__link">
-    createFromJSON (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#createfromxml-function" title="createFromXML (Function)" class="md-nav__link">
-    createFromXML (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-function" title="get (Function)" class="md-nav__link">
-    get (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ismap-function" title="isMap (Function)" class="md-nav__link">
-    isMap (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#put-function" title="put (Function)" class="md-nav__link">
-    put (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#putall-function" title="putAll (Function)" class="md-nav__link">
-    putAll (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-function" title="remove (Function)" class="md-nav__link">
-    remove (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tojson-function" title="toJSON (Function)" class="md-nav__link">
-    toJSON (Function)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#toxml-function" title="toXML (Function)" class="md-nav__link">
-    toXML (Function)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -754,18 +768,21 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/wso2-extensions/siddhi-execution-map/edit/master/docs/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/siddhi-io/siddhi-execution-map/blob/master/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v501">API Docs - v5.0.1<a class="headerlink" href="#api-docs-v501" title="Permanent link">&para;</a></h1>
-<h2 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h2>
-<h3 id="create-function">create <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#create-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This creates a map between the keys and their corresponding values.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:create(&lt;OBJECT&gt; key1, &lt;OBJECT&gt; value1, &lt;OBJECT&gt; key2, &lt;OBJECT&gt; value2)
-</pre></div>
-
+                <h1 id="api-docs-v502">API Docs - v5.0.2</h1>
+<div class="admonition info">
+<p class="admonition-title">Tested Siddhi Core version: <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/">5.0.0</a></em></p>
+<p>It could also support other Siddhi Core minor versions.</p>
+</div>
+<h2 id="map">Map</h2>
+<h3 id="create-function">create <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function creates a map pairing the keys and their corresponding values.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:create(&lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; key1, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; value1)
+&lt;OBJECT&gt; map:create(&lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; key1, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; value1, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; ...)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -779,52 +796,33 @@
     </tr>
     <tr>
         <td style="vertical-align: top">key1</td>
-        <td style="vertical-align: top; word-wrap: break-word">key 1</td>
+        <td style="vertical-align: top; word-wrap: break-word">Key 1</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">value1</td>
         <td style="vertical-align: top; word-wrap: break-word">Value 1</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
-    </tr>
-    <tr>
-        <td style="vertical-align: top">key2</td>
-        <td style="vertical-align: top; word-wrap: break-word">Key 2</td>
-        <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
-        <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
-    </tr>
-    <tr>
-        <td style="vertical-align: top">value2</td>
-        <td style="vertical-align: top; word-wrap: break-word">Value 2</td>
-        <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
-        <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>create(1 , ?one? ,  2 , ?two? , 3 , ?three?)
-</pre></div>
+<pre><code>map:create(1, 'one', 2, 'two', 3, 'three')
+</code></pre>
 
+<p style="word-wrap: break-word">This returns a map with keys <code>1</code>, <code>2</code>, <code>3</code> mapped with their corresponding values, <code>one</code>, <code>two</code>, <code>three</code>.</p>
 
-<p style="word-wrap: break-word">This returns a map with keys 1, 2, 3 mapped with their corresponding values, "one", "two", "three".</p>
-
-<h3 id="createfromjson-function">createFromJSON <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#createfromjson-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the map created by pairing the keys with its corresponding values given in the JSON string.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:createFromJSON(&lt;STRING&gt; json.string)
-</pre></div>
-
+<h3 id="createfromjson-function">createFromJSON <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the map created by pairing the keys with their corresponding values given in the JSON string.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:createFromJSON(&lt;STRING&gt; json.string)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -842,24 +840,21 @@
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>createFromJSON(?{?symbol&#39; : &#39;IBM&#39; , &#39;price&#39; : 200, &#39;volume&#39; : 100}?)
-</pre></div>
+<pre><code>map:createFromJSON(&quot;{‘symbol' : 'IBM', 'price' : 200, 'volume' : 100}&quot;)
+</code></pre>
 
+<p style="word-wrap: break-word">This returns a map with the keys <code>symbol</code>, <code>price</code>, and <code>volume</code>, and their values, <code>IBM</code>, <code>200</code> and <code>100</code> respectively.</p>
 
-<p style="word-wrap: break-word">This returns a map with the keys "symbol", "price", "volume", and its values, "IBM", 200 and 100 respectively.</p>
-
-<h3 id="createfromxml-function">createFromXML <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#createfromxml-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the map created by pairing the keys with their corresponding values,given as an XML string.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:createFromXML(&lt;STRING&gt; xml.string)
-</pre></div>
-
+<h3 id="createfromxml-function">createFromXML <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the map created by pairing the keys with their corresponding values,given as an XML string.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:createFromXML(&lt;STRING&gt; xml.string)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -877,24 +872,26 @@
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>createFromJSON(?{?symbol&#39; : &#39;IBM&#39; , &#39;price&#39; : 200, &#39;volume&#39; : 100}?)
-</pre></div>
+<pre><code>map:createFromXML(&quot;&lt;stock&gt;
+                      &lt;symbol&gt;IBM&lt;/symbol&gt;
+                      &lt;price&gt;200&lt;/price&gt;
+                      &lt;volume&gt;100&lt;/volume&gt;
+                   &lt;/stock&gt;&quot;)
 
+</code></pre>
 
-<p style="word-wrap: break-word"> returns a map with the keys "symbol", "price", "volume", and with the values "IBM", 200 and 100 respectively.</p>
+<p style="word-wrap: break-word">This returns a map with the keys <code>symbol</code>, <code>price</code>, <code>volume</code>, and with their values <code>IBM</code>, <code>200</code> and <code>100</code> respectively.</p>
 
-<h3 id="get-function">get <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#get-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the value object, that corresponds to the given key, from the map. </p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:get(&lt;OBJECT&gt; map, &lt;OBJECT&gt; key)
-</pre></div>
-
+<h3 id="get-function">get <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the value corresponding to the given key from the map.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:get(&lt;OBJECT&gt; map, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; key)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -908,36 +905,39 @@
     </tr>
     <tr>
         <td style="vertical-align: top">map</td>
-        <td style="vertical-align: top; word-wrap: break-word">The map from where the value should be obtained</td>
+        <td style="vertical-align: top; word-wrap: break-word">The map from where the value should be obtained.</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">key</td>
-        <td style="vertical-align: top; word-wrap: break-word">The key of the value which needs to be returned</td>
+        <td style="vertical-align: top; word-wrap: break-word">The key to fetch the value.</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>get(company,1)
-</pre></div>
+<pre><code>map:get(companyMap, 1)
+</code></pre>
 
+<p style="word-wrap: break-word">If the companyMap has key <code>1</code> and value <code>ABC</code> in it's set of key value pairs. The function returns <code>ABC</code>.</p>
 
-<p style="word-wrap: break-word">This function returns the value that is associated with the key, i.e., 1, from a map named company.</p>
+<p><span id="example-2" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 2</span></p>
+<pre><code>map:get(companyMap, 2)
+</code></pre>
 
-<h3 id="ismap-function">isMap <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#ismap-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns 'true' if the object is a map and 'false' if otherwise.</p>
+<p style="word-wrap: break-word">If the companyMap does not have any value for key <code>2</code> then the function returns <code>null</code>.</p>
 
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;BOOL&gt; map:isMap(&lt;OBJECT&gt; object)
-</pre></div>
-
+<h3 id="ismap-function">isMap <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function checks if the object is type of a map.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;BOOL&gt; map:isMap(&lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; arg)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -950,29 +950,26 @@
         <th>Dynamic</th>
     </tr>
     <tr>
-        <td style="vertical-align: top">object</td>
-        <td style="vertical-align: top; word-wrap: break-word">The object that the function checks to determine whether it's a map or not.</td>
+        <td style="vertical-align: top">arg</td>
+        <td style="vertical-align: top; word-wrap: break-word">The argument the need to be determined whether it's a map or not.</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>isMap(students)
-</pre></div>
+<pre><code>map:isMap(students)
+</code></pre>
 
+<p style="word-wrap: break-word">Returns 'true' if the students is and an instance of <code>java.util.Map</code> else it returns <code>false</code>.</p>
 
-<p style="word-wrap: break-word">This function returns 'true' if the object, students is a map. It returns 'false' if it is not a map.</p>
-
-<h3 id="put-function">put <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#put-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the updated map after adding the given key-value pair.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:put(&lt;OBJECT&gt; map, &lt;OBJECT&gt; key, &lt;OBJECT&gt; value)
-</pre></div>
-
+<h3 id="put-function">put <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the updated map after adding the given key-value pair. If the key already exist in the map the key is updated with the new value.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:put(&lt;OBJECT&gt; map, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; key, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; value)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -990,40 +987,37 @@
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">key</td>
-        <td style="vertical-align: top; word-wrap: break-word">The key of the value added.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The key to be added.</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">value</td>
-        <td style="vertical-align: top; word-wrap: break-word">The new value.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The value to be added.</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>put(students , 1234 , ?sam?)
-</pre></div>
+<pre><code>map:put(students , 1234 , 'sam')
+</code></pre>
 
+<p style="word-wrap: break-word">Function returns the updated map named students after adding the value <code>sam</code> with the key <code>1234</code>.</p>
 
-<p style="word-wrap: break-word">This function returns the updated map named students after adding the object "sam" with key 1234.</p>
-
-<h3 id="putall-function">putAll <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#putall-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the updated 'to.map' map after copying all of the mappings from the specified 'from.map.' map. If there are duplicate keys, 'from.map' overwrites the values into the 'to.map.' map.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:putAll(&lt;OBJECT&gt; to.map, &lt;OBJECT&gt; from.map)
-</pre></div>
-
+<h3 id="putall-function">putAll <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the updated map after adding all the key-value pairs from another map. If there are duplicate keys, the key will be assigned new values from the map that's being copied.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:putAll(&lt;OBJECT&gt; to.map, &lt;OBJECT&gt; from.map)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -1037,36 +1031,33 @@
     </tr>
     <tr>
         <td style="vertical-align: top">to.map</td>
-        <td style="vertical-align: top; word-wrap: break-word">The map into which the mappings need to copied.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The map into which the key-values need to copied.</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">from.map</td>
-        <td style="vertical-align: top; word-wrap: break-word">The map from which the mappings are copied.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The map from which the key-values are copied.</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>putAll(toMap , fromMap)
-</pre></div>
+<pre><code>map:putAll(toMap, fromMap)
+</code></pre>
 
+<p style="word-wrap: break-word">If <code>toMap</code> contains key-value pairs ('symbol': 'wso2'), ('volume' : 100), and if <code>fromMap</code> contains key-value pairs ('symbol': 'IBM'), ('price' : 12), then the function returns updated <code>toMap</code> with key-value pairs ('symbol': 'IBM'), ('price' : 12), ('volume' : 100).</p>
 
-<p style="word-wrap: break-word">This returns the updated map named 'toMap' after adding each mapping from 'fromMap.'</p>
-
-<h3 id="remove-function">remove <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#remove-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the updated map after removing the element with the key specified.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;OBJECT&gt; map:remove(&lt;OBJECT&gt; map, &lt;OBJECT&gt; key)
-</pre></div>
-
+<h3 id="remove-function">remove <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the updated map after removing the element with the specified key.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;OBJECT&gt; map:remove(&lt;OBJECT&gt; map, &lt;OBJECT|INT|LONG|FLOAT|DOUBLE|FLOAT|BOOL|STRING&gt; key)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -1080,36 +1071,33 @@
     </tr>
     <tr>
         <td style="vertical-align: top">map</td>
-        <td style="vertical-align: top; word-wrap: break-word">The map that needs to be updated by removing the element.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The map that needs to be updated.</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
         <td style="vertical-align: top">key</td>
-        <td style="vertical-align: top; word-wrap: break-word">The key of the element that needs to removed from the map.</td>
+        <td style="vertical-align: top; word-wrap: break-word">The key of the element that needs to removed.</td>
         <td style="vertical-align: top"></td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">OBJECT<br>INT<br>LONG<br>FLOAT<br>DOUBLE<br>FLOAT<br>BOOL<br>STRING</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>remove(students , 1234)
-</pre></div>
+<pre><code>map:remove(students, 1234)
+</code></pre>
 
+<p style="word-wrap: break-word">This returns the updated map, students after removing the key-value pair corresponding to the key <code>1234</code>.</p>
 
-<p style="word-wrap: break-word">This function returns the updated map, students after removing the element with the key 1234.</p>
-
-<h3 id="tojson-function">toJSON <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#tojson-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This converts a map into a JSON object and returns the definition of that JSON object as a string.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;STRING&gt; map:toJSON(&lt;OBJECT&gt; map)
-</pre></div>
-
+<h3 id="tojson-function">toJSON <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function converts a map into a JSON object and returns the JSON as a string.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;STRING&gt; map:toJSON(&lt;OBJECT&gt; map)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -1127,24 +1115,22 @@
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>toJSON(company)
-</pre></div>
+<pre><code>map:toJSON(company)
+</code></pre>
 
+<p style="word-wrap: break-word">If <code>company</code> is a map with key-value pairs, ('symbol': 'wso2'),('volume' : 100), and ('price', 200), it returns the JSON string <code>{"symbol" : "wso2", "volume" : 100 , "price" : 200}</code>.</p>
 
-<p style="word-wrap: break-word">If "company" is a map with key-value pairs, ("symbol" : wso2),("volume" : 100), and ("price",200), it returns the string ?{?symbol? : ?wso2?, ?volume? : 100 , ?price? : 200}?.</p>
-
-<h3 id="toxml-function">toXML <em><a target="_blank" href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#function">(Function)</a></em><a class="headerlink" href="#toxml-function" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">This returns the map as an XML string.</p>
-
-<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
-<div class="codehilite"><pre><span></span>&lt;STRING&gt; map:toXML(&lt;OBJECT&gt; map, &lt;OBJECT&gt; rootelementname)
-</pre></div>
-
+<h3 id="toxml-function">toXML <em><a target="_blank" href="http://siddhi.io/en/v5.0/docs/query-guide/#function">(Function)</a></em></h3>
+<p><p style="word-wrap: break-word">Function returns the map as an XML string.</p>
+<span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<pre><code>&lt;STRING&gt; map:toXML(&lt;OBJECT&gt; map)
+&lt;STRING&gt; map:toXML(&lt;OBJECT&gt; map, &lt;OBJECT|STRING&gt; root.element.name)
+</code></pre>
 
 <p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
 <table>
@@ -1162,24 +1148,29 @@
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">OBJECT</td>
         <td style="vertical-align: top">No</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
     <tr>
-        <td style="vertical-align: top">rootelementname</td>
+        <td style="vertical-align: top">root.element.name</td>
         <td style="vertical-align: top; word-wrap: break-word">The root element of the map.</td>
-        <td style="vertical-align: top">null</td>
-        <td style="vertical-align: top">OBJECT</td>
+        <td style="vertical-align: top">The XML root element will be ignored</td>
+        <td style="vertical-align: top">OBJECT<br>STRING</td>
         <td style="vertical-align: top">Yes</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
     </tr>
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<div class="codehilite"><pre><span></span>toXML(company, &quot;abcCompany&quot;)
-</pre></div>
+<pre><code>toXML(company, 'abcCompany')
+</code></pre>
 
+<p style="word-wrap: break-word">If <code>company</code> is a map with key-value pairs, ('symbol' : 'wso2'), ('volume' : 100), and ('price' : 200), this function returns XML as a string, <code>&lt;abcCompany&gt;&lt;symbol&gt;wso2&lt;/symbol&gt;&lt;volume&gt;&lt;100&gt;&lt;/volume&gt;&lt;price&gt;200&lt;/price&gt;&lt;/abcCompany&gt;</code>.</p>
 
-<p style="word-wrap: break-word">If "company" is a map with key-value pairs, (?symbol? : wso2), (?volume? : 100), and (?price? : 200), this function returns the string, ?&lt;abcCompany&gt;&lt;symbol&gt;wso2&lt;/symbol&gt;&lt;volume&gt;&lt;100&gt;&lt;/volume&gt;&lt;price&gt;200&lt;/price&gt;&lt;/abcCompany&gt;.</p>
+<p><span id="example-2" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 2</span></p>
+<pre><code>toXML(company)
+</code></pre>
+
+<p style="word-wrap: break-word">If <code>company</code> is a map with key-value pairs, ('symbol' : 'wso2'), ('volume' : 100), and ('price' : 200), this function returns XML without root element as a string, <code>&lt;symbol&gt;wso2&lt;/symbol&gt;&lt;volume&gt;&lt;100&gt;&lt;/volume&gt;&lt;price&gt;200&lt;/price&gt;</code>.</p>
                 
                   
                 
@@ -1200,7 +1191,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../4.0.5/" title="4.0.5" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../.." title="Information" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1209,19 +1200,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                4.0.5
+                Information
               </span>
             </div>
           </a>
         
         
-          <a href="../../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../5.0.2/" title="5.0.2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                License
+                5.0.2
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1237,7 +1228,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2011 - 2018 WSO2
+            Siddhi - Documentation
           </div>
         
         powered by
@@ -1247,33 +1238,30 @@
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
-      <a href="https://github.com/wso2/siddhi" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/siddhi-io/siddhi" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://medium.com/siddhi-io" class="md-footer-social__link fa fa-medium"></a>
+    
+      <a href="https://twitter.com/siddhi_io" class="md-footer-social__link fa fa-twitter"></a>
     
       <a href="https://www.linkedin.com/groups/13553064" class="md-footer-social__link fa fa-linkedin"></a>
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../../assets/javascripts/application.a59e2a89.js"></script>
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
       
-      <script>app.initialize({version:"0.17.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
-        <script src="../../javascripts/extra.js"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-103065-28","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+        <script src="../../assets/javascripts/extra.js"></script>
       
     
   </body>
