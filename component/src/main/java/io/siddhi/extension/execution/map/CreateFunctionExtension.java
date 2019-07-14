@@ -50,26 +50,36 @@ import java.util.Map;
                 @Parameter(name = "key1",
                         description = "Key 1",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                        DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true,
+                        optional = true,
+                        defaultValue = "-"
                 ),
                 @Parameter(name = "value1",
                         description = "Value 1",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
-                        dynamic = true
+                        dynamic = true,
+                        optional = true,
+                        defaultValue = "-"
                 ),
         },
         parameterOverloads = {
+                @ParameterOverload(),
                 @ParameterOverload(parameterNames = {"key1", "value1"}),
                 @ParameterOverload(parameterNames = {"key1", "value1", "..."}),
         },
         returnAttributes = @ReturnAttribute(description = "Returns the created map object," +
                 " by pairing adjacent key value pairs.", type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:create(1, 'one', 2, 'two', 3, 'three')",
-                description = "This returns a map with keys `1`, `2`, `3` mapped with their corresponding values, " +
-                        "`one`, `two`, `three`.")
+        examples = {
+                @Example(
+                        syntax = "map:create(1, 'one', 2, 'two', 3, 'three')",
+                        description = "This returns a map with keys `1`, `2`, `3` mapped with " +
+                                "their corresponding values, `one`, `two`, `three`."),
+                @Example(
+                        syntax = "map:create()",
+                        description = "This returns an empty map.")
+        }
 )
 public class CreateFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
