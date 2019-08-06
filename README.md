@@ -2,8 +2,8 @@ Siddhi Execution Map
 ======================================
 
   [![Jenkins Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-execution-map/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-execution-map/)
-  [![GitHub (pre-)Release](https://img.shields.io/github/release/siddhi-io/siddhi-execution-map/all.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
-  [![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
+  [![GitHub Release](https://img.shields.io/github/release/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
+  [![GitHub Release Date](https://img.shields.io/github/release-date/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/releases)
   [![GitHub Open Issues](https://img.shields.io/github/issues-raw/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/issues)
   [![GitHub Last Commit](https://img.shields.io/github/last-commit/siddhi-io/siddhi-execution-map.svg)](https://github.com/siddhi-io/siddhi-execution-map/commits/master)
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
