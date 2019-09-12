@@ -26,7 +26,7 @@ import io.siddhi.core.stream.StreamJunction;
 import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
-import io.siddhi.extension.execution.map.test.util.SiddhiTestHelper;
+import io.siddhi.core.util.SiddhiTestHelper;
 import io.siddhi.extension.execution.map.test.util.UnitTestAppender;
 import io.siddhi.extension.execution.string.ConcatFunctionExtension;
 import org.apache.axiom.om.impl.exception.XMLComparisonException;

@@ -24,7 +24,7 @@ import io.siddhi.core.event.Event;
 import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
-import io.siddhi.extension.execution.map.test.util.SiddhiTestHelper;
+import io.siddhi.core.util.SiddhiTestHelper;
 import org.apache.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
