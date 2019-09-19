@@ -34,7 +34,6 @@ import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Extension(
         namespace = "map",
@@ -80,7 +79,7 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
             throw new SiddhiAppCreationException("map:collect() function  should have two parameters , " +
                     "but found '" + attributesLength + "' parameters.");
         }
-        return CollectState::new;
+        return MapState::new;
     }
 
     @Override
@@ -91,8 +90,8 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
 
     @Override
     public Object processAdd(Object[] objects, State state) {
-        ((CollectState) state).mapOfValues.put(objects[0], objects[1]);
-        return ((CollectState) state).getClonedMapOfValues();
+        ((MapState) state).addEntry(objects[0], objects[1]);
+        return ((MapState) state).getClonedMapOfValues();
     }
 
     @Override
@@ -103,8 +102,8 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
 
     @Override
     public Object processRemove(Object[] objects, State state) {
-        ((CollectState) state).mapOfValues.remove(objects[0]);
-        return ((CollectState) state).getClonedMapOfValues();
+        ((MapState) state).removeEntry(objects[0]);
+        return ((MapState) state).getClonedMapOfValues();
     }
 
 
@@ -116,33 +115,7 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
 
     @Override
     public Object reset(State state) {
-        ((CollectState) state).mapOfValues = new HashMap<>();
+        ((MapState) state).setMapOfValues(new HashMap<>());
         return new HashMap<>();
-    }
-
-    public class CollectState extends State {
-
-        private Map<Object, Object> mapOfValues = new HashMap<>();
-
-        @Override
-        public boolean canDestroy() {
-            return mapOfValues.size() == 0;
-        }
-
-        @Override
-        public Map<String, Object> snapshot() {
-            Map<String, Object> state = new HashMap<>();
-            state.put("mapOfValues", mapOfValues);
-            return state;
-        }
-
-        @Override
-        public void restore(Map<String, Object> state) {
-            mapOfValues = (HashMap<Object, Object>) state.get("mapOfValues");
-        }
-
-        public Map<Object, Object> getClonedMapOfValues() {
-            return new HashMap<>(mapOfValues);
-        }
     }
 }
