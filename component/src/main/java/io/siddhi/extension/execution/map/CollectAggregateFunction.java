@@ -35,6 +35,9 @@ import io.siddhi.query.api.definition.Attribute;
 
 import java.util.HashMap;
 
+/**
+ * Implementation class for map:collect()
+ */
 @Extension(
         namespace = "map",
         name = "collect",

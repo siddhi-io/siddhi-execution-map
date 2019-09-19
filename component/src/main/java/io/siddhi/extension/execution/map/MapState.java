@@ -22,6 +22,9 @@ import io.siddhi.core.util.snapshot.state.State;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * State to be kept for map:collect() and map:merge()
+ */
 public class MapState extends State {
 
     private Map<Object, Object> mapOfValues = new HashMap<>();

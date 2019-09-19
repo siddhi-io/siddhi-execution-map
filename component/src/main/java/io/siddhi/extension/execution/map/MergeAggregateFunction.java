@@ -37,6 +37,9 @@ import io.siddhi.query.api.definition.Attribute;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation class for map:merge()
+ */
 @Extension(
         namespace = "map",
         name = "merge",

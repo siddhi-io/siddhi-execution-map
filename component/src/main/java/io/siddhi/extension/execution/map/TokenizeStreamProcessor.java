@@ -47,6 +47,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implementation class for map:tokenize()
+ */
 @Extension(
         namespace = "map",
         name = "tokenize",
