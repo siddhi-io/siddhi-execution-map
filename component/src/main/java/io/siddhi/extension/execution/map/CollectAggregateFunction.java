@@ -21,10 +21,10 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
-import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.query.processor.ProcessingMode;
 import io.siddhi.core.query.selector.attribute.aggregator.AttributeAggregatorExecutor;
@@ -48,13 +48,20 @@ import java.util.HashMap;
                         name = "key",
                         description = "Key of the map entry",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true
                 ),
                 @Parameter(
                         name = "value",
                         description = "Value of the map entry",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true
+                )
+        },
+        parameterOverloads = {
+                @ParameterOverload(
+                        parameterNames = {"key", "value"}
                 )
         },
         returnAttributes = {
@@ -79,11 +86,6 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
     protected StateFactory<State> init(ExpressionExecutor[] expressionExecutors, ProcessingMode processingMode,
                                        boolean outputExpectsExpiredEvents, ConfigReader configReader,
                                        SiddhiQueryContext siddhiQueryContext) {
-        int attributesLength = expressionExecutors.length;
-        if ((attributesLength != 2)) {
-            throw new SiddhiAppCreationException("map:collect() function  should have two parameters , " +
-                    "but found '" + attributesLength + "' parameters.");
-        }
         return MapState::new;
     }
 

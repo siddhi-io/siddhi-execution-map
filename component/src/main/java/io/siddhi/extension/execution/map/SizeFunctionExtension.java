@@ -25,7 +25,6 @@ import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
-import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.exception.SiddhiAppRuntimeException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.executor.function.FunctionExecutor;
@@ -66,16 +65,6 @@ public class SizeFunctionExtension extends FunctionExecutor<State> {
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,
                                        ConfigReader configReader, SiddhiQueryContext siddhiQueryContext) {
-        int attributesLength = attributeExpressionExecutors.length;
-        if ((attributesLength != 1)) {
-            throw new SiddhiAppCreationException("map:size() function  should have only one parameter , " +
-                    "but found '" + attributesLength + "' parameters.");
-        }
-        if (attributeExpressionExecutors[0].getReturnType() != Attribute.Type.OBJECT) {
-            throw new SiddhiAppCreationException("The parameter 'map' in map:size() function should be of " +
-                    "type OBJECT, but found a parameter with type '" +
-                    attributeExpressionExecutors[0].getReturnType() + "'.");
-        }
         return null;
     }
 

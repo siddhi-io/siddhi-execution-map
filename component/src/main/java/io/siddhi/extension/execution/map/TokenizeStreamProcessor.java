@@ -21,6 +21,7 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
@@ -30,7 +31,6 @@ import io.siddhi.core.event.stream.StreamEvent;
 import io.siddhi.core.event.stream.StreamEventCloner;
 import io.siddhi.core.event.stream.holder.StreamEventClonerHolder;
 import io.siddhi.core.event.stream.populater.ComplexEventPopulater;
-import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.exception.SiddhiAppRuntimeException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.query.processor.ProcessingMode;
@@ -58,8 +58,12 @@ import java.util.Map;
                 @Parameter(
                         name = "map",
                         description = "Hash map containing key value pairs",
-                        type = DataType.OBJECT
+                        type = DataType.OBJECT,
+                        dynamic = true
                 )
+        },
+        parameterOverloads = {
+                @ParameterOverload(parameterNames = {"map"})
         },
         returnAttributes = {
                 @ReturnAttribute(
@@ -94,20 +98,7 @@ public class TokenizeStreamProcessor extends StreamProcessor<State> {
                                        StreamEventClonerHolder streamEventClonerHolder,
                                        boolean outputExpectsExpiredEvents, boolean findToBeExecuted,
                                        SiddhiQueryContext siddhiQueryContext) {
-
-        int attributesLength = expressionExecutors.length;
-        if ((attributesLength != 1)) {
-            throw new SiddhiAppCreationException("map:tokenize() function  should have only one parameter , " +
-                    "but found '" + attributesLength + "' parameters.");
-        }
-
-        if (expressionExecutors[0].getReturnType() == Attribute.Type.OBJECT) {
-            this.expressionExecutor = expressionExecutors[0];
-        } else {
-            throw new SiddhiAppCreationException("The parameter 'map' in map:tokenize() function should be of " +
-                    "type OBJECT, but found a parameter with type '" + expressionExecutors[0].getReturnType() + "'.");
-        }
-
+        this.expressionExecutor = expressionExecutors[0];
         this.attributesList.add(new Attribute("key", Attribute.Type.STRING));
         this.attributesList.add(new Attribute("value", Attribute.Type.STRING));
         return null;

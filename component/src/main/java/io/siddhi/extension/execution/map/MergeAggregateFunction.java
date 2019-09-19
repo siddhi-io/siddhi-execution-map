@@ -21,10 +21,10 @@ package io.siddhi.extension.execution.map;
 import io.siddhi.annotation.Example;
 import io.siddhi.annotation.Extension;
 import io.siddhi.annotation.Parameter;
+import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
-import io.siddhi.core.exception.SiddhiAppCreationException;
 import io.siddhi.core.exception.SiddhiAppRuntimeException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.query.processor.ProcessingMode;
@@ -49,7 +49,13 @@ import java.util.Map;
                 @Parameter(
                         name = "map",
                         description = "Maps to be collected",
-                        type = DataType.OBJECT
+                        type = DataType.OBJECT,
+                        dynamic = true
+                )
+        },
+        parameterOverloads = {
+                @ParameterOverload(
+                        parameterNames = "map"
                 )
         },
         returnAttributes = {
@@ -73,17 +79,6 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors, ProcessingMode processingMode,
                                        boolean outputExpectsExpiredEvents, ConfigReader configReader,
                                        SiddhiQueryContext siddhiQueryContext) {
-        int attributesLength = attributeExpressionExecutors.length;
-        if ((attributesLength != 1)) {
-            throw new SiddhiAppCreationException("map:merge() function  should have only one parameter , " +
-                    "but found '" + attributesLength + "' parameters.");
-        }
-        if (attributeExpressionExecutors[0].getReturnType() != Attribute.Type.OBJECT) {
-            throw new SiddhiAppCreationException("The parameter 'map' in map:merge() function should be of " +
-                    "type OBJECT, but found a parameter with type '" +
-                    attributeExpressionExecutors[0].getReturnType() + "'.");
-        }
-
         return MapState::new;
     }
 
