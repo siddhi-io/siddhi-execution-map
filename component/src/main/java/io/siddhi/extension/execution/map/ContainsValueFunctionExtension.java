@@ -55,7 +55,7 @@ import java.util.Map;
                 @Parameter(name = "value",
                         description = "The value to be checked.",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                                DataType.BOOL, DataType.STRING},
                         dynamic = true
                 )
         },

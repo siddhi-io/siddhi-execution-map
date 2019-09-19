@@ -55,7 +55,7 @@ import java.util.HashMap;
                         name = "value",
                         description = "Value of the map entry",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                                DataType.BOOL, DataType.STRING},
                         dynamic = true
                 )
         },

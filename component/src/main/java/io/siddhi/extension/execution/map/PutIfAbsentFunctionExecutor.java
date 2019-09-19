@@ -55,13 +55,13 @@ import java.util.Map;
                 @Parameter(name = "key",
                         description = "The key to be added.",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                                DataType.BOOL, DataType.STRING},
                         dynamic = true
                 ),
                 @Parameter(name = "value",
                         description = "The value to be added.",
                         type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                                DataType.BOOL, DataType.STRING},
                         dynamic = true
                 )
         },
