@@ -27,6 +27,19 @@ limitations under the License.
             <class name="io.siddhi.extension.execution.map.RemoveFunctionExtensionTestCase"/>
             <class name="io.siddhi.extension.execution.map.ToJSONFunctionExtensionTestCase"/>
             <class name="io.siddhi.extension.execution.map.ToXMLFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ClearFunctionExecutorTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CollectAggregatorFunctionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ContainsKeyFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ContainsValueFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.IsEmptyFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.KeysFunctionExecutorTestCase"/>
+            <class name="io.siddhi.extension.execution.map.MergeAggregateFunctionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.PutIfAbsentFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ReplaceFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ReplaceAllFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.SizeFunctionExecutorTestCase"/>
+            <class name="io.siddhi.extension.execution.map.ValuesFunctionExecutorTestCase"/>
+            <class name="io.siddhi.extension.execution.map.TokenizeStreamProcessorTestCase"/>
         </classes>
     </test>
 </suite>
