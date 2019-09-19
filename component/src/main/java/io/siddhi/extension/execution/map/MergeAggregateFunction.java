@@ -78,6 +78,12 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
             throw new SiddhiAppCreationException("map:merge() function  should have only one parameter , " +
                     "but found '" + attributesLength + "' parameters.");
         }
+        if (attributeExpressionExecutors[0].getReturnType() != Attribute.Type.OBJECT) {
+            throw new SiddhiAppCreationException("The parameter 'map' in map:merge() function should be of " +
+                    "type OBJECT, but found a parameter with type '" +
+                    attributeExpressionExecutors[0].getReturnType() + "'.");
+        }
+
         return MapState::new;
     }
 
