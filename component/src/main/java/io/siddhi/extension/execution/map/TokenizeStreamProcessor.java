@@ -65,12 +65,14 @@ import java.util.Map;
                 @ReturnAttribute(
                         name = "key",
                         description = "Key of an entry consisted in the map",
-                        type = DataType.OBJECT
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
                 ),
                 @ReturnAttribute(
                         name = "value",
                         description = "Value of an entry consisted in the map",
-                        type = DataType.OBJECT
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
                 )
         },
         examples = {

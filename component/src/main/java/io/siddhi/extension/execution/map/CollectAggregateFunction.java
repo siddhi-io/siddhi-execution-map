@@ -47,12 +47,14 @@ import java.util.HashMap;
                 @Parameter(
                         name = "key",
                         description = "Key of the map entry",
-                        type = DataType.OBJECT
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
                 ),
                 @Parameter(
                         name = "value",
                         description = "Value of the map entry",
-                        type = DataType.OBJECT
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING}
                 )
         },
         returnAttributes = {

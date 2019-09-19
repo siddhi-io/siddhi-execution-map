@@ -96,5 +96,6 @@ public class SizeFunctionExtension extends FunctionExecutor<State> {
             return ((Map) data).size();
         }
         throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data + "'.");    }
+                "Data: '" + data + "'.");
+    }
 }
