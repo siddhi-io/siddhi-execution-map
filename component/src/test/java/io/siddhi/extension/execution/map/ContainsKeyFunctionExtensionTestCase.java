@@ -33,8 +33,8 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ContainsFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(ContainsFunctionExtensionTestCase.class);
+public class ContainsKeyFunctionExtensionTestCase {
+    private static final Logger log = Logger.getLogger(ContainsKeyFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
