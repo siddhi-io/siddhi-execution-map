@@ -43,8 +43,8 @@ import java.util.Map;
 @Extension(
         namespace = "map",
         name = "merge",
-        description = "Collect multiple maps and merge them as a single map, only distinct keys are collected if a " +
-                "duplicate key arrives, it overrides the old value",
+        description = "Collect multiple maps to merge as a single map. Only distinct keys are collected, if a " +
+                "duplicate key arrives, it overrides the old value.",
         parameters = {
                 @Parameter(
                         name = "map",
@@ -60,7 +60,7 @@ import java.util.Map;
         },
         returnAttributes = {
                 @ReturnAttribute(
-                        description = "Map containing all collected key-value pairs.",
+                        description = "Map containing all the collected key-value pairs.",
                         type = DataType.OBJECT
                 )
         },
@@ -70,7 +70,7 @@ import java.util.Map;
                                 "select map:merge(map) as studentDetails\n" +
                                 "insert into StudentSteam;",
                         description = "For the window expiry of 2 events, the merge() function will collect " +
-                                "attribute values of map and merge to a single map returned as studentDetails."
+                                "attributes of `map` and merge them to a single map, returned as studentDetails."
                 )
         }
 )

@@ -41,7 +41,7 @@ import java.util.HashMap;
 @Extension(
         namespace = "map",
         name = "collect",
-        description = "Collect multiple key-value pairs and construct a map, only distinct keys are collected if a " +
+        description = "Collect multiple key-value pairs to construct a map. Only distinct keys are collected, if a " +
                 "duplicate key arrives, it overrides the old value",
         parameters = {
                 @Parameter(
@@ -76,7 +76,7 @@ import java.util.HashMap;
                                  "select map:collect(key, value) as studentDetails\n" +
                                  "insert into StudentSteam;",
                         description = "For the window expiry of 10 events, the collect() function will collect " +
-                                "attribute values of key and value to a single map and return as studentDetails."
+                                "attributes of `key` and `value` to a single map and return as studentDetails."
                 )
         }
 )

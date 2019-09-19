@@ -41,7 +41,7 @@ import java.util.Map;
 @Extension(
         name = "replaceAll",
         namespace = "map",
-        description = "Function returns the updated map after replacing all the key-value pairs from another map," +
+        description = "Function returns the updated map after replacing all the key-value pairs from another map, " +
                 "if keys are present.",
         parameters = {
                 @Parameter(name = "to.map",

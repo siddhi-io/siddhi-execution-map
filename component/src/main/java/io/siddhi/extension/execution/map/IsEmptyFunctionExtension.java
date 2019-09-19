@@ -47,7 +47,7 @@ import java.util.Map;
         description = "Function checks if the map is empty.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "The map the need to be determined whether it's empty or not.",
+                        description = "The map the need to be checked whether it's empty or not.",
                         type = {DataType.OBJECT},
                         dynamic = true
                 )
@@ -60,7 +60,7 @@ import java.util.Map;
                 type = DataType.BOOL),
         examples = @Example(
                 syntax = "map:isEmpty(students)",
-                description = "Returns 'true' if the students is empty else it returns `false`.")
+                description = "Returns 'true' if the students map is empty else it returns `false`.")
 )
 public class IsEmptyFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.BOOL;

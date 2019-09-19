@@ -42,11 +42,11 @@ import java.util.Map;
 @Extension(
         namespace = "map",
         name = "keys",
-        description = "Function to return the keys of the map.",
+        description = "Function to return the keys of the map as a list.",
         parameters = {
                 @Parameter(
                         name = "map",
-                        description = "The map from which list if keys to be returned.",
+                        description = "The map from which list of keys to be returned.",
                         type = {DataType.OBJECT},
                         dynamic = true
                 )

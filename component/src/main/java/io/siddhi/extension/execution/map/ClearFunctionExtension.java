@@ -44,8 +44,7 @@ import java.util.Map;
 @Extension(
         name = "clear",
         namespace = "map",
-        description = "Function returns the cleared map after adding the given key-value pair. " +
-                "If the key already exist in the map the key is updated with the new value.",
+        description = "Function returns the cleared map. ",
         parameters = {
                 @Parameter(name = "map",
                         description = "The map which needs to be cleared",

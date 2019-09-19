@@ -48,7 +48,7 @@ import java.util.Map;
         description = "Function checks if the map contains the key.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "The map the need to be determined which contains the key or not.",
+                        description = "The map the needs to be checked on containing the key or not.",
                         type = {DataType.OBJECT},
                         dynamic = true
                 ),
@@ -67,7 +67,7 @@ import java.util.Map;
                 type = DataType.BOOL),
         examples = @Example(
                 syntax = "map:containsKey(students, '1234')",
-                description = "Returns 'true' if the students contains key `1234` else it returns `false`.")
+                description = "Returns 'true' if the students map contains key `1234` else it returns `false`.")
 )
 public class ContainsKeyFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.BOOL;
