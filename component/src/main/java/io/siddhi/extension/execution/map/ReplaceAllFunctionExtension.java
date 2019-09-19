@@ -85,11 +85,9 @@ public class ReplaceAllFunctionExtension extends FunctionExecutor<State> {
                 fromMap.forEach(toMap::replace);
                 return toMap;
             }
-            throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                    "Data: '" + data[1].toString() + "'.");
+            throw new SiddhiAppRuntimeException("Second attribute value must be of type java.util.Map.");
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data[0].toString() + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override

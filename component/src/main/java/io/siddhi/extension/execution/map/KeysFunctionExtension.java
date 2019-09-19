@@ -85,7 +85,6 @@ public class KeysFunctionExtension extends FunctionExecutor<State> {
         if (data instanceof Map) {
             return new ArrayList<Object>(((Map) data).keySet());
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 }

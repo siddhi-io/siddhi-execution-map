@@ -94,8 +94,7 @@ public class PutIfAbsentFunctionExecutor extends FunctionExecutor<State> {
             hashMap.putIfAbsent(data[1], data[2]);
             return hashMap;
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the first attribute is not of type Map<>. " +
-                "Data: '" + Arrays.toString(data) + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override

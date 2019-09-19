@@ -88,8 +88,7 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
             ((MapState) state).addAll((Map<Object, Object>) data);
             return ((MapState) state).getClonedMapOfValues();
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override
@@ -104,8 +103,7 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
             ((MapState) state).removeAll((Map<Object, Object>) data);
             return ((MapState) state).getClonedMapOfValues();
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override

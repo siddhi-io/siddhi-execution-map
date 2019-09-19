@@ -82,8 +82,7 @@ public class IsEmptyFunctionExtension extends FunctionExecutor<State> {
         if (data instanceof Map) {
             return ((Map) data).isEmpty();
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data.toString() + "'.");    }
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");    }
 
     @Override
     public Attribute.Type getReturnType() {

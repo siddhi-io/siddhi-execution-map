@@ -84,8 +84,7 @@ public class ContainsKeyFunctionExtension extends FunctionExecutor<State> {
         if (data[0] instanceof Map) {
             return ((Map) data[0]).containsKey(data[1]);
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + Arrays.toString(data) + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override

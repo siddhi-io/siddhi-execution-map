@@ -93,8 +93,7 @@ public class ReplaceFunctionExtension extends FunctionExecutor<State> {
             hashMap.replace(data[1], data[2]);
             return hashMap;
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + Arrays.toString(data) + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override

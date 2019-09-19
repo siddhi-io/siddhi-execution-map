@@ -84,8 +84,7 @@ public class ClearFunctionExtension extends FunctionExecutor<State> {
             hashMap.clear();
             return hashMap;
         }
-        throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                "Data: '" + data.toString() + "'.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
     }
 
     @Override
