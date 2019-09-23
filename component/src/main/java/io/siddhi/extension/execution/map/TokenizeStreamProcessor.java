@@ -76,7 +76,8 @@ import java.util.Set;
                 ),
                 @ReturnAttribute(
                         name = "value",
-                        description = "Value of an entry consisted in the map",
+                        description = "Value of an entry consisted in the map. If more than one map is given, " +
+                                "then an Array List of values from each map is returned for the `value` attribute.",
                         type = {DataType.OBJECT}
                 )
         },
