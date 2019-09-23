@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -25,71 +25,72 @@ import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
+import io.siddhi.core.exception.SiddhiAppRuntimeException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.executor.function.FunctionExecutor;
 import io.siddhi.core.util.config.ConfigReader;
 import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
-import io.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
 /**
- * isMap(Object)
- * Returns boolean true if the object is a hashmap, boolean false if it is not .
- * Accept Type(s): (Object)
- * Return Type(s): boolean
+ * clear(HashMap , key , value)
+ * Returns the cleared HashMap.
+ * Accept Type(s): (HashMap , ValidAttributeType , ValidAttributeType)
+ * Return Type(s): HashMap
  */
 @Extension(
-        name = "isMap",
+        name = "clear",
         namespace = "map",
-        description = "Function checks if the object is type of a map.",
+        description = "Function returns the cleared map. ",
         parameters = {
-                @Parameter(name = "arg",
-                        description = "The argument the need to be determined whether it's a map or not.",
-                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                @Parameter(name = "map",
+                        description = "The map which needs to be cleared",
+                        type = DataType.OBJECT,
                         dynamic = true
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(parameterNames = {"arg"})
+                @ParameterOverload(parameterNames = {"map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns `true` if the arg is a map (`java.util.Map`) and `false` if otherwise.",
-                type = DataType.BOOL),
-        examples = @Example(
-                syntax = "map:isMap(stockDetails)",
-                description = "Returns 'true' if the stockDetails is and an instance of `java.util.Map` " +
-                        "else it returns `false`.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns the cleared map.",
+                        type = DataType.OBJECT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:clear(stockDetails)",
+                        description = "Returns an empty map."
+        )
 )
-public class IsMapFunctionExtension extends FunctionExecutor {
-    private Attribute.Type returnType = Attribute.Type.BOOL;
+public class ClearFunctionExtension extends FunctionExecutor<State> {
+    private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override
-    protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
+    protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
-        if (attributeExpressionExecutors.length != 1) {
-            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:isMap() function, " +
-                    "required only one, but found " + attributeExpressionExecutors.length);
-        }
         return null;
     }
 
     @Override
     protected Object execute(Object[] data, State state) {
+        //Since the map:clear() function takes in 1 parameter, this method does not get called. Hence, not implemented.
         return null;
     }
 
     @Override
-    protected Boolean execute(Object data, State state) {
+    protected Object execute(Object data, State state) {
         if (data instanceof Map) {
-            return Boolean.TRUE;
+            Map<Object, Object> hashMap = (Map<Object, Object>) data;
+            hashMap.clear();
+            return hashMap;
         }
-
-        return Boolean.FALSE;
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'");
     }
 
     @Override

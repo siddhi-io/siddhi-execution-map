@@ -32,7 +32,6 @@ import io.siddhi.core.util.config.ConfigReader;
 import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
-import io.siddhi.query.api.exception.SiddhiAppValidationException;
 
 import java.util.Map;
 
@@ -55,17 +54,29 @@ import java.util.Map;
                 @Parameter(
                         name = "key",
                         description = "The key to fetch the value.",
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        dynamic = true
+                ),
+                @Parameter(
+                        name = "default.value",
+                        description = "The value to be returned if the map does not have the key.",
                         type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        optional = true,
+                        defaultValue = "<EMPTY_STRING>",
                         dynamic = true
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(parameterNames = {"map", "key"})
+                @ParameterOverload(parameterNames = {"map", "key"}),
+                @ParameterOverload(parameterNames = {"map", "key", "default.value"})
         },
         returnAttributes = @ReturnAttribute(
                 description = "Returns the value from the map that corresponds to the given key.",
-                type = DataType.OBJECT),
+                type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                        DataType.FLOAT, DataType.BOOL, DataType.STRING}
+                        ),
         examples = {
                 @Example(
                         syntax = "map:get(companyMap, 1)",
@@ -74,19 +85,24 @@ import java.util.Map;
                 @Example(
                         syntax = "map:get(companyMap, 2)",
                         description = "If the companyMap does not have any value for key `2` then the function " +
-                                "returns `null`.")
+                                "returns `null`."),
+                @Example(
+                        syntax = "map:get(companyMap, 2, 'two')",
+                        description = "If the companyMap does not have any value for key `2` then the function " +
+                                "returns `two`."
+                )
         }
 )
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
+    private boolean isDefaultValueGiven = false;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
-        if (attributeExpressionExecutors.length != 2) {
-            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:get() function, " +
-                    "required 2, but found " + attributeExpressionExecutors.length);
+        if (attributeExpressionExecutors.length == 3) {
+            this.isDefaultValueGiven = true;
         }
         return null;
     }
@@ -97,7 +113,11 @@ public class GetFunctionExtension extends FunctionExecutor {
         if (data[0] instanceof Map) {
             map = (Map) data[0];
         } else {
-            throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map");
+            throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found " +
+                    data[0].getClass().getCanonicalName());
+        }
+        if (this.isDefaultValueGiven) {
+            return map.getOrDefault(data[1], data[2]);
         }
         return map.get(data[1]);
     }

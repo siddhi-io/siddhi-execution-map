@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -25,74 +25,71 @@ import io.siddhi.annotation.ParameterOverload;
 import io.siddhi.annotation.ReturnAttribute;
 import io.siddhi.annotation.util.DataType;
 import io.siddhi.core.config.SiddhiQueryContext;
+import io.siddhi.core.exception.SiddhiAppRuntimeException;
 import io.siddhi.core.executor.ExpressionExecutor;
 import io.siddhi.core.executor.function.FunctionExecutor;
 import io.siddhi.core.util.config.ConfigReader;
 import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
-import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
 
 import java.util.Map;
 
 /**
- * remove(HashMap , key)
- * Returns the updated hashmap
- * Accept Type(s): (HashMap , ValidAttributeType)
- * Return Type(s): HashMap
+ * containsKey(Object)
+ * Returns boolean true if the object is empty map, boolean false if it is not .
+ * Accept Type(s): (Object)
+ * Return Type(s): boolean
  */
 @Extension(
-        name = "remove",
+        name = "containsKey",
         namespace = "map",
-        description = "Function returns the updated map after removing the element with the specified key.",
+        description = "Function checks if the map contains the key.",
         parameters = {
                 @Parameter(name = "map",
-                        description = "The map that needs to be updated.",
-                        type = DataType.OBJECT,
+                        description = "The map the needs to be checked on containing the key or not.",
+                        type = {DataType.OBJECT},
                         dynamic = true
                 ),
                 @Parameter(name = "key",
-                        description = "The key of the element that needs to removed.",
-                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.FLOAT, DataType.BOOL, DataType.STRING},
+                        description = "The key to be checked.",
+                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                                DataType.BOOL, DataType.STRING},
                         dynamic = true
                 )
         },
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "key"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns the updated map after removing the key-value.",
-                type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:remove(stockDetails, 1234)",
-                description = "This returns the updated map, stockDetails after removing the key-value pair" +
-                        " corresponding to the key `1234`."
-        )
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns `true` if the map is contains the key and `false` if otherwise.",
+                        type = DataType.BOOL
+                ),
+        examples =
+                @Example(
+                        syntax = "map:containsKey(stockDetails, '1234')",
+                        description = "Returns 'true' if the stockDetails map contains key `1234` " +
+                                "else it returns `false`."
+                )
 )
-public class RemoveFunctionExtension extends FunctionExecutor {
-    private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);
-    private Attribute.Type returnType = Attribute.Type.OBJECT;
+public class ContainsKeyFunctionExtension extends FunctionExecutor<State> {
+    private Attribute.Type returnType = Attribute.Type.BOOL;
 
     @Override
-    protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,
+    protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,
                                 ConfigReader configReader,
                                 SiddhiQueryContext siddhiQueryContext) {
-        if (attributeExpressionExecutors.length < 2) {
-            throw new SiddhiAppValidationException("Invalid no of arguments passed to map:remove() function, " +
-                    "required one or more keys, but found " + attributeExpressionExecutors.length);
-        }
         return null;
     }
 
     @Override
     protected Object execute(Object[] data, State state) {
-        Map<Object, Object> map = (Map<Object, Object>) data[0];
-        for (int i = 1; i < data.length; i++) {
-            map.remove(data[i]);
+        if (data[0] instanceof Map) {
+            return ((Map) data[0]).containsKey(data[1]);
         }
-        return map;
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data[0].getClass().getCanonicalName() + "'.");
     }
 
     @Override

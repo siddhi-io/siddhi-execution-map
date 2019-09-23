@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -31,10 +31,12 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class IsMapFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(IsMapFunctionExtensionTestCase.class);
+public class ValuesFunctionExecutorTestCase {
+    private static final Logger log = Logger.getLogger(ValuesFunctionExecutorTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -45,20 +47,23 @@ public class IsMapFunctionExtensionTestCase {
     }
 
     @Test
-    public void testIsMapFunctionExtension() throws InterruptedException {
-        log.info("IsMapFunctionExtension TestCase");
+    public void testValuesFunctionExtension() throws InterruptedException {
+        log.info("ValuesFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
 
-        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
-        String query = ("@info(name = 'query1') from inputStream " +
-                "select symbol,price,map:create() as tmpMap" +
-                " insert into tmpStream;" +
-                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, " +
-                "map:put(tmpMap,symbol,price) as map1" +
-                " insert into outputStream;" +
-                "@info(name = 'query3') from outputStream " +
-                "select map:isMap(map1) as isMap1,map:isMap(symbol) as isMap2" +
-                " insert into outputStream2;"
+        String inStreamDefinition = "define stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') " +
+                "from inputStream " +
+                "select symbol,price, map:create() as tmpMap " +
+                "insert into tmpStream;" +
+                "@info(name = 'query2') " +
+                "from tmpStream  " +
+                "select symbol,price,tmpMap, map:put(tmpMap,symbol,price) as map1 " +
+                "insert into outputStream;" +
+                "@info(name = 'query3') " +
+                "from outputStream " +
+                "select map:values(map1) as isMap1 " +
+                "insert into outputStream2;"
         );
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
@@ -70,21 +75,21 @@ public class IsMapFunctionExtensionTestCase {
                 EventPrinter.print(events);
                 for (Event event : events) {
                     count.incrementAndGet();
-                    if (count.get() == 1) {
-                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
-                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
-                        eventArrived = true;
+                    List<Object> data = ((ArrayList<Object>) event.getData(0));
+                    switch (count.get()) {
+                        case 1:
+                            AssertJUnit.assertEquals(100, data.get(0));
+                            break;
+                        case 2:
+                            AssertJUnit.assertEquals(200, data.get(0));
+                            break;
+                        case 3:
+                            AssertJUnit.assertEquals(300, data.get(0));
+                            break;
+                        default:
+                            AssertJUnit.fail();
                     }
-                    if (count.get() == 2) {
-                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
-                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
-                        eventArrived = true;
-                    }
-                    if (count.get() == 3) {
-                        AssertJUnit.assertEquals(Boolean.TRUE, event.getData(0));
-                        AssertJUnit.assertEquals(Boolean.FALSE, event.getData(1));
-                        eventArrived = true;
-                    }
+                    eventArrived = true;
                 }
             }
         });
@@ -101,8 +106,8 @@ public class IsMapFunctionExtensionTestCase {
     }
 
     @Test(expectedExceptions = SiddhiAppCreationException.class)
-    public void testIsMapFunctionExtension1() throws InterruptedException {
-        log.info("IsMapFunctionExtension TestCase with test attributeExpressionExecutors length");
+    public void testValuesFunctionExtension1() {
+        log.info("ValuesFunctionExtension TestCase with test attributeExpressionExecutors length");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
@@ -112,7 +117,26 @@ public class IsMapFunctionExtensionTestCase {
                 "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) " +
                 "as map1 insert into outputStream;" +
                 "@info(name = 'query3') from outputStream " +
-                "select map:isMap(map1) as isMap1,map:isMap(symbol,price) as isMap2" +
+                "select map:isMap(map1) as isMap1,map:values(symbol,price) as isMap2" +
+                " insert into outputStream2;"
+        );
+
+        siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
+    }
+
+    @Test(expectedExceptions = SiddhiAppCreationException.class)
+    public void testValuesFunctionExtension3() {
+        log.info("ValuesFunctionExtension TestCase with test attributeExpressionExecutors length");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
+        String query = ("@info(name = 'query1') from inputStream " +
+                "select symbol,price,map:create() as tmpMap" +
+                " insert into tmpStream;" +
+                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) " +
+                "as map1 insert into outputStream;" +
+                "@info(name = 'query3') from outputStream " +
+                "select map:isMap(map1) as isMap1,map:values(symbol) as isMap2" +
                 " insert into outputStream2;"
         );
 

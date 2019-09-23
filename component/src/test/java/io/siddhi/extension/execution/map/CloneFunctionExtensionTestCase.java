@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -31,11 +31,13 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class RemoveFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(RemoveFunctionExtensionTestCase.class);
+public class CloneFunctionExtensionTestCase {
+    private static final Logger log = Logger.getLogger(CloneFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -46,18 +48,25 @@ public class RemoveFunctionExtensionTestCase {
     }
 
     @Test
-    public void testRemoveFunctionExtension() throws InterruptedException {
-        log.info("RemoveFunctionExtension TestCase");
+    public void testCloneFunctionExtension() throws InterruptedException {
+        log.info("CloneFunctionExtension TestCase");
+
+        List<Map> clonedMap = new ArrayList<>();
+        List<Map> dataMap = new ArrayList<>();
+
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
-        String query = ("@info(name = 'query1') from inputStream select symbol,price, "
-                + "map:create() as tmpMap insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, " +
-                "map:put(tmpMap,symbol,price) as map1"
-                + " insert into outputStream;"
-                + "@info(name = 'query3') from outputStream  select map1, map:remove(map1,'IBM') as map2"
-                + " insert into outputStream2;"
+        String query = ("@info(name = 'query1') from inputStream " +
+                "select symbol,price,map:create() as tmpMap" +
+                " insert into tmpStream;" +
+                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, " +
+                "map:put(tmpMap,symbol,price) as map1" +
+                " insert into outputStream;" +
+                "@info(name = 'query3') " +
+                "from outputStream " +
+                "select map:clone(map1) as cloneMap, map1 " +
+                " insert into outputStream2;"
         );
 
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
@@ -69,22 +78,9 @@ public class RemoveFunctionExtensionTestCase {
                 EventPrinter.print(events);
                 for (Event event : events) {
                     count.incrementAndGet();
-
-                    if (count.get() == 1) {
-                        HashMap map = (HashMap) event.getData(1);
-                        AssertJUnit.assertEquals(null, map.get("IBM"));
-                        eventArrived = true;
-                    }
-                    if (count.get() == 2) {
-                        HashMap map = (HashMap) event.getData(1);
-                        AssertJUnit.assertEquals(200, map.get("WSO2"));
-                        eventArrived = true;
-                    }
-                    if (count.get() == 3) {
-                        HashMap map = (HashMap) event.getData(1);
-                        AssertJUnit.assertEquals(300, map.get("XYZ"));
-                        eventArrived = true;
-                    }
+                    eventArrived = true;
+                    clonedMap.add((Map) event.getData(0));
+                    dataMap.add((Map) event.getData(1));
                 }
             }
         });
@@ -92,28 +88,33 @@ public class RemoveFunctionExtensionTestCase {
         InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
-        inputHandler.send(new Object[]{"WSO2", 200, 200L});
-        inputHandler.send(new Object[]{"XYZ", 300, 200L});
-        SiddhiTestHelper.waitForEvents(100, 3, count, 60000);
-        AssertJUnit.assertEquals(3, count.get());
+        SiddhiTestHelper.waitForEvents(100, 1, count, 60000);
+
         AssertJUnit.assertTrue(eventArrived);
+        AssertJUnit.assertEquals(1, count.get());
+
+        AssertJUnit.assertNotSame(dataMap.get(0), clonedMap.get(0));
+        AssertJUnit.assertEquals(dataMap.get(0).get("IBM"), clonedMap.get(0).get("IBM"));
+
         siddhiAppRuntime.shutdown();
     }
 
     @Test(expectedExceptions = SiddhiAppCreationException.class)
-    public void testRemoveFunctionExtension1() throws InterruptedException {
-        log.info("RemoveFunctionExtension TestCase with test attributeExpressionExecutors length");
+    public void testCloneFunctionExtension1() {
+        log.info("CloneFunctionExtension TestCase with test attributeExpressionExecutors length");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
-        String query = ("@info(name = 'query1') from inputStream select symbol,price, "
-                + "map:create() as tmpMap insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price)"
-                + " as map1 insert into outputStream;"
-                + "@info(name = 'query3') from outputStream  select map1, map:remove(map1) as map2"
-                + " insert into outputStream2;"
+        String query = ("@info(name = 'query1') from inputStream " +
+                "select symbol,price,map:create() as tmpMap" +
+                " insert into tmpStream;" +
+                "@info(name = 'query2') from tmpStream  select symbol,price,tmpMap, map:put(tmpMap,symbol,price) " +
+                "as map1 insert into outputStream;" +
+                "@info(name = 'query3') from outputStream " +
+                "select map:isEmpty(map1) as isMap1,map:clone(symbol,price) as isMap2" +
+                " insert into outputStream2;"
         );
+
         siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
     }
-
 }

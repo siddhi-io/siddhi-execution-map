@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c)  2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -33,8 +33,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PutAllFunctionExtensionTestCase {
-    private static final Logger log = Logger.getLogger(PutAllFunctionExtensionTestCase.class);
+public class ReplaceAllFunctionExtensionTestCase {
+    private static final Logger log = Logger.getLogger(ReplaceAllFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -45,15 +45,15 @@ public class PutAllFunctionExtensionTestCase {
     }
 
     @Test
-    public void testPutAllFunctionExtension() throws InterruptedException {
-        log.info("PutAllFunctionExtension TestCase");
+    public void testReplaceAllFunctionExtension() throws InterruptedException {
+        log.info("ReplaceAllFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine trigger startTrigger at 'start';";
         String query = ("@info(name = 'query1') from startTrigger "
                 + "select map:create(1 , 'one' ,  2 , 'two' , 3 , 'three') as map1, "
-                + "map:create(4 , 'four' ,  5 , 'five' , 6 , 'six') as map2 insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream  select map:putAll(map1, map2)" +
+                + "map:create(1 , 'one1' ,  2 , 'two2' , 3 , 'three3') as map2 insert into tmpStream;"
+                + "@info(name = 'query2') from tmpStream  select map:replaceAll(map1, map2)" +
                 " as newMap"
                 + " insert into outputStream;"
 
@@ -68,8 +68,8 @@ public class PutAllFunctionExtensionTestCase {
                 for (Event event : events) {
                     count.incrementAndGet();
                     HashMap map = (HashMap) event.getData(0);
-                    AssertJUnit.assertEquals("one", map.get(1));
-                    AssertJUnit.assertEquals("six", map.get(6));
+                    AssertJUnit.assertEquals("one1", map.get(1));
+                    AssertJUnit.assertEquals("three3", map.get(3));
                     eventArrived = true;
                 }
             }
@@ -82,8 +82,8 @@ public class PutAllFunctionExtensionTestCase {
     }
 
     @Test
-    public void testPutAllFunctionExtension2() throws InterruptedException {
-        log.info("PutAllFunctionExtension TestCase");
+    public void testReplaceAllFunctionExtension2() throws InterruptedException {
+        log.info("ReplaceAllFunctionExtension TestCase");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine trigger startTrigger at 'start';";
@@ -93,7 +93,7 @@ public class PutAllFunctionExtensionTestCase {
                 + "map:create(7 , 'seven' ,  8 , 'eight' , 9 , 'nine') as map3 "
                 + "insert into tmpStream;"
                 + "@info(name = 'query2') from tmpStream  "
-                + "select map:putAll(map:putAll(map1, map2), map3) as newMap "
+                + "select map:replaceAll(map:replaceAll(map1, map2), map3) as newMap "
                 + "insert into outputStream;"
         );
 
@@ -107,8 +107,8 @@ public class PutAllFunctionExtensionTestCase {
                     count.incrementAndGet();
                     HashMap map = (HashMap) event.getData(0);
                     AssertJUnit.assertEquals("one", map.get(1));
-                    AssertJUnit.assertEquals("six", map.get(6));
-                    AssertJUnit.assertEquals("nine", map.get(9));
+                    AssertJUnit.assertNull(map.get(6));
+                    AssertJUnit.assertNull(map.get(9));
                     eventArrived = true;
                 }
             }
@@ -121,15 +121,15 @@ public class PutAllFunctionExtensionTestCase {
     }
 
     @Test(expectedExceptions = SiddhiAppCreationException.class)
-    public void testPutAllFunctionExtension1() throws InterruptedException {
-        log.info("PutAllFunctionExtension TestCase with test attributeExpressionExecutors length");
+    public void testReplaceAllFunctionExtension1() {
+        log.info("ReplaceAllFunctionExtension TestCase with test attributeExpressionExecutors length");
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine trigger startTrigger at 'start';";
         String query = ("@info(name = 'query1') from startTrigger "
                 + "select map:create() as map1, map:create() as map2, map:create() as map3 "
                 + "insert into tmpStream;"
-                + "@info(name = 'query2') from tmpStream select map1, map:putAll(map1, map2, map3) as newMap"
+                + "@info(name = 'query2') from tmpStream select map1, map:replaceAll(map1, map2, map3) as newMap"
                 + " insert into outputStream;"
         );
         siddhiManager.createSiddhiAppRuntime(inStreamDefinition + query);
