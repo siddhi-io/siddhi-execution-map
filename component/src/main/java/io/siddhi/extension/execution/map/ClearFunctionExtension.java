@@ -62,7 +62,7 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:clear(students)",
+                        syntax = "map:clear(stockDetails)",
                         description = "Returns an empty map."
         )
 )

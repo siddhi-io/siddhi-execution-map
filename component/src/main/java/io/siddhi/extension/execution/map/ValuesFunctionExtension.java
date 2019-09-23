@@ -58,8 +58,8 @@ import java.util.Map;
                 description = "Returns values of the map as a list.",
                 type = DataType.OBJECT),
         examples = @Example(
-                syntax = "map:values(students)",
-                description = "Returns values of the `students` map.")
+                syntax = "map:values(stockDetails)",
+                description = "Returns values of the `stockDetails` map.")
 )
 public class ValuesFunctionExtension extends FunctionExecutor<State> {
 

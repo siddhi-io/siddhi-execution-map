@@ -60,9 +60,9 @@ import java.util.Map;
                 description = "Returns `true` if the arg is a map (`java.util.Map`) and `false` if otherwise.",
                 type = DataType.BOOL),
         examples = @Example(
-                syntax = "map:isMap(students)",
-                description = "Returns 'true' if the students is and an instance of `java.util.Map` else it returns " +
-                        "`false`.")
+                syntax = "map:isMap(stockDetails)",
+                description = "Returns 'true' if the stockDetails is and an instance of `java.util.Map` " +
+                        "else it returns `false`.")
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.BOOL;

@@ -72,9 +72,9 @@ import java.util.Map;
         returnAttributes = @ReturnAttribute(
                 description = "Returns the updated map with key and value.", type = DataType.OBJECT),
         examples = @Example(
-                syntax = "map:put(students , 1234 , 'sam')",
-                description = "Function returns the updated map named students after adding the value " +
-                        "`sam` with the key `1234`.")
+                syntax = "map:put(stockDetails , 'IBM' , '200')",
+                description = "Function returns the updated map named stockDetails after adding the value " +
+                        "`200` with the key `IBM`.")
 )
 public class PutFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;

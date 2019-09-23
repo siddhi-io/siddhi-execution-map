@@ -60,8 +60,8 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:size(students)",
-                        description = "Returns size of the `students` map."
+                        syntax = "map:size(stockDetails)",
+                        description = "Returns size of the `stockDetails` map."
                 )
 )
 public class SizeFunctionExtension extends FunctionExecutor<State> {

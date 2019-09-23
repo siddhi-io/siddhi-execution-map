@@ -61,8 +61,8 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:keys(students)",
-                        description = "Returns keys of the `students` map."
+                        syntax = "map:keys(stockDetails)",
+                        description = "Returns keys of the `stockDetails` map."
                 )
 )
 public class KeysFunctionExtension extends FunctionExecutor<State> {

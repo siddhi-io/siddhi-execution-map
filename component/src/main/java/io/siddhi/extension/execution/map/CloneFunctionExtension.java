@@ -58,8 +58,8 @@ import java.util.Map;
                         description = "Returns the cloned map.", type = DataType.OBJECT),
         examples =
                 @Example(
-                        syntax = "map:clone(students)",
-                        description = "Function returns cloned map of students."
+                        syntax = "map:clone(stockDetails)",
+                        description = "Function returns cloned map of stockDetails."
         )
 )
 public class CloneFunctionExtension extends FunctionExecutor<State> {

@@ -74,9 +74,9 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:putIfAbsent(students , 1234 , 'sam')",
-                        description = "Function returns the updated map named students after adding the value " +
-                        "`sam` with the key `1234` if key is absent from the original map."
+                        syntax = "map:putIfAbsent(stockDetails , 1234 , 'IBM')",
+                        description = "Function returns the updated map named stockDetails after adding the value " +
+                        "`IBM` with the key `1234` if key is absent from the original map."
                 )
 )
 public class PutIfAbsentFunctionExecutor extends FunctionExecutor<State> {

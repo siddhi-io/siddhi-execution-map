@@ -72,9 +72,9 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:replace(students , 1234 , 'sam')",
-                        description = "Function returns the updated map named students after replacing the value " +
-                        "`sam` with the key `1234` if present.")
+                        syntax = "map:replace(stockDetails , 1234 , 'IBM')",
+                        description = "Function returns the updated map named stockDetails after replacing the value " +
+                        "`IBM` with the key `1234` if present.")
 )
 public class ReplaceFunctionExtension extends FunctionExecutor<State> {
 

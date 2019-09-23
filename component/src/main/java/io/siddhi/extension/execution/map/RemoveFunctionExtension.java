@@ -66,8 +66,8 @@ import java.util.Map;
                 description = "Returns the updated map after removing the key-value.",
                 type = DataType.OBJECT),
         examples = @Example(
-                syntax = "map:remove(students, 1234)",
-                description = "This returns the updated map, students after removing the key-value pair" +
+                syntax = "map:remove(stockDetails, 1234)",
+                description = "This returns the updated map, stockDetails after removing the key-value pair" +
                         " corresponding to the key `1234`."
         )
 )

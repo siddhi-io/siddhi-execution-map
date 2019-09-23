@@ -74,7 +74,7 @@ import java.util.HashMap;
                 @Example(
                         syntax = "from StockStream#window.lengthBatch(10)\n" +
                                  "select map:collect(symbol, price) as stockDetails\n" +
-                                 "insert into StudentSteam;",
+                                 "insert into OutputStream;",
                         description = "For the window expiry of 10 events, the collect() function will collect " +
                                 "attributes of `key` and `value` to a single map and return as stockDetails."
                 )

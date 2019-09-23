@@ -68,8 +68,9 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:containsKey(students, '1234')",
-                        description = "Returns 'true' if the students map contains key `1234` else it returns `false`."
+                        syntax = "map:containsKey(stockDetails, '1234')",
+                        description = "Returns 'true' if the stockDetails map contains key `1234` " +
+                                "else it returns `false`."
                 )
 )
 public class ContainsKeyFunctionExtension extends FunctionExecutor<State> {

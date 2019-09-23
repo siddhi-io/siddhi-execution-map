@@ -68,8 +68,8 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:containsValue(students, 'Sam')",
-                        description = "Returns 'true' if the students map contains value `Sam` " +
+                        syntax = "map:containsValue(stockDetails, 'IBM')",
+                        description = "Returns 'true' if the stockDetails map contains value `IBM` " +
                                 "else it returns `false`."
                 )
 )

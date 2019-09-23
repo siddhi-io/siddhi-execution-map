@@ -62,8 +62,8 @@ import java.util.Map;
                 ),
         examples =
                 @Example(
-                        syntax = "map:isEmpty(students)",
-                        description = "Returns 'true' if the students map is empty else it returns `false`."
+                        syntax = "map:isEmpty(stockDetails)",
+                        description = "Returns 'true' if the stockDetails map is empty else it returns `false`."
                 )
 )
 public class IsEmptyFunctionExtension extends FunctionExecutor<State> {

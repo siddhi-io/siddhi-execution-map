@@ -66,7 +66,7 @@ import java.util.Map;
                 @Example(
                         syntax = "from StockStream#window.lengthBatch(2)\n" +
                                 "select map:merge(map) as stockDetails\n" +
-                                "insert into StudentSteam;",
+                                "insert into OutputStream;",
                         description = "For the window expiry of 2 events, the merge() function will collect " +
                                 "attributes of `map` and merge them to a single map, returned as stockDetails."
                 )
