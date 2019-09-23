@@ -85,7 +85,12 @@ import java.util.Map;
                 @Example(
                         syntax = "map:get(companyMap, 2)",
                         description = "If the companyMap does not have any value for key `2` then the function " +
-                                "returns `null`.")
+                                "returns `null`."),
+                @Example(
+                        syntax = "map:get(companyMap, 2, 'two')",
+                        description = "If the companyMap does not have any value for key `2` then the function " +
+                                "returns `two`."
+                )
         }
 )
 public class GetFunctionExtension extends FunctionExecutor {

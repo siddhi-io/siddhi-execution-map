@@ -72,11 +72,11 @@ import java.util.HashMap;
         },
         examples = {
                 @Example(
-                        syntax = "from CSCStream#window.lengthBatch(10)\n" +
-                                 "select map:collect(key, value) as studentDetails\n" +
+                        syntax = "from StockStream#window.lengthBatch(10)\n" +
+                                 "select map:collect(symbol, price) as stockDetails\n" +
                                  "insert into StudentSteam;",
                         description = "For the window expiry of 10 events, the collect() function will collect " +
-                                "attributes of `key` and `value` to a single map and return as studentDetails."
+                                "attributes of `key` and `value` to a single map and return as stockDetails."
                 )
         }
 )
