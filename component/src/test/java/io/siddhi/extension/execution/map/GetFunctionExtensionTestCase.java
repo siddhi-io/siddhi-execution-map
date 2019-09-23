@@ -164,7 +164,7 @@ public class GetFunctionExtensionTestCase {
                 " insert into tmpStream;" +
                 "@info(name = 'query2') " +
                 "from tmpStream  " +
-                "select symbol,price,tmpMap,map:put(tmpMap,symbol,price) as map1" +
+                "select symbol,price,tmpMap,map:put(tmpMap,symbol,price, '') as map1" +
                 " insert into outputStream;" +
                 "@info(name = 'query3') from outputStream  select map1, map:get(map1,symbol,price) as price" +
                 " insert into outputStream2;"
