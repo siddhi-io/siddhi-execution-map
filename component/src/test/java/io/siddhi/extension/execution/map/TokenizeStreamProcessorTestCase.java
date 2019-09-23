@@ -109,7 +109,7 @@ public class TokenizeStreamProcessorTestCase {
                         " map:create(4 , 'four' ,  5 , 'five' , 6 , 'six') as map2 "
                         + "insert into tmpStream;"
                         + "@info(name = 'query2') "
-                        + "from tmpStream#map:tokenize(map1, map2) "
+                        + "from tmpStream#map:tokenize(map1, '2') "
                         + "select key, value "
                         + "insert into TokenizedStream; "
 
@@ -120,8 +120,8 @@ public class TokenizeStreamProcessorTestCase {
         siddhiAppRuntime.shutdown();
     }
 
-    @Test(expectedExceptions = SiddhiAppCreationException.class)
-    public void testTokenizeStreamProcessor3() {
+    @Test
+    public void testTokenizeStreamProcessor3() throws InterruptedException {
         log.info("Tokenize Stream Processor TestCase - Use string object");
         SiddhiManager siddhiManager = new SiddhiManager();
 
@@ -133,14 +133,39 @@ public class TokenizeStreamProcessorTestCase {
                 + " map:create(4 , 'four' ,  5 , 'five' , 6 , 'six') as map2 "
                 + "insert into tmpStream;"
                 + "@info(name = 'query2') "
-                + "from tmpStream#map:tokenize('1') "
+                + "from tmpStream#map:tokenize(map1, map2) "
                 + "select key, value "
                 + "insert into TokenizedStream; "
 
         );
-
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
                 inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("TokenizedStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] events) {
+                EventPrinter.print(events);
+                for (Event event : events) {
+                    eventArrived = true;
+                    count.incrementAndGet();
+                    inEventsList.add(event.getData());
+                }
+            }
+        });
+        siddhiAppRuntime.start();
+        SiddhiTestHelper.waitForEvents(100, 6, count, 60000);
+
+        List<Object[]> expected = Arrays.asList(
+                new Object[]{1, new ArrayList<>(Arrays.asList("one", null))},
+                new Object[]{2, new ArrayList<>(Arrays.asList("two", null))},
+                new Object[]{3, new ArrayList<>(Arrays.asList("three", null))},
+                new Object[]{4, new ArrayList<>(Arrays.asList(null, "four"))},
+                new Object[]{5, new ArrayList<>(Arrays.asList(null, "five"))},
+                new Object[]{6, new ArrayList<>(Arrays.asList(null, "six"))}
+        );
+        AssertJUnit.assertTrue(eventArrived);
+        AssertJUnit.assertEquals(6, count.get());
+        AssertJUnit.assertTrue("Events do not match", SiddhiTestHelper.isUnsortedEventsMatch(expected, inEventsList));
+
         siddhiAppRuntime.shutdown();
     }
 }

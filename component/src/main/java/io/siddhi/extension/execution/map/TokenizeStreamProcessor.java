@@ -44,8 +44,10 @@ import io.siddhi.query.api.definition.Attribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Implementation class for map:tokenize()
@@ -63,20 +65,19 @@ import java.util.Map;
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(parameterNames = {"map"})
+                @ParameterOverload(parameterNames = {"map"}),
+                @ParameterOverload(parameterNames = {"map", "..."})
         },
         returnAttributes = {
                 @ReturnAttribute(
                         name = "key",
                         description = "Key of an entry consisted in the map",
-                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.BOOL, DataType.STRING}
+                        type = {DataType.OBJECT}
                 ),
                 @ReturnAttribute(
                         name = "value",
                         description = "Value of an entry consisted in the map",
-                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
-                                DataType.BOOL, DataType.STRING}
+                        type = {DataType.OBJECT}
                 )
         },
         examples = {
@@ -90,7 +91,8 @@ import java.util.Map;
 )
 public class TokenizeStreamProcessor extends StreamProcessor<State> {
    private List<Attribute> attributesList = new ArrayList<>();
-   private ExpressionExecutor expressionExecutor;
+   private ExpressionExecutor[] expressionExecutor;
+   private int numOfMaps;
 
     @Override
     protected StateFactory<State> init(MetaStreamEvent metaStreamEvent, AbstractDefinition abstractDefinition,
@@ -98,9 +100,11 @@ public class TokenizeStreamProcessor extends StreamProcessor<State> {
                                        StreamEventClonerHolder streamEventClonerHolder,
                                        boolean outputExpectsExpiredEvents, boolean findToBeExecuted,
                                        SiddhiQueryContext siddhiQueryContext) {
-        this.expressionExecutor = expressionExecutors[0];
-        this.attributesList.add(new Attribute("key", Attribute.Type.STRING));
-        this.attributesList.add(new Attribute("value", Attribute.Type.STRING));
+        this.expressionExecutor = expressionExecutors;
+        this.numOfMaps = expressionExecutors.length;
+
+        this.attributesList.add(new Attribute("key", Attribute.Type.OBJECT));
+        this.attributesList.add(new Attribute("value", Attribute.Type.OBJECT));
         return null;
     }
 
@@ -110,18 +114,37 @@ public class TokenizeStreamProcessor extends StreamProcessor<State> {
                            State state) {
         while (complexEventChunk.hasNext()) {
             StreamEvent event = complexEventChunk.next();
-            Object mapObject = this.expressionExecutor.execute(event);
 
-            if (!(mapObject instanceof HashMap)) {
-                throw new SiddhiAppRuntimeException("Dropping event since the object is not of type Map<>. " +
-                        "Event: '" + event + "'.");
+            List<Map<Object, Object>> dataMaps = new ArrayList<>();
+            for (int i = 0; i < this.expressionExecutor.length; i++) {
+                Object mapObject = this.expressionExecutor[i].execute(event);
+                if (!(mapObject instanceof HashMap)) {
+                    throw new SiddhiAppRuntimeException("Attribute number, '" + (i + 1) + "' must be of type " +
+                            "java.util.Map, but found " + mapObject.getClass().getCanonicalName());
+                }
+                dataMaps.add((Map) mapObject);
             }
 
-            Map<Object, Object> dataMap = (HashMap<Object, Object>) mapObject;
+            Set<Object> allKeySet = new HashSet<>();
+            for (Map<Object, Object> dataMap : dataMaps) {
+                Set<Object> keySet = dataMap.keySet();
+                allKeySet.addAll(keySet);
+            }
 
-            for (Map.Entry<Object, Object> entry : dataMap.entrySet()) {
+            for (Object key : allKeySet) {
                 StreamEvent clonedEvent = streamEventCloner.copyStreamEvent(event);
-                Object[] data = new Object[]{entry.getKey(), entry.getValue()};
+
+                Object[] data;
+                if (this.numOfMaps == 1) {
+                    data = new Object[]{key, dataMaps.get(0).get(key)};
+                } else {
+                    List<Object> value = new ArrayList<>();
+                    for (int i = 0; i < this.numOfMaps; i++) {
+                        value.add(dataMaps.get(i).get(key));
+                    }
+                    data = new Object[]{key, value};
+                }
+
                 complexEventPopulater.populateComplexEvent(clonedEvent, data);
                 complexEventChunk.insertBeforeCurrent(clonedEvent);
             }
