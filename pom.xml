@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.siddhi.extension.execution.map</groupId>
     <artifactId>siddhi-execution-map-parent</artifactId>
-    <version>5.0.5-SNAPSHOT</version>
+    <version>5.0.5</version>
     <packaging>pom</packaging>
     <name>Siddhi Execution Extension - Map Aggregator Pom</name>
 
@@ -68,7 +68,7 @@
         <url>https://github.com/siddhi-io/siddhi-execution-map.git</url>
         <developerConnection>scm:git:https://github.com/siddhi-io/siddhi-execution-map.git
         </developerConnection>
-        <tag>HEAD</tag>
+        <tag>v5.0.5</tag>
     </scm>
     <dependencyManagement>
         <dependencies>
