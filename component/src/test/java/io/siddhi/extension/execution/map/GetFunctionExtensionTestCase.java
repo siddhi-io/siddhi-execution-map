@@ -200,4 +200,50 @@ public class GetFunctionExtensionTestCase {
         AssertJUnit.assertTrue(appender.getMessages().contains("First attribute value must be of type java.util.Map"));
         siddhiAppRuntime.shutdown();
     }
+
+    @Test
+    public void testGetFunctionExtension5() throws InterruptedException {
+        log.info("GetFunctionExtension5 Default TestCase");
+        SiddhiManager siddhiManager = new SiddhiManager();
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string, price double, volume long);";
+
+        String query = ("@info(name = 'query1') from inputStream " +
+                "select symbol,price,map:create() as tmpMap" +
+                " insert into tmpStream;" +
+                "@info(name = 'query2') " +
+                "from tmpStream  " +
+                "select symbol,price,tmpMap,map:put(tmpMap,symbol,price) as map1" +
+                " insert into outputStream;" +
+                "@info(name = 'query3') " +
+                " from outputStream select map1, map:get(map1, 'XYZ', 100) as price" +
+                " insert into outputStream2;"
+        );
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+
+        siddhiAppRuntime.addCallback("outputStream2", new StreamCallback() {
+            @Override
+            public void receive(Event[] events) {
+                EventPrinter.print(events);
+                for (Event event : events) {
+                    count.incrementAndGet();
+                    eventArrived = true;
+                    AssertJUnit.assertEquals(100, event.getData(1));
+
+                }
+            }
+        });
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM", 100d, 100L});
+
+        SiddhiTestHelper.waitForEvents(100, 1, count, 60000);
+
+        AssertJUnit.assertTrue(eventArrived);
+        AssertJUnit.assertEquals(1, count.get());
+        siddhiAppRuntime.shutdown();
+    }
+
+
 }
