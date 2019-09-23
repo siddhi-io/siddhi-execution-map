@@ -58,15 +58,19 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"to.map", "from.map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns the updated map after replacing all the key-value pairs if present.",
-                type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:replaceAll(toMap, fromMap)",
-                description = "If `toMap` contains key-value pairs ('symbol': 'wso2'), ('volume' : 100), " +
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns the updated map after replacing all the key-value pairs if present.",
+                        type = DataType.OBJECT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:replaceAll(toMap, fromMap)",
+                        description = "If `toMap` contains key-value pairs ('symbol': 'wso2'), ('volume' : 100), " +
                         "and if `fromMap` contains key-value pairs ('symbol': 'IBM'), ('price' : 12), " +
                         "then the function returns updated `toMap` with key-value pairs ('symbol': 'IBM'), " +
-                        "('volume' : 100).")
+                        "('volume' : 100)."
+                )
 )
 public class ReplaceAllFunctionExtension extends FunctionExecutor<State> {
 
@@ -85,9 +89,11 @@ public class ReplaceAllFunctionExtension extends FunctionExecutor<State> {
                 fromMap.forEach(toMap::replace);
                 return toMap;
             }
-            throw new SiddhiAppRuntimeException("Second attribute value must be of type java.util.Map.");
+            throw new SiddhiAppRuntimeException("Second attribute value must be of type java.util.Map, but found '" +
+                    data[1].getClass().getCanonicalName() + "'.");
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data[0].getClass().getCanonicalName() + "'.");
     }
 
     @Override

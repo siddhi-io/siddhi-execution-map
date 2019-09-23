@@ -53,12 +53,16 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns size of the map (`java.util.Map`).",
-                type = DataType.INT),
-        examples = @Example(
-                syntax = "map:size(students)",
-                description = "Returns size of the `students` map.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns size of the map (`java.util.Map`).",
+                        type = DataType.INT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:size(students)",
+                        description = "Returns size of the `students` map."
+                )
 )
 public class SizeFunctionExtension extends FunctionExecutor<State> {
 
@@ -84,6 +88,7 @@ public class SizeFunctionExtension extends FunctionExecutor<State> {
         if (data instanceof Map) {
             return ((Map) data).size();
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'");
     }
 }

@@ -33,7 +33,6 @@ import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -64,18 +63,17 @@ import java.util.Map;
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(
-                        parameterNames = {"map", "key", "value"}
-                        )
+                @ParameterOverload(parameterNames = {"map", "key", "value"})
         },
         returnAttributes =
                 @ReturnAttribute(
-                    description = "Returns the updated map replaced key and value.",
-                    type = DataType.OBJECT
+                        description = "Returns the updated map replaced key and value.",
+                        type = DataType.OBJECT
                 ),
-        examples = @Example(
-                syntax = "map:replace(students , 1234 , 'sam')",
-                description = "Function returns the updated map named students after replacing the value " +
+        examples =
+                @Example(
+                        syntax = "map:replace(students , 1234 , 'sam')",
+                        description = "Function returns the updated map named students after replacing the value " +
                         "`sam` with the key `1234` if present.")
 )
 public class ReplaceFunctionExtension extends FunctionExecutor<State> {
@@ -89,11 +87,12 @@ public class ReplaceFunctionExtension extends FunctionExecutor<State> {
     @Override
     protected Object execute(Object[] data, State state) {
         if (data[0] instanceof Map) {
-            Map<Object, Object> hashMap = (Map<Object, Object>) data[0];
-            hashMap.replace(data[1], data[2]);
-            return hashMap;
+            Map<Object, Object> map = (Map<Object, Object>) data[0];
+            map.replace(data[1], data[2]);
+            return map;
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data[0].getClass().getCanonicalName() + "'.");
     }
 
     @Override

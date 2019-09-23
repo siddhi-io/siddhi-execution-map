@@ -33,7 +33,6 @@ import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -68,12 +67,17 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "key", "value"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns the updated map with key and value.", type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:putIfAbsent(students , 1234 , 'sam')",
-                description = "Function returns the updated map named students after adding the value " +
-                        "`sam` with the key `1234` if key is absent from the original map.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns the updated map with key and value.",
+                        type = DataType.OBJECT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:putIfAbsent(students , 1234 , 'sam')",
+                        description = "Function returns the updated map named students after adding the value " +
+                        "`sam` with the key `1234` if key is absent from the original map."
+                )
 )
 public class PutIfAbsentFunctionExecutor extends FunctionExecutor<State> {
     @Override
@@ -94,7 +98,8 @@ public class PutIfAbsentFunctionExecutor extends FunctionExecutor<State> {
             hashMap.putIfAbsent(data[1], data[2]);
             return hashMap;
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data[0].getClass().getCanonicalName() + "'.");
     }
 
     @Override

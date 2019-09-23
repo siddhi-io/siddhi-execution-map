@@ -33,7 +33,6 @@ import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -62,12 +61,17 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map", "value"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns `true` if the map is contains the value and `false` if otherwise.",
-                type = DataType.BOOL),
-        examples = @Example(
-                syntax = "map:containsValue(students, 'Sam')",
-                description = "Returns 'true' if the students map contains value `Sam` else it returns `false`.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns `true` if the map is contains the value and `false` if otherwise.",
+                        type = DataType.BOOL
+                ),
+        examples =
+                @Example(
+                        syntax = "map:containsValue(students, 'Sam')",
+                        description = "Returns 'true' if the students map contains value `Sam` " +
+                                "else it returns `false`."
+                )
 )
 public class ContainsValueFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.BOOL;
@@ -84,7 +88,8 @@ public class ContainsValueFunctionExtension extends FunctionExecutor<State> {
         if (data[0] instanceof Map) {
             return ((Map) data[0]).containsValue(data[1]);
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found " +
+                data[0].getClass().getCanonicalName());
     }
 
     @Override

@@ -27,50 +27,46 @@ import java.util.Map;
  */
 public class MapState extends State {
 
-    private Map<Object, Object> mapOfValues = new HashMap<>();
+    private Map<Object, Object> dataMap = new HashMap<>();
 
     @Override
     public boolean canDestroy() {
-        return mapOfValues.size() == 0;
+        return dataMap.isEmpty();
     }
 
     @Override
     public Map<String, Object> snapshot() {
         Map<String, Object> state = new HashMap<>();
-        state.put("mapOfValues", mapOfValues);
+        state.put("mapOfValues", dataMap);
         return state;
     }
 
     @Override
     public void restore(Map<String, Object> state) {
-        mapOfValues = (HashMap<Object, Object>) state.get("mapOfValues");
+        dataMap = (HashMap<Object, Object>) state.get("mapOfValues");
     }
 
-    public void setMapOfValues(Map<Object, Object> mapOfValues) {
-        this.mapOfValues = mapOfValues;
+    public void setDataMap(Map<Object, Object> dataMap) {
+        this.dataMap = dataMap;
     }
 
     public void addEntry(Object key, Object value) {
-        mapOfValues.put(key, value);
+        dataMap.put(key, value);
     }
 
     public void removeEntry(Object key) {
-        mapOfValues.remove(key);
+        dataMap.remove(key);
     }
 
     public void addAll(Map<Object, Object> map) {
-        mapOfValues.putAll(map);
+        dataMap.putAll(map);
     }
 
     public void removeAll(Map<Object, Object> map) {
-        map.keySet().forEach((key) -> mapOfValues.remove(key));
+        map.keySet().forEach((key) -> dataMap.remove(key));
     }
 
-    public Map<Object, Object> getMapOfValues() {
-        return mapOfValues;
-    }
-
-    public Map<Object, Object> getClonedMapOfValues() {
-        return new HashMap<>(mapOfValues);
+    public Map<Object, Object> getDataMapClone() {
+        return new HashMap<>(dataMap);
     }
 }

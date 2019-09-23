@@ -37,7 +37,7 @@ import java.util.Map;
 
 /**
  * clear(HashMap , key , value)
- * Returns the updated hashmap.
+ * Returns the cleared HashMap.
  * Accept Type(s): (HashMap , ValidAttributeType , ValidAttributeType)
  * Return Type(s): HashMap
  */
@@ -55,11 +55,16 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns the cleared map.", type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:clear(students)",
-                description = "Returns an empty map.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns the cleared map.",
+                        type = DataType.OBJECT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:clear(students)",
+                        description = "Returns an empty map."
+        )
 )
 public class ClearFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
@@ -73,7 +78,7 @@ public class ClearFunctionExtension extends FunctionExecutor<State> {
 
     @Override
     protected Object execute(Object[] data, State state) {
-        //Since the map:clear() function takes in 3 parameters, this method does not get called. Hence, not implemented.
+        //Since the map:clear() function takes in 1 parameter, this method does not get called. Hence, not implemented.
         return null;
     }
 
@@ -84,7 +89,8 @@ public class ClearFunctionExtension extends FunctionExecutor<State> {
             hashMap.clear();
             return hashMap;
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'");
     }
 
     @Override

@@ -54,7 +54,7 @@ import java.util.HashMap;
                 @Parameter(
                         name = "value",
                         description = "Value of the map entry",
-                        type = {DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
+                        type = {DataType.OBJECT, DataType.INT, DataType.LONG, DataType.FLOAT, DataType.DOUBLE,
                                 DataType.BOOL, DataType.STRING},
                         dynamic = true
                 )
@@ -98,7 +98,7 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
     @Override
     public Object processAdd(Object[] objects, State state) {
         ((MapState) state).addEntry(objects[0], objects[1]);
-        return ((MapState) state).getClonedMapOfValues();
+        return ((MapState) state).getDataMapClone();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
     @Override
     public Object processRemove(Object[] objects, State state) {
         ((MapState) state).removeEntry(objects[0]);
-        return ((MapState) state).getClonedMapOfValues();
+        return ((MapState) state).getDataMapClone();
     }
 
 
@@ -122,7 +122,7 @@ public class CollectAggregateFunction extends AttributeAggregatorExecutor<State>
 
     @Override
     public Object reset(State state) {
-        ((MapState) state).setMapOfValues(new HashMap<>());
-        return new HashMap<>();
+        ((MapState) state).setDataMap(new HashMap<>());
+        return ((MapState) state).getDataMapClone();
     }
 }

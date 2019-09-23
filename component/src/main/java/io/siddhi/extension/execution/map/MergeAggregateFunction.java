@@ -54,9 +54,7 @@ import java.util.Map;
                 )
         },
         parameterOverloads = {
-                @ParameterOverload(
-                        parameterNames = "map"
-                )
+                @ParameterOverload(parameterNames = "map")
         },
         returnAttributes = {
                 @ReturnAttribute(
@@ -86,9 +84,10 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
     public Object processAdd(Object data, State state) {
         if (data instanceof Map) {
             ((MapState) state).addAll((Map<Object, Object>) data);
-            return ((MapState) state).getClonedMapOfValues();
+            return ((MapState) state).getDataMapClone();
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'.");
     }
 
     @Override
@@ -101,9 +100,10 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
     public Object processRemove(Object data, State state) {
         if (data instanceof Map) {
             ((MapState) state).removeAll((Map<Object, Object>) data);
-            return ((MapState) state).getClonedMapOfValues();
+            return ((MapState) state).getDataMapClone();
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'.");
     }
 
     @Override
@@ -119,6 +119,7 @@ public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
 
     @Override
     public Object reset(State state) {
-        ((MapState) state).setMapOfValues(new HashMap<>());
-        return new HashMap<>();    }
+        ((MapState) state).setDataMap(new HashMap<>());
+        return ((MapState) state).getDataMapClone();
+    }
 }

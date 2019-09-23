@@ -55,12 +55,16 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns `true` if the map is empty and `false` if otherwise.",
-                type = DataType.BOOL),
-        examples = @Example(
-                syntax = "map:isEmpty(students)",
-                description = "Returns 'true' if the students map is empty else it returns `false`.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns `true` if the map is empty and `false` if otherwise.",
+                        type = DataType.BOOL
+                ),
+        examples =
+                @Example(
+                        syntax = "map:isEmpty(students)",
+                        description = "Returns 'true' if the students map is empty else it returns `false`."
+                )
 )
 public class IsEmptyFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.BOOL;
@@ -82,7 +86,9 @@ public class IsEmptyFunctionExtension extends FunctionExecutor<State> {
         if (data instanceof Map) {
             return ((Map) data).isEmpty();
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");    }
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'.");
+    }
 
     @Override
     public Attribute.Type getReturnType() {

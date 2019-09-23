@@ -64,6 +64,7 @@ public class MergeAggregateFunctionTestCase {
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(inStreamDefinition +
                 query);
 
+
         siddhiAppRuntime.addCallback("StudentSteam", new StreamCallback() {
             @Override
             public void receive(Event[] events) {
@@ -82,6 +83,7 @@ public class MergeAggregateFunctionTestCase {
         siddhiAppRuntime.start();
 
         Map<String, String> nameMap = new HashMap<>();
+
         nameMap.put("name", "Harry");
         nameMap.put("middleName", "Henry");
         nameMap.put("surName", "Potter");

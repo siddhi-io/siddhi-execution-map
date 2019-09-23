@@ -54,12 +54,16 @@ import java.util.Map;
         parameterOverloads = {
                 @ParameterOverload(parameterNames = {"map"})
         },
-        returnAttributes = @ReturnAttribute(
-                description = "Returns keys of the map as a list.",
-                type = DataType.OBJECT),
-        examples = @Example(
-                syntax = "map:keys(students)",
-                description = "Returns keys of the `students` map.")
+        returnAttributes =
+                @ReturnAttribute(
+                        description = "Returns keys of the map as a list.",
+                        type = DataType.OBJECT
+                ),
+        examples =
+                @Example(
+                        syntax = "map:keys(students)",
+                        description = "Returns keys of the `students` map."
+                )
 )
 public class KeysFunctionExtension extends FunctionExecutor<State> {
 
@@ -85,6 +89,7 @@ public class KeysFunctionExtension extends FunctionExecutor<State> {
         if (data instanceof Map) {
             return new ArrayList<Object>(((Map) data).keySet());
         }
-        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map.");
+        throw new SiddhiAppRuntimeException("First attribute value must be of type java.util.Map, but found '" +
+                data.getClass().getCanonicalName() + "'.");
     }
 }
