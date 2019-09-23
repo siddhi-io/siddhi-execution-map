@@ -40,6 +40,8 @@ limitations under the License.
             <class name="io.siddhi.extension.execution.map.SizeFunctionExecutorTestCase"/>
             <class name="io.siddhi.extension.execution.map.ValuesFunctionExecutorTestCase"/>
             <class name="io.siddhi.extension.execution.map.TokenizeStreamProcessorTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CloneFunctionExtensionTestCase"/>
+            <class name="io.siddhi.extension.execution.map.CombineByKeyFunctionExtensionTestCase"/>
         </classes>
     </test>
 </suite>
