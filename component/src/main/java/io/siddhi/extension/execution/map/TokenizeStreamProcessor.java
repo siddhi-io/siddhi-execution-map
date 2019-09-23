@@ -82,10 +82,17 @@ import java.util.Set;
         },
         examples = {
                 @Example(
-                        syntax = "map:tokenize(customMap)",
-                        description = "If custom map contains ('symbol': 'wso2'), ('volume' : 100) key-value pairs, " +
-                                "then tokenize function will return 2 events with key: symbol, value: wso2 and " +
-                                "key: volume, value: 100 respectively. "
+                        syntax =
+                                "define stream StockStream(symbol string, price float);\n\n" +
+                                "from StockStream#window.lengthBatch(2)\n" +
+                                "select map:collect(symbol, price) as symbolPriceMap\n" +
+                                "insert into TempStream;\n\n" +
+                                "from TempStream#map:tokenize(customMap)\n" +
+                                "select key, value \n" +
+                                "insert into SymbolStream;",
+                        description = "Based on the length batch window, `symbolPriceMap` will collect two events, " +
+                                "and the map will then again tokenized to give 2 events with key and values being " +
+                                "symbol name and price respectively."
                 )
         }
 )
