@@ -72,6 +72,7 @@ import java.util.Map;
                         "('price' : 12), ('volume' : 100).")
 )
 public class PutAllFunctionExtension extends FunctionExecutor {
+    private static final long serialVersionUID = 1L;
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override

@@ -69,6 +69,7 @@ import java.util.Map;
 )
 public class ToJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.STRING;
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,

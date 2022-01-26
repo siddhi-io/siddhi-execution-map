@@ -26,7 +26,8 @@ import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
 import io.siddhi.core.util.SiddhiTestHelper;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -38,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MergeAggregateFunctionTestCase {
-    private static final Logger log = Logger.getLogger(MergeAggregateFunctionTestCase.class);
+    private static final Logger log = LogManager.getLogger(MergeAggregateFunctionTestCase.class);
     private boolean eventArrived;
     private int inEventCount;
     private List<Object[]> actual;

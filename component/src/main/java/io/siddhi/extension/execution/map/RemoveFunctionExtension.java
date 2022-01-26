@@ -32,7 +32,6 @@ import io.siddhi.core.util.snapshot.state.State;
 import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
-import org.apache.log4j.Logger;
 
 import java.util.Map;
 
@@ -72,7 +71,7 @@ import java.util.Map;
         )
 )
 public class RemoveFunctionExtension extends FunctionExecutor {
-    private static final Logger log = Logger.getLogger(RemoveFunctionExtension.class);
+    private static final long serialVersionUID = 1L;
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override

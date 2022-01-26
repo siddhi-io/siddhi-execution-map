@@ -73,6 +73,7 @@ import java.util.Map;
         }
 )
 public class MergeAggregateFunction extends AttributeAggregatorExecutor<State> {
+    private static final long serialVersionUID = 1L;
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors, ProcessingMode processingMode,
                                        boolean outputExpectsExpiredEvents, ConfigReader configReader,

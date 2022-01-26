@@ -77,6 +77,7 @@ import java.util.Map;
                         "`200` with the key `IBM`.")
 )
 public class PutFunctionExtension extends FunctionExecutor {
+    private static final long serialVersionUID = 1L;
     private Attribute.Type returnType = Attribute.Type.OBJECT;
 
     @Override

@@ -96,6 +96,7 @@ import java.util.Map;
 public class GetFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
     private boolean isDefaultValueGiven = false;
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,

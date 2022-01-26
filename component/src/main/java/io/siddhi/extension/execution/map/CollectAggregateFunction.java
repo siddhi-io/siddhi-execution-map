@@ -81,6 +81,7 @@ import java.util.HashMap;
         }
 )
 public class CollectAggregateFunction extends AttributeAggregatorExecutor<State> {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] expressionExecutors, ProcessingMode processingMode,

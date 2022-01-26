@@ -62,7 +62,7 @@ import java.util.Map;
                 description = "Returns values of the `stockDetails` map.")
 )
 public class ValuesFunctionExtension extends FunctionExecutor<State> {
-
+    private static final long serialVersionUID = 1L;
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,
                                        ConfigReader configReader, SiddhiQueryContext siddhiQueryContext) {

@@ -80,6 +80,7 @@ import java.util.Map;
                 )
 )
 public class PutIfAbsentFunctionExecutor extends FunctionExecutor<State> {
+    private static final long serialVersionUID = 1L;
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors, ConfigReader configReader,
                                        SiddhiQueryContext siddhiQueryContext) {
