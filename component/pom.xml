@@ -145,32 +145,32 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>${maven.bundle.plugin.version}</version>
                 <extensions>true</extensions>
-                <!--<configuration>-->
-                    <!--<instructions>-->
-                        <!--<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>-->
-                        <!--<Bundle-Name>${project.artifactId}</Bundle-Name>-->
-                        <!--<Private-Package>-->
-                            <!--org.json.*,-->
-                            <!--org.apache.axiom.*,-->
-                            <!--org.apache.commons.lang3.*-->
-                        <!--</Private-Package>-->
-                        <!--<Export-Package>-->
-                            <!--!org.json.*,-->
-                            <!--!org.apache.axiom.*,-->
-                            <!--!org.apache.commons.lang3.*,-->
-                            <!--io.siddhi.extension.execution.map.*-->
-                        <!--</Export-Package>-->
-                        <!--<Import-Package>-->
-                            <!--io.siddhi.query.*;version="${siddhi.import.version.range}",-->
-                            <!--io.siddhi.core.*;version="${siddhi.import.version.range}",-->
-                            <!--io.siddhi.annotation.*;version="${siddhi.import.version.range}",-->
-                            <!--*;resolution:=optional-->
-                        <!--</Import-Package>-->
-                        <!--<Include-Resource>-->
-                            <!--META-INF=target/classes/META-INF-->
-                        <!--</Include-Resource>-->
-                    <!--</instructions>-->
-                <!--</configuration>-->
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Private-Package>
+                            org.json.*,
+                            org.apache.axiom.*,
+                            org.apache.commons.lang3.*
+                        </Private-Package>
+                        <Export-Package>
+                            !org.json.*,
+                            !org.apache.axiom.*,
+                            !org.apache.commons.lang3.*,
+                            io.siddhi.extension.execution.map.*
+                        </Export-Package>
+                        <Import-Package>
+                            io.siddhi.query.*;version="${siddhi.import.version.range}",
+                            io.siddhi.core.*;version="${siddhi.import.version.range}",
+                            io.siddhi.annotation.*;version="${siddhi.import.version.range}",
+                            *;resolution:=optional
+                        </Import-Package>
+                        <Include-Resource>
+                            META-INF=target/classes/META-INF
+                        </Include-Resource>
+                    </instructions>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
