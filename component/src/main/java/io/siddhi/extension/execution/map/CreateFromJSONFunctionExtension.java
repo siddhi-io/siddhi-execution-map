@@ -72,6 +72,7 @@ import java.util.Map;
 )
 public class CreateFromJSONFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,

@@ -22,17 +22,16 @@ import io.siddhi.core.SiddhiAppRuntime;
 import io.siddhi.core.SiddhiManager;
 import io.siddhi.core.event.Event;
 import io.siddhi.core.exception.SiddhiAppCreationException;
-import io.siddhi.core.stream.StreamJunction;
 import io.siddhi.core.stream.input.InputHandler;
 import io.siddhi.core.stream.output.StreamCallback;
 import io.siddhi.core.util.EventPrinter;
 import io.siddhi.core.util.SiddhiTestHelper;
-import io.siddhi.extension.execution.map.test.util.UnitTestAppender;
 import io.siddhi.extension.execution.string.ConcatFunctionExtension;
 import org.apache.axiom.om.impl.exception.XMLComparisonException;
 import org.apache.axiom.om.impl.llom.util.XMLComparator;
 import org.apache.axiom.om.util.AXIOMUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,7 +40,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.xml.stream.XMLStreamException;
 
 public class ToXMLFunctionExtensionTestCase {
-    private static Logger log = Logger.getLogger(ToXMLFunctionExtensionTestCase.class);
+    private static final Logger log = (Logger) LogManager.getLogger(ToXMLFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -371,9 +370,6 @@ public class ToXMLFunctionExtensionTestCase {
     @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testToXMLFunctionExtension6() throws InterruptedException {
         log.info("ToXMLFunctionExtension TestCase with test data should be Map string format  ");
-        log = Logger.getLogger(StreamJunction.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (symbol string, price long, volume long);";
@@ -390,9 +386,6 @@ public class ToXMLFunctionExtensionTestCase {
     @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testCreateFromXMLFunctionExtension5() throws InterruptedException {
         log.info("CreateFromXMLFunctionExtension TestCase with test Object[] data should be string format");
-        log = Logger.getLogger(StreamJunction.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
 
         String inStreamDefinition = "\ndefine stream inputStream (longAttr long, doubleAttr double, booleanAttr bool,"

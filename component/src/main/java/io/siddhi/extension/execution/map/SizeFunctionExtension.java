@@ -65,6 +65,7 @@ import java.util.Map;
                 )
 )
 public class SizeFunctionExtension extends FunctionExecutor<State> {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,

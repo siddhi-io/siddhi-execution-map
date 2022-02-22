@@ -29,7 +29,8 @@ import io.siddhi.core.util.EventPrinter;
 import io.siddhi.core.util.SiddhiTestHelper;
 import io.siddhi.extension.execution.map.test.util.UnitTestAppender;
 import io.siddhi.extension.execution.string.ConcatFunctionExtension;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -40,7 +41,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ToJSONFunctionExtensionTestCase {
-    private static Logger log = Logger.getLogger(ToJSONFunctionExtensionTestCase.class);
+    private static final Logger log = (Logger) LogManager.getLogger(ToJSONFunctionExtensionTestCase.class);
     private AtomicInteger count = new AtomicInteger(0);
     private volatile boolean eventArrived;
 
@@ -192,9 +193,9 @@ public class ToJSONFunctionExtensionTestCase {
     @Test (expectedExceptions = {SiddhiAppCreationException.class})
     public void testToJSONFunctionExtension4() throws InterruptedException {
         log.info("ToJSONFunctionExtension TestCase with data should be a Map string format");
-        log = Logger.getLogger(StreamJunction.class);
-        UnitTestAppender appender = new UnitTestAppender();
-        log.addAppender(appender);
+        Logger logger = (Logger) LogManager.getLogger(StreamJunction.class);
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        logger.addAppender(appender);
         SiddhiManager siddhiManager = new SiddhiManager();
         siddhiManager.setExtension("str:concat", ConcatFunctionExtension.class);
 

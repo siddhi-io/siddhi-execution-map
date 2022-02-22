@@ -64,6 +64,7 @@ import java.util.Map;
 )
 public class CloneFunctionExtension extends FunctionExecutor<State> {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,

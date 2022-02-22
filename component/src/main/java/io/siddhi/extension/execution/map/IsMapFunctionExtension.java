@@ -66,6 +66,7 @@ import java.util.Map;
 )
 public class IsMapFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.BOOL;
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,

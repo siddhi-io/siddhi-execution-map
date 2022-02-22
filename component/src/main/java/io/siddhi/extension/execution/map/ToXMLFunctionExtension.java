@@ -86,6 +86,7 @@ import java.util.Map;
         }
 )
 public class ToXMLFunctionExtension extends FunctionExecutor {
+    private static final long serialVersionUID = 1L;
     private Attribute.Type returnType = Attribute.Type.STRING;
     private String rootElement = null;
 

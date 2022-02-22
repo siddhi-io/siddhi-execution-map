@@ -78,6 +78,7 @@ import javax.xml.stream.XMLStreamException;
 public class CreateFromXMLFunctionExtension extends FunctionExecutor {
     private Attribute.Type returnType = Attribute.Type.OBJECT;
     private NumberFormat numberFormat = NumberFormat.getInstance();
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory init(ExpressionExecutor[] attributeExpressionExecutors,

@@ -77,6 +77,7 @@ import java.util.Map;
                         "`IBM` with the key `1234` if present.")
 )
 public class ReplaceFunctionExtension extends FunctionExecutor<State> {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected StateFactory<State> init(ExpressionExecutor[] attributeExpressionExecutors,
