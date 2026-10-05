@@ -302,4 +302,50 @@ public class CreateFromXMLFunctionExtensionTestCase {
         AssertJUnit.assertTrue(eventArrived);
         siddhiAppRuntime.shutdown();
     }
+
+    @Test
+    public void testCreateFromXMLNumberDetection() throws InterruptedException {
+        log.info("CreateFromXMLFunctionExtension TestCase for number detection");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromXML(\"<sensor>" +
+                "<long>-2</long>" +
+                "<double>1.5</double>" +
+                "<plusLong>+1</plusLong>" +
+                "<plusDouble>+1.5</plusDouble>" +
+                "<leadingZero>09</leadingZero>" +
+                "<text>1a</text>" +
+                "</sensor>\") as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                EventPrinter.print(inEvents);
+                for (Event event : inEvents) {
+                    count.incrementAndGet();
+                    Map map = (Map) event.getData(0);
+                    AssertJUnit.assertEquals(-2L, map.get("long"));
+                    AssertJUnit.assertEquals(1.5d, map.get("double"));
+                    AssertJUnit.assertEquals("+1", map.get("plusLong"));
+                    AssertJUnit.assertEquals("+1.5", map.get("plusDouble"));
+                    AssertJUnit.assertEquals("09", map.get("leadingZero"));
+                    AssertJUnit.assertEquals("1a", map.get("text"));
+                    eventArrived = true;
+                }
+            }
+        });
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM"});
+        SiddhiTestHelper.waitForEvents(100, 1, count, 60000);
+        AssertJUnit.assertEquals(1, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
+    }
 }
