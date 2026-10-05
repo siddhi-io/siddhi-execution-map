@@ -278,4 +278,39 @@ public class CreateFromJSONFunctionExtensionTestCase {
         siddhiAppRuntime.shutdown();
         logger.removeAppender(appender);
     }
+
+    @Test
+    public void testCreateFromJSONNumberOutOfDoubleRange() throws InterruptedException {
+        log.info("CreateFromJSONFunctionExtension TestCase with a number outside the double range");
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (json string);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromJSON(json) as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                count.addAndGet(inEvents.length);
+            }
+        });
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"{'symbol':'WSO2','price':1e309}"});
+        inputHandler.send(new Object[]{"{'symbol':'WSO2','price':{'min':-1e309}}"});
+        AssertJUnit.assertEquals(0, count.get());
+        String messages = ((UnitTestAppender) logger.getAppenders().get("UnitTestAppender")).getMessages();
+        AssertJUnit.assertTrue(messages.contains("Cannot create JSON from '{'symbol':'WSO2','price':1e309}'"));
+        AssertJUnit.assertTrue(messages.contains("Cannot create JSON from '{'symbol':'WSO2','price':{'min':-1e309}}'"));
+        siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
+    }
 }
