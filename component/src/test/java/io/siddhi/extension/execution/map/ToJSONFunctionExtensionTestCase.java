@@ -38,6 +38,9 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ToJSONFunctionExtensionTestCase {
@@ -212,6 +215,55 @@ public class ToJSONFunctionExtensionTestCase {
         siddhiAppRuntime.start();
         inputHandler.send(new Object[]{"IBM", 100, 100L});
         AssertJUnit.assertTrue(appender.getMessages().contains("Data should be a string"));
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test
+    public void testToJSONWithNullValues() throws InterruptedException {
+        log.info("ToJSONFunctionExtension TestCase with null values");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (data object);";
+        String query = ("@info(name = 'query1') from inputStream "
+                + "select map:toJSON(data) as jsonString insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                EventPrinter.print(inEvents);
+                for (Event event : inEvents) {
+                    count.incrementAndGet();
+                    try {
+                        JSONAssert.assertEquals("{\"symbol\":\"WSO2\",\"price\":null,"
+                                        + "\"values\":[1,null],\"nested\":{\"volume\":null,\"count\":2}}",
+                                (String) event.getData(0), true);
+                    } catch (JSONException e) {
+                        log.error(e);
+                        AssertJUnit.fail(e.getMessage());
+                    }
+                    eventArrived = true;
+                }
+            }
+        });
+
+        Map<String, Object> nested = new HashMap<>();
+        nested.put("volume", null);
+        nested.put("count", 2);
+        Map<String, Object> data = new HashMap<>();
+        data.put("symbol", "WSO2");
+        data.put("price", null);
+        data.put("values", Arrays.asList(1, null));
+        data.put("nested", nested);
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{data});
+        SiddhiTestHelper.waitForEvents(100, 1, count, 60000);
+        AssertJUnit.assertEquals(1, count.get());
+        AssertJUnit.assertTrue(eventArrived);
         siddhiAppRuntime.shutdown();
     }
 }

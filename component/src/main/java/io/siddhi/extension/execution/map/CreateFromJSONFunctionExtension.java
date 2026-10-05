@@ -36,6 +36,8 @@ import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -121,6 +123,8 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
             }
             if (value instanceof JSONObject) {
                 value = getMapFromJson(new HashMap<Object, Object>(), (JSONObject) value);
+            } else if (value instanceof BigDecimal || value instanceof BigInteger) {
+                value = ((Number) value).doubleValue();
             }
             map.put(key, value);
         }

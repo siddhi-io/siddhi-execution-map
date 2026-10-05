@@ -34,6 +34,7 @@ import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.query.api.definition.Attribute;
 import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.json.JSONObject;
+import org.json.JSONParserConfiguration;
 
 import java.util.Map;
 
@@ -91,7 +92,7 @@ public class ToJSONFunctionExtension extends FunctionExecutor {
     protected Object execute(Object data, State state) {
         if (data instanceof Map) {
             Map<Object, Object> map = (Map) data;
-            JSONObject jsonObject = new JSONObject(map);
+            JSONObject jsonObject = new JSONObject(map, new JSONParserConfiguration().withUseNativeNulls(true));
             return jsonObject.toString();
         } else {
             throw new SiddhiAppRuntimeException("Data should be a string");
