@@ -36,6 +36,8 @@ import io.siddhi.query.api.exception.SiddhiAppValidationException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -94,14 +96,12 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
     protected Object execute(Object data, State state) {
         if (data instanceof String) {
             Map<Object, Object> map = new HashMap<Object, Object>();
-            JSONObject jsonObject = null;
             try {
-                jsonObject = new JSONObject(data.toString());
+                return getMapFromJson(map, new JSONObject(data.toString()));
             } catch (JSONException e) {
                 throw new SiddhiAppRuntimeException(
                         "Cannot create JSON from '" + data.toString() + "' in create from json function", e);
             }
-            return getMapFromJson(map, jsonObject);
         } else {
             throw new SiddhiAppRuntimeException("Data should be a string");
         }
@@ -121,6 +121,12 @@ public class CreateFromJSONFunctionExtension extends FunctionExecutor {
             }
             if (value instanceof JSONObject) {
                 value = getMapFromJson(new HashMap<Object, Object>(), (JSONObject) value);
+            } else if (value instanceof BigDecimal || value instanceof BigInteger) {
+                double doubleValue = ((Number) value).doubleValue();
+                if (Double.isInfinite(doubleValue)) {
+                    throw new JSONException("Value of key '" + key + "' is outside the double range: " + value);
+                }
+                value = doubleValue;
             }
             map.put(key, value);
         }

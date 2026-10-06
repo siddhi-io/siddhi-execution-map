@@ -36,6 +36,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CreateFromJSONFunctionExtensionTestCase {
@@ -191,5 +192,125 @@ public class CreateFromJSONFunctionExtensionTestCase {
         SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
                 inStreamDefinition + query);
 
+    }
+
+    @Test
+    public void testCreateFromJSONNumberTypes() throws InterruptedException {
+        log.info("CreateFromJSONFunctionExtension TestCase for number types");
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (symbol string);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromJSON(\"{'int':1,'long':12345678901,'double':1.5,'negative':-1.25,"
+                + "'exponent':2E-3,'bigInteger':12345678901234567890,'bool':true,'nested':{'double':0.1}}\") "
+                + "as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                EventPrinter.print(inEvents);
+                for (Event event : inEvents) {
+                    count.incrementAndGet();
+                    Map map = (Map) event.getData(0);
+                    AssertJUnit.assertEquals(1, map.get("int"));
+                    AssertJUnit.assertEquals(12345678901L, map.get("long"));
+                    AssertJUnit.assertEquals(1.5d, map.get("double"));
+                    AssertJUnit.assertEquals(-1.25d, map.get("negative"));
+                    AssertJUnit.assertEquals(0.002d, map.get("exponent"));
+                    AssertJUnit.assertEquals(1.2345678901234567E19d, map.get("bigInteger"));
+                    AssertJUnit.assertEquals(true, map.get("bool"));
+                    AssertJUnit.assertEquals(0.1d, ((Map) map.get("nested")).get("double"));
+                    eventArrived = true;
+                }
+            }
+        });
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"IBM"});
+        SiddhiTestHelper.waitForEvents(100, 1, count, 60000);
+        AssertJUnit.assertEquals(1, count.get());
+        AssertJUnit.assertTrue(eventArrived);
+        siddhiAppRuntime.shutdown();
+    }
+
+    @Test
+    public void testCreateFromJSONDeeplyNested() throws InterruptedException {
+        log.info("CreateFromJSONFunctionExtension TestCase with deeply nested JSON");
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (json string);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromJSON(json) as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                count.addAndGet(inEvents.length);
+            }
+        });
+
+        StringBuilder json = new StringBuilder();
+        for (int i = 0; i < 10000; i++) {
+            json.append("{\"a\":");
+        }
+        json.append(1);
+        for (int i = 0; i < 10000; i++) {
+            json.append('}');
+        }
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{json.toString()});
+        AssertJUnit.assertEquals(0, count.get());
+        AssertJUnit.assertTrue(((UnitTestAppender) logger.getAppenders().
+                get("UnitTestAppender")).getMessages().contains("Cannot create JSON from"));
+        siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
+    }
+
+    @Test
+    public void testCreateFromJSONNumberOutOfDoubleRange() throws InterruptedException {
+        log.info("CreateFromJSONFunctionExtension TestCase with a number outside the double range");
+        UnitTestAppender appender = new UnitTestAppender("UnitTestAppender", null);
+        final Logger logger = (Logger) LogManager.getRootLogger();
+        logger.setLevel(Level.ALL);
+        logger.addAppender(appender);
+        appender.start();
+        SiddhiManager siddhiManager = new SiddhiManager();
+
+        String inStreamDefinition = "\ndefine stream inputStream (json string);";
+        String query = ("@info(name = 'query1') from inputStream select "
+                + "map:createFromJSON(json) as hashMap insert into outputStream;");
+
+        SiddhiAppRuntime siddhiAppRuntime = siddhiManager.createSiddhiAppRuntime(
+                inStreamDefinition + query);
+        siddhiAppRuntime.addCallback("outputStream", new StreamCallback() {
+            @Override
+            public void receive(Event[] inEvents) {
+                count.addAndGet(inEvents.length);
+            }
+        });
+
+        InputHandler inputHandler = siddhiAppRuntime.getInputHandler("inputStream");
+        siddhiAppRuntime.start();
+        inputHandler.send(new Object[]{"{'symbol':'WSO2','price':1e309}"});
+        inputHandler.send(new Object[]{"{'symbol':'WSO2','price':{'min':-1e309}}"});
+        AssertJUnit.assertEquals(0, count.get());
+        String messages = ((UnitTestAppender) logger.getAppenders().get("UnitTestAppender")).getMessages();
+        AssertJUnit.assertTrue(messages.contains("Cannot create JSON from '{'symbol':'WSO2','price':1e309}'"));
+        AssertJUnit.assertTrue(messages.contains("Cannot create JSON from '{'symbol':'WSO2','price':{'min':-1e309}}'"));
+        siddhiAppRuntime.shutdown();
+        logger.removeAppender(appender);
     }
 }
